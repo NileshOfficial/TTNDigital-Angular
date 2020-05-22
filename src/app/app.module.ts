@@ -8,13 +8,15 @@ import { AppComponent } from './app.component';
 import { LoginBoardComponent } from './login-board/login-board.component';
 import { LoaderComponent } from './loader/loader.component';
 import { AuthCallbackComponent } from './auth-callback/auth-callback.component';
+import { HomeComponent } from './home/home.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginBoardComponent,
     LoaderComponent,
-    AuthCallbackComponent
+    AuthCallbackComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
