@@ -1,0 +1,64 @@
+.board {
+    position: fixed;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: url('../../assets/images/TTN-img.png') center center/cover;
+}
+
+.overlay {
+    margin: 1rem;
+    background: url('../../assets/images/TTN-img.png') center center/cover;
+}
+
+.card {
+    background-color: rgba(255, 255, 255, 0.97);
+    padding-top: 3rem;
+    padding-bottom: 2rem;
+    text-align: center;
+    max-width: 600px;
+    border: none;
+    border-radius: 2px;
+    position: relative;
+    z-index: 1
+}
+
+.logo {
+    width: 120px;
+    height: 120px;
+    margin-bottom: 1.5rem;
+}
+
+.logo img {
+    height: 100%;
+    width: 100%;
+}
+
+.loginButton {
+    background-color: #e04a32;
+    color: #fff;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    min-width: 100px;
+    margin-bottom: 5rem;
+    font-size: 1.6rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 300px;
+    border: 1px solid #e04a32;
+    transition: 0.1s ease-in-out;
+}
+
+.loginButton fa-icon {
+    font-size: 3.2rem;
+    margin-right: 1rem;
+}
+
+.loginButton:hover {
+    border: 1px solid #e04a32;
+    color: #e04a32;
+    background-color: #fff;
+}

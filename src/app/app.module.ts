@@ -4,10 +4,12 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { LoginBoardComponent } from './login-board/login-board.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    LoginBoardComponent
   ],
   imports: [
     BrowserModule,
