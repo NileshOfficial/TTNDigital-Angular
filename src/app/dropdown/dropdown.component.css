@@ -6,7 +6,6 @@
 .select .title {
     display: flex;
     justify-content: space-between;
-    border: 1px solid #dcdcdc;
     border-radius: 4px;
     font-size: 1.6rem;
     padding: 1rem 2rem;
