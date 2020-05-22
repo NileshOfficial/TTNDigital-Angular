@@ -1,0 +1,9 @@
+<div class="select">
+    <a class="title titleText" (click)="toggleOptions()" [ngClass]="{optionsVisible: optionsVisible}">
+        <span>{{ heading }}</span>
+        <fa-icon [icon]="optionsVisible ? upArrowHead : downArrowHead"></fa-icon>
+    </a>
+    <ul *ngIf="optionsVisible" class="options">
+        <li *ngFor="let option of options" (click)="updateHeading(option)">{{ option }}</li>
+    </ul>
+</div>
