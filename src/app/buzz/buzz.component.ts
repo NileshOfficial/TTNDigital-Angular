@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { faPen, faChevronRight, IconDefinition } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'ttnd-buzz',
@@ -7,6 +8,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class BuzzComponent implements OnInit {
 
+  penIcon: IconDefinition = faPen;
+  postIcon: IconDefinition = faChevronRight;
+  
   constructor() { }
 
   ngOnInit(): void {
