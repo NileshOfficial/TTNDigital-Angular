@@ -9,6 +9,7 @@ import { LoginBoardComponent } from './login-board/login-board.component';
 import { LoaderComponent } from './loader/loader.component';
 import { AuthCallbackComponent } from './auth-callback/auth-callback.component';
 import { HomeComponent } from './home/home.component';
+import { DropdownComponent } from './dropdown/dropdown.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { HomeComponent } from './home/home.component';
     LoginBoardComponent,
     LoaderComponent,
     AuthCallbackComponent,
-    HomeComponent
+    HomeComponent,
+    DropdownComponent
   ],
   imports: [
     BrowserModule,
