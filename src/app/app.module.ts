@@ -10,6 +10,7 @@ import { LoaderComponent } from './loader/loader.component';
 import { AuthCallbackComponent } from './auth-callback/auth-callback.component';
 import { HomeComponent } from './home/home.component';
 import { DropdownComponent } from './dropdown/dropdown.component';
+import { BuzzComponent } from './buzz/buzz.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { DropdownComponent } from './dropdown/dropdown.component';
     LoaderComponent,
     AuthCallbackComponent,
     HomeComponent,
-    DropdownComponent
+    DropdownComponent,
+    BuzzComponent
   ],
   imports: [
     BrowserModule,
