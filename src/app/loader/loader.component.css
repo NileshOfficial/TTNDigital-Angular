@@ -1,0 +1,127 @@
+.cubeContainer {
+    height: 80px;
+    width: 80px;
+    position: relative;
+    margin: 200px auto;
+}
+
+.cube {
+    height: 20px;
+    width: 20px;
+    background-color: #4169e1;
+}
+
+.cube1 {
+    position: absolute;
+    top: 0;
+    left: 0;
+    animation: traverseBorder1 2s infinite ease-in-out;
+}
+
+.cube2 {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    animation: traverseBorder2 2s infinite ease-in-out;
+}
+
+@keyframes traverseBorder1 {
+    25% {
+        top: 0;
+        left: 60px;
+        transform: rotate(-180deg)
+    }
+    50% {
+        top: 60px;
+        left: 60px;
+        transform: rotate(90deg);
+        width: 10px;
+        height: 10px;
+    }
+    75% {
+        top: 60px;
+        left: 0;
+        transform: rotate(-180deg);
+    }
+    100% {
+        top: 0;
+        left: 0;
+        transform: rotate(90deg);
+        width: 20px;
+        height: 20px;
+    }
+}
+
+@keyframes traverseBorder2 {
+    25% {
+        bottom: 0;
+        right: 60px;
+        transform: rotate(180deg)
+    }
+    50% {
+        bottom: 60px;
+        right: 60px;
+        transform: rotate(-90deg);
+        width: 10px;
+        height: 10px;
+    }
+    75% {
+        bottom: 60px;
+        right: 0;
+        transform: rotate(180deg);
+    }
+    100% {
+        bottom: 0;
+        right: 0;
+        transform: rotate(-90deg);
+        width: 20px;
+        height: 20px;
+    }
+}
+
+.loader {
+    border: 2px solid transparent;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    animation: spin 0.8s linear alternate infinite;
+    animation-timing-function: ease-in-out;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.loader .secondary {
+    border: 2px solid transparent;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    animation: spinSecondary 0.8s linear infinite;
+    animation-timing-function: ease-in-out;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+        border-top: 2px solid #3498db;
+        border-bottom: 2px solid #3498db;
+    }
+    100% {
+        transform: rotate(360deg);
+        border-top: 2px solid #3498db;
+        border-bottom: 2px solid #3498db;
+    }
+}
+
+@keyframes spinSecondary {
+    0% {
+        transform: rotate(180deg);
+        border-left: 2px solid #3498db;
+        border-right: 2px solid #3498db;
+    }
+    100% {
+        transform: rotate(0deg);
+        border-left: 2px solid #3498db;
+        border-right: 2px solid #3498db;
+    }
+}

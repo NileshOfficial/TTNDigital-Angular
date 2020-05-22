@@ -1,0 +1,8 @@
+<div *ngIf="animation === 'cubes' " class="cubeContainer">
+    <div class="cube cube1"></div>
+    <div class="cube cube2"></div>
+</div>
+
+<div *ngIf="animation !== 'cubes'" [ngStyle]="setOuterHeightWidth()" class="loader">
+    <div class="secondary" [ngStyle]="setInnerHeightWidth()" ></div>
+</div>
