@@ -10,7 +10,9 @@
 
 .overlay {
     margin: 1rem;
+    background-color: rgba(255, 255, 255, 0.5);
     background: url('../../assets/images/TTN-img.png') center center/cover;
+    filter: blur(8px);
 }
 
 .card {
