@@ -1,0 +1,49 @@
+<header>
+    <span class="logo">
+        <img src="../../assets/images/logo.png" alt="logo">
+    </span>
+    <a>
+        logout
+        <fa-icon [icon]="signOutIcon"></fa-icon>
+    </a>
+</header>
+<div class="banner">
+    <h1>
+        posting your thoughts
+        <br />
+        never been so easy..
+    </h1>
+</div>
+<main>
+    <nav>
+        <ul class="card">
+            <li class="navlink titleText" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+                <a [routerLink]="['/routePath']">
+                    <span class="titleText">buzz</span>
+                    <fa-icon [icon]="rightArrowHead"></fa-icon>
+                </a>
+            </li>
+            <li class="navlink titleText" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+                <a [routerLink]="['/routePath']">
+                    <span class="titleText">complaints</span>
+                    <fa-icon [icon]="rightArrowHead"></fa-icon>
+                </a>
+            </li>
+            <li class="navlink titleText" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+                <a [routerLink]="['/routePath']">
+                    <span class="titleText">resolved</span>
+                    <fa-icon [icon]="rightArrowHead"></fa-icon>
+                </a>
+            </li>
+        </ul>
+        <div class="extras">
+            <span class="copyright">&copy; 2016 to the new digital</span>
+            <ul class="helpLinks">
+                <li><a>about</a></li>
+                <li><a>help</a></li>
+            </ul>
+        </div>
+    </nav>
+    <div class="content">
+    </div>
+</main>
