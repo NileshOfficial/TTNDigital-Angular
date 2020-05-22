@@ -1,0 +1,124 @@
+header {
+    background-color: #f4f7fa;
+    min-height: 50px;
+    padding-left: 5rem;
+    padding-right: 5rem;
+    position: relative;
+    text-align: end;
+}
+
+header .logo {
+    height: 100px;
+    position: absolute;
+    top: 0;
+    left: 5rem;
+    background-color: #fff;
+    padding-left: 2rem;
+    padding-right: 2rem;
+    box-shadow: 0 0 5px #777;
+}
+
+header .logo img {
+    height: 100%;
+    width: 100%;
+}
+
+header a {
+    font-size: 1.4rem;
+    color: #e04a32;
+    text-transform: capitalize;
+    line-height: 50px;
+    height: 100%;
+}
+
+header a fa-icon {
+    margin-left: 1rem;
+}
+
+.banner {
+    min-height: 300px;
+    width: 100%;
+    background: url('../../assets/images/home-banner.jpg') center center/cover;
+    padding-left: 80px;
+    display: flex;
+    align-items: center;
+    color: #fff;
+}
+
+.banner h1 {
+    text-transform: uppercase;
+}
+
+main {
+    display: flex;
+    padding: 2.5rem 5rem 5rem;
+    background-color: #f4f7fa;
+}
+
+nav {
+    flex-grow: 1;
+    margin-right: 4rem;
+}
+
+nav .card {
+    background-color: #fff;
+}
+
+nav .navlink {
+    border-bottom: 1px solid #dcdcdc;
+    font-size: 1.4rem;
+    text-transform: uppercase;
+    font-weight: 500;
+}
+
+nav .navlink:last-child {
+    border-bottom: none;
+}
+
+nav .navlink a {
+    display: inline-flex;
+    justify-content: space-between;
+    width: 100%;
+    height: 100%;
+    padding: 2rem;
+}
+
+nav .navlink.active {
+    color: #e04a32;
+}
+
+.extras {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 1.5rem;
+    font-size: 1.1rem;
+    text-transform: capitalize;
+    padding-left: 1rem;
+    padding-right: 1rem;
+}
+
+.extras .copyright {
+    color: #aaa;
+}
+
+.extras .helpLinks {
+    display: flex;
+}
+
+.extras .helpLinks li {
+    margin-right: 1.5em;
+    color: #64bdfc;
+    transition: 0.2s ease-in-out;
+}
+
+.extras .helpLinks li:last-child {
+    margin-right: 0;
+}
+
+.extras .helpLinks li a:hover {
+    text-decoration: underline;
+}
+
+.content {
+    flex-grow: 6;
+}
