@@ -4,6 +4,7 @@ import { LoginBoardComponent } from './login-board/login-board.component';
 import { AuthCallbackComponent } from './auth-callback/auth-callback.component';
 import { BuzzComponent } from './buzz/buzz.component';
 import { HomeComponent } from './home/home.component';
+import { ComplaintsComponent } from './complaints/complaints.component';
 
 
 const routes: Routes = [
@@ -14,10 +15,11 @@ const routes: Routes = [
       { path: 'login', component: LoginBoardComponent }
     ]
   },
-  { path: 'home', redirectTo: '/home/buzz' },
+  { path: 'home', redirectTo: '/home/buzz', pathMatch: "full"},
   {
     path: 'home', component: HomeComponent, children: [
-      { path: 'buzz', component: BuzzComponent }
+      { path: 'buzz', component: BuzzComponent },
+      { path: 'complaints', component: ComplaintsComponent }
     ]
   }
 ];
