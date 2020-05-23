@@ -56,8 +56,8 @@ main {
 }
 
 nav {
-    flex-grow: 1;
     margin-right: 4rem;
+    min-width: 350px;
 }
 
 nav .card {
@@ -117,8 +117,4 @@ nav .navlink a {
 
 .extras .helpLinks li a:hover {
     text-decoration: underline;
-}
-
-.content {
-    flex-grow: 6;
 }

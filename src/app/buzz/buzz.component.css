@@ -1,6 +1,5 @@
-.card {
-    width: 600px;
-    margin: 200px auto;
+.card:first-child {
+    margin-bottom: 2rem;
 }
 
 .header {
@@ -16,6 +15,7 @@
 
 .body {
     border-bottom: none !important;
+    background-color: #fff;
 }
 
 .body form {
@@ -66,4 +66,12 @@
 .body form .submit:hover {
     background-color: #e04a32;
     color: #fff;
+}
+
+.post {
+    border-bottom: 1px solid #dcdcdc;
+}
+
+.post:last-child {
+    border-bottom: none;
 }

@@ -1,20 +1,46 @@
-<div class="card">
-    <h5 class="header">
-        <fa-icon [icon]="penIcon" flip="horizontal" ></fa-icon> create buzz
-    </h5>
-    <div class="body">
-        <form>
-            <textarea placeholder="Share your thought...."></textarea>
-            <ttnd-dropdown id="dropdown" heading="Category" [options]="['Activity', 'Lost And Found']"></ttnd-dropdown>
-            <div class="attachment">
-                <label for="fileInput">
-                    <fa-icon [icon]="imageIcon"></fa-icon>
-                </label>
-                <input id="fileInput" type="file" multiple>
+<div>
+    <div class="card">
+        <h5 class="header">
+            <fa-icon [icon]="penIcon" flip="horizontal"></fa-icon> create buzz
+        </h5>
+        <div class="body">
+            <form>
+                <textarea placeholder="Share your thought...."></textarea>
+                <ttnd-dropdown id="dropdown" heading="Category" [options]="['Activity', 'Lost And Found']">
+                </ttnd-dropdown>
+                <div class="attachment">
+                    <label for="fileInput">
+                        <fa-icon [icon]="imageIcon"></fa-icon>
+                    </label>
+                    <input id="fileInput" type="file" multiple>
+                </div>
+                <a class="submit">
+                    <fa-icon [icon]="postIcon"></fa-icon>
+                </a>
+            </form>
+        </div>
+    </div>
+
+    <div class="card">
+        <h5 class="header">
+            <fa-icon [icon]="atIcon"></fa-icon> recent buzz
+        </h5>
+        <div class="body">
+            <div class="post">
+                <ttnd-buzz-post [post]="data"></ttnd-buzz-post>
             </div>
-            <a class="submit">
-                <fa-icon [icon]="postIcon"></fa-icon>
-            </a>
-        </form>
+            <div class="post">
+                <ttnd-buzz-post [post]="data"></ttnd-buzz-post>
+            </div>
+            <div class="post">
+                <ttnd-buzz-post [post]="data"></ttnd-buzz-post>
+            </div>
+            <div class="post">
+                <ttnd-buzz-post [post]="data"></ttnd-buzz-post>
+            </div>
+            <div class="post">
+                <ttnd-buzz-post [post]="data"></ttnd-buzz-post>
+            </div>
+        </div>
     </div>
 </div>
