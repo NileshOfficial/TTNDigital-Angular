@@ -1,0 +1,69 @@
+.card {
+    width: 600px;
+    margin: 200px auto;
+}
+
+.header {
+    padding: 1rem 2rem;
+    margin-bottom: 0;
+    background-color: #f2f2f2;
+}
+
+.header fa-icon{
+    color: #aaa;
+    margin-right: 2rem;
+}
+
+.body {
+    border-bottom: none !important;
+}
+
+.body form {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.body form textarea{
+    width: 100%;
+    height: 300px;
+    border: none;
+    border-bottom: 1px solid #dcdcdc;
+    padding: 1rem;
+    resize: none;
+}
+
+#dropdown {
+    width: 170px;
+    margin-right: 1rem;
+}
+
+.body form .attachment {
+    font-size: 2rem;
+    color: #999;
+}
+
+.body form .attachment input[type="file"] {
+    display: none;
+}
+
+.body form .submit {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding-left: 3px;
+    font-size: 2rem;
+    color: #e04a32;
+    max-width: 30px;
+    margin-left: auto;
+    margin-right: 2rem;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    transition: 0.2s ease-in-out;
+}
+
+.body form .submit:hover {
+    background-color: #e04a32;
+    color: #fff;
+}
