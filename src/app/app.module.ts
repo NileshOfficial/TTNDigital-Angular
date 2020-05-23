@@ -14,6 +14,7 @@ import { BuzzComponent } from './buzz/buzz.component';
 import { BuzzPostComponent } from './buzz-post/buzz-post.component';
 import { AddZeroPipe } from './pipes/addzero.pipe';
 import { MsToDurationPipe } from './pipes/ms-to-duration.pipe';
+import { ComplaintsComponent } from './complaints/complaints.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { MsToDurationPipe } from './pipes/ms-to-duration.pipe';
     BuzzComponent,
     BuzzPostComponent,
     AddZeroPipe,
-    MsToDurationPipe
+    MsToDurationPipe,
+    ComplaintsComponent
   ],
   imports: [
     BrowserModule,
