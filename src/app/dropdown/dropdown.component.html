@@ -1,5 +1,5 @@
 <div class="select">
-    <a class="title titleText" (click)="toggleOptions()" [ngClass]="{optionsVisible: optionsVisible}">
+    <a class="title titleText" (click)="toggleOptions()" [ngClass]="{optionsVisible: optionsVisible, bordered: bordered}">
         <span>{{ heading }}</span>
         <fa-icon [icon]="optionsVisible ? upArrowHead : downArrowHead"></fa-icon>
     </a>

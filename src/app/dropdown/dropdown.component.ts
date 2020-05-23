@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, HostListener, ElementRef } from '@angular/core';
 import { faAngleUp, faAngleDown, IconDefinition } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
@@ -10,14 +10,21 @@ export class DropdownComponent implements OnInit {
 
   @Input() heading: string = '';
   @Input() options: Array<string | number> = [];
+  @Input() bordered: boolean = false;
   @Output() selected: EventEmitter<string | number> = new EventEmitter();
 
   upArrowHead: IconDefinition = faAngleUp;
   downArrowHead: IconDefinition = faAngleDown;
-
   optionsVisible: boolean = false;
 
-  constructor() { }
+  @HostListener('document:click', ['$event'])
+  clickout(event) {
+    if(!this.eRef.nativeElement.contains(event.target)) {
+      this.optionsVisible = false;
+    }
+  }
+
+  constructor(private eRef: ElementRef) { }
 
   ngOnInit(): void {
   }
