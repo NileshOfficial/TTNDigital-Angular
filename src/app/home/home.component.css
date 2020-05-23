@@ -83,7 +83,7 @@ nav .navlink a {
     padding: 2rem;
 }
 
-nav .navlink.active {
+.active {
     color: #e04a32;
 }
 

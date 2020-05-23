@@ -17,21 +17,21 @@
 <main>
     <nav>
         <ul class="card">
-            <li class="navlink titleText" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
-                <a [routerLink]="['/routePath']">
-                    <span class="titleText">buzz</span>
+            <li class="navlink">
+                <a class="titleText" [routerLink]="['./buzz']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+                    <span>buzz</span>
                     <fa-icon [icon]="rightArrowHead"></fa-icon>
                 </a>
             </li>
-            <li class="navlink titleText" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
-                <a [routerLink]="['/routePath']">
-                    <span class="titleText">complaints</span>
+            <li class="navlink" >
+                <a class="titleText" [routerLink]="['/routePath']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+                    <span>complaints</span>
                     <fa-icon [icon]="rightArrowHead"></fa-icon>
                 </a>
             </li>
-            <li class="navlink titleText" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
-                <a [routerLink]="['/routePath']">
-                    <span class="titleText">resolved</span>
+            <li class="navlink">
+                <a class="titleText" [routerLink]="['/routePath']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+                    <span>resolved</span>
                     <fa-icon [icon]="rightArrowHead"></fa-icon>
                 </a>
             </li>
