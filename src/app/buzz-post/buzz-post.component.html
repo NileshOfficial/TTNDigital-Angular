@@ -1,7 +1,7 @@
 <div class="post">
     <div class="postedOn titleText">
-        <span class="date">{{ postData['date'] }}</span>/
-        <span class="month">{{ postData['month'] }}</span>
+        <span class="date">{{ postData['date'] | addzero }}</span>/
+        <span class="month">{{ postData['month'] | addzero }}</span>
     </div>
     <div class="content">
         <div class="images">
@@ -10,7 +10,7 @@
         <div class="meta">
             {{ postData['email'] }}
             <fa-icon [icon]="dotIcon"></fa-icon>
-            {{ postData['time'] }}
+            {{ postData['time'] | duration }}
         </div>
         <p class="description">{{ postData['description'] }}</p>
         <div class="review">

@@ -13,6 +13,7 @@ import { DropdownComponent } from './dropdown/dropdown.component';
 import { BuzzComponent } from './buzz/buzz.component';
 import { BuzzPostComponent } from './buzz-post/buzz-post.component';
 import { AddZeroPipe } from './pipes/addzero.pipe';
+import { MsToDurationPipe } from './pipes/ms-to-duration.pipe';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { AddZeroPipe } from './pipes/addzero.pipe';
     DropdownComponent,
     BuzzComponent,
     BuzzPostComponent,
-    AddZeroPipe
+    AddZeroPipe,
+    MsToDurationPipe
   ],
   imports: [
     BrowserModule,
