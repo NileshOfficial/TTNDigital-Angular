@@ -6,11 +6,11 @@
         <form>
             <div class="formElement">
                 <label class="titleText" for="dept">select department</label>
-                <ttnd-dropdown id="dept"></ttnd-dropdown>
+                <ttnd-dropdown [bordered]="true" id="dept" [options]="departments" ></ttnd-dropdown>
             </div>
             <div class="formElement">
                 <label class="titleText" for="dept">issue title</label>
-                <ttnd-dropdown id="dept"></ttnd-dropdown>
+                <ttnd-dropdown [bordered]="true" id="dept" [options]="issues"></ttnd-dropdown>
             </div>
             <div class="formElement">
                 <label class="titleText" for="name">your name</label>

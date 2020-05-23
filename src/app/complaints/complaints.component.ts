@@ -9,6 +9,9 @@ import { faImage, IconDefinition } from '@fortawesome/free-regular-svg-icons';
 export class ComplaintsComponent implements OnInit {
 
   imageIcon: IconDefinition = faImage;
+
+  departments = ['Admin', 'IT', 'Infra', 'HR'];
+  issues = ['Hardware', 'Infrastructure', 'Others'];
   constructor() { }
 
   ngOnInit(): void {
