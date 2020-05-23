@@ -1,0 +1,77 @@
+<div class="card">
+    <h5 class="header">
+        complaint box
+    </h5>
+    <div class="body">
+        <form>
+            <div class="formElement">
+                <label class="titleText" for="dept">select department</label>
+                <ttnd-dropdown id="dept"></ttnd-dropdown>
+            </div>
+            <div class="formElement">
+                <label class="titleText" for="dept">issue title</label>
+                <ttnd-dropdown id="dept"></ttnd-dropdown>
+            </div>
+            <div class="formElement">
+                <label class="titleText" for="name">your name</label>
+                <input type="text" id="name">
+            </div>
+            <div class="formElement">
+                <label class="titleText" for="dept">email id</label>
+                <input type="email" id="email">
+            </div>
+            <div class="formElement fullwidth">
+                <label class="titleText" for="description">your concern</label>
+                <textarea id="description"></textarea>
+            </div>
+            <div class="formElement fullwidth alignRight">
+                <label class="titleText" for="file">attachment</label>
+                <fa-icon class="titleText" [icon]="imageIcon"></fa-icon>
+                <input type="file" id="file">
+            </div>
+            <div class="formElement fullwidth alignRight">
+                <button class="submit">Submit</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div class="card">
+    <h5 class="header">
+        your complaints
+    </h5>
+    <div class="body p-0">
+        <table class="table">
+            <tr>
+                <th>department</th>
+                <th>issue id</th>
+                <th>assigned to</th>
+                <th>status</th>
+            </tr>
+            <tr>
+                <td>sdfsdf</td>
+                <td>sfsdf</td>
+                <td>sfsdff</td>
+                <td>sdfsdf</td>
+            </tr>
+            <tr>
+                <td>sdfsdf</td>
+                <td>sdfsf</td>
+                <td>brgbfb</td>
+                <td>sfsd</td>
+            </tr>
+            <tr>
+                <td>fgdfg</td>
+                <td>fgdfg</td>
+                <td>fgdfg</td>
+                <td>fgdfg</td>
+            </tr>
+            <tr>
+                <td>xgdgdffv</td>
+                <td>xgdgdffv</td>
+                <td>xgdgdffv</td>
+                <td>xgdgdffv</td>
+            </tr>
+        </table>
+    </div>
+</div>
