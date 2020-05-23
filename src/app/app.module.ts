@@ -12,6 +12,7 @@ import { HomeComponent } from './home/home.component';
 import { DropdownComponent } from './dropdown/dropdown.component';
 import { BuzzComponent } from './buzz/buzz.component';
 import { BuzzPostComponent } from './buzz-post/buzz-post.component';
+import { AddZeroPipe } from './pipes/addzero.pipe';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { BuzzPostComponent } from './buzz-post/buzz-post.component';
     HomeComponent,
     DropdownComponent,
     BuzzComponent,
-    BuzzPostComponent
+    BuzzPostComponent,
+    AddZeroPipe
   ],
   imports: [
     BrowserModule,
