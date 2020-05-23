@@ -1,0 +1,81 @@
+.post {
+    display: flex;
+    background-color: #fff;
+    padding: 2rem 2rem 1rem 2rem;
+}
+
+.postedOn {
+    min-width: 50px;
+    margin-right: 1rem;
+    color: #aaa;
+    font-size: 1.4rem;
+}
+
+.postedOn .date, .postedOn .month {
+    font-size: 2.8rem;
+    font-style: italic;
+}
+
+.postedOn .date {
+    margin-right: 5px;
+}
+
+.postedOn .month {
+    color: #777
+}
+
+.images {
+    height: 250px;
+    margin-bottom: 2rem;
+    border: 1px solid #dcdcdc;
+}
+
+.images img {
+    width: 100%;
+    height: 100%;
+}
+
+.meta {
+    display: inline-flex;
+    align-items: center;
+    font-size: 1.2rem;
+    color: #aaa;
+    margin-bottom: 8px;
+}
+
+.meta fa-icon {
+    margin-left: 2rem;
+    margin-right: 3px;
+    font-size: 5px;
+}
+
+.description {
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+    line-height: 15px;
+}
+
+.review {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.like {
+    display: inline-flex;
+    align-items: center;
+    margin-right: 2rem;
+    font-size: 1.2rem;
+    color: #aaa;
+}
+
+.like .count {
+    margin-right: 8px;
+}
+
+.like fa-icon {
+    font-size: 1.8rem;
+}
+
+.active {
+    color: #e04a32;
+}

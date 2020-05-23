@@ -1,1 +1,27 @@
-
+<div class="post">
+    <div class="postedOn titleText">
+        <span class="date">{{ postData['date'] }}</span>/
+        <span class="month">{{ postData['month'] }}</span>
+    </div>
+    <div class="content">
+        <div class="images">
+            <img src="../../assets/images/home-banner.jpg">
+        </div>
+        <div class="meta">
+            {{ postData['email'] }}
+            <fa-icon [icon]="dotIcon"></fa-icon>
+            {{ postData['time'] }}
+        </div>
+        <p class="description">{{ postData['description'] }}</p>
+        <div class="review">
+            <a class="like" (click)="toggleReview('like')">
+                <span class="count">{{ postData['likes'] }}</span>
+                <fa-icon [icon]="likeIcon" [ngClass]="{'active': liked}"></fa-icon>
+            </a>
+            <a class="like" (click)="toggleReview('dislike')">
+                <span class="count">{{ postData['dislikes'] }}</span>
+                <fa-icon [icon]="dislikeIcon" flip="horizontal" [ngClass]="{'active': disliked}"></fa-icon>
+            </a>
+        </div>
+    </div>
+</div>
