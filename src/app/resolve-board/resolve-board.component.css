@@ -1,0 +1,33 @@
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem 2rem;
+    margin-bottom: 0;
+    background-color: #f2f2f2;
+}
+
+.filterSelect {
+    font-size: 1.2rem;
+}
+
+.filterSelect fa-icon {
+    margin-left: 5px;
+}
+
+.table {
+    background-color: #fff;
+}
+
+.table th {
+    width: 20%;
+}
+
+.table td {
+    padding-top: 0;
+    padding-bottom: 0;
+}
+
+ttnd-dropdown {
+    text-align: center !important;
+}
