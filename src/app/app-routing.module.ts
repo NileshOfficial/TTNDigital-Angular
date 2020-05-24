@@ -5,6 +5,7 @@ import { AuthCallbackComponent } from './auth-callback/auth-callback.component';
 import { BuzzComponent } from './buzz/buzz.component';
 import { HomeComponent } from './home/home.component';
 import { ComplaintsComponent } from './complaints/complaints.component';
+import { ResolveBoardComponent } from './resolve-board/resolve-board.component';
 
 
 const routes: Routes = [
@@ -19,7 +20,8 @@ const routes: Routes = [
   {
     path: 'home', component: HomeComponent, children: [
       { path: 'buzz', component: BuzzComponent },
-      { path: 'complaints', component: ComplaintsComponent }
+      { path: 'complaints', component: ComplaintsComponent },
+      { path: 'resolve', component: ResolveBoardComponent }
     ]
   }
 ];

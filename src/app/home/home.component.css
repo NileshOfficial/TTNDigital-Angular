@@ -118,3 +118,7 @@ nav .navlink a {
 .extras .helpLinks li a:hover {
     text-decoration: underline;
 }
+
+.content {
+    width: 100%;
+}
