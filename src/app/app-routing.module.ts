@@ -7,6 +7,7 @@ import { HomeComponent } from './home/home.component';
 import { ComplaintsComponent } from './complaints/complaints.component';
 import { ResolveBoardComponent } from './resolve-board/resolve-board.component';
 import { AboutComponent } from './about/about.component';
+import { HelpComponent } from './help/help.component';
 
 
 const routes: Routes = [
@@ -17,13 +18,14 @@ const routes: Routes = [
       { path: 'login', component: LoginBoardComponent }
     ]
   },
-  { path: 'home', redirectTo: '/home/buzz', pathMatch: "full"},
+  { path: 'home', redirectTo: '/home/buzz', pathMatch: "full" },
   {
     path: 'home', component: HomeComponent, children: [
       { path: 'buzz', component: BuzzComponent },
       { path: 'complaints', component: ComplaintsComponent },
       { path: 'resolve', component: ResolveBoardComponent },
-      { path: 'about', component: AboutComponent }
+      { path: 'about', component: AboutComponent },
+      { path: 'help', component: HelpComponent }
     ]
   }
 ];
