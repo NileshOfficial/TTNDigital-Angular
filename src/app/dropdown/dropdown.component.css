@@ -6,6 +6,7 @@
 .select .title {
     display: inline-flex;
     align-items: center;
+    position: relative;
     border-radius: 4px;
     font-size: inherit;
     color: inherit;
@@ -26,6 +27,7 @@
 
 .select .options {
     position: absolute;
+    z-index: 10;
     top: 100%;
     left: 0;
     right: 0;
@@ -39,6 +41,7 @@
 }
 
 .select .options li {
+    font-weight: 400;
     padding: 1rem 2rem;
     border-bottom: 1px solid #dcdcdc;
     cursor: pointer;
@@ -57,4 +60,13 @@
 
 .bordered {
     border: 1px solid #dcdcdc;
+}
+
+.clickHandle {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: transparent;
 }

@@ -1,7 +1,8 @@
 <div class="select">
-    <a class="title titleText" (click)="toggleOptions()" [ngClass]="{optionsVisible: optionsVisible, bordered: bordered}">
+    <a class="title titleText" [ngClass]="{optionsVisible: optionsVisible, bordered: bordered}">
         <span>{{ heading }}</span>
         <fa-icon [icon]="optionsVisible ? upArrowHead : downArrowHead"></fa-icon>
+        <div class="clickHandle" (click)="toggleOptions()"></div>
     </a>
     <ul *ngIf="optionsVisible" class="options">
         <li *ngFor="let option of options; let i = index" (click)="updateHeading(option, i)">{{ option }}</li>
