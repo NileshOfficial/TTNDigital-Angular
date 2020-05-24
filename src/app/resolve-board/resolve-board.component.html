@@ -1,0 +1,30 @@
+<div class="card">
+    <h5 class="header">
+        your complaints
+        <a class="filterSelect titleText">
+            filter by
+            <fa-icon [icon]="filterIcon"></fa-icon>
+        </a>
+    </h5>
+    <table class="table">
+        <tr>
+            <th>
+                department 
+                <fa-icon [icon]="sortIcon"></fa-icon>
+            </th>
+            <th>issue id</th>
+            <th>locked by</th>
+            <th>assigned to</th>
+            <th>status</th>
+        </tr>
+        <tr>
+            <td>afdsa</td>
+            <td>aff</td>
+            <td>gdg</td>
+            <td>rgef</td>
+            <td>
+                <ttnd-dropdown [options]="statusOptions" [select]="1" (selectChanged)="getDropdownValue($event)"></ttnd-dropdown>
+            </td>
+        </tr>
+    </table>
+</div>

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { faSort, faFilter, IconDefinition } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'ttnd-resolve-board',
@@ -7,9 +8,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ResolveBoardComponent implements OnInit {
 
+  sortIcon: IconDefinition = faSort;
+  filterIcon: IconDefinition = faFilter;
+  statusOptions: Array<string> = ['Open', 'Resolved', 'In Progress'];
+
+
   constructor() { }
 
   ngOnInit(): void {
+  }
+
+  getDropdownValue(event: { heading: string, idx: number }) {
+
   }
 
 }
