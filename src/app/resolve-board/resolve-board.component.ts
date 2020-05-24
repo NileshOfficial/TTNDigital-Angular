@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { faSort, faFilter, IconDefinition } from '@fortawesome/free-solid-svg-icons';
+import { faSort, faFilter, faChevronRight, faTimes, IconDefinition } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'ttnd-resolve-board',
@@ -10,9 +10,13 @@ export class ResolveBoardComponent implements OnInit {
 
   sortIcon: IconDefinition = faSort;
   filterIcon: IconDefinition = faFilter;
+  rightArrowIcon: IconDefinition = faChevronRight;
+  crossIcon: IconDefinition = faTimes;
+
   statusOptions: Array<string> = ['Open', 'Resolved', 'In Progress'];
   departmentOptions: Array<string> = ['Admin', 'IT', 'Infra', 'HR'];
-  searchOptions: Array<string> = ['Issue Id', 'Locked By']
+  searchOptions: Array<string> = ['Issue Id', 'Locked By'];
+  timePopupVisible: boolean = false;
 
   constructor() { }
 
@@ -20,7 +24,17 @@ export class ResolveBoardComponent implements OnInit {
   }
 
   getDropdownValue(event: { heading: string, idx: number }) {
+    if(event.heading === 'In Progress' || event.heading === 'Open')
+      this.timePopupVisible = true;
+    else this.hideEstimatedTimePopup()
+  }
 
+  estimatedTimeSubmit() {
+    this.hideEstimatedTimePopup();
+  }
+
+  hideEstimatedTimePopup() {
+    this.timePopupVisible = false;
   }
 
 }
