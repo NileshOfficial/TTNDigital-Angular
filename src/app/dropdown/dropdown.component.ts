@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter, HostListener, ElementRef } from '@angular/core';
-import { faAngleUp, faAngleDown, IconDefinition } from '@fortawesome/free-solid-svg-icons';
+import { faChevronUp, faChevronDown, IconDefinition, faThumbsDown } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'ttnd-dropdown',
@@ -11,10 +11,11 @@ export class DropdownComponent implements OnInit {
   @Input() heading: string = '';
   @Input() options: Array<string | number> = [];
   @Input() bordered: boolean = false;
-  @Output() selected: EventEmitter<string | number> = new EventEmitter();
+  @Input() select: number = null;
+  @Output() selectChanged: EventEmitter<string | number> = new EventEmitter();
 
-  upArrowHead: IconDefinition = faAngleUp;
-  downArrowHead: IconDefinition = faAngleDown;
+  upArrowHead: IconDefinition = faChevronUp;
+  downArrowHead: IconDefinition = faChevronDown;
   optionsVisible: boolean = false;
 
   @HostListener('document:click', ['$event'])
@@ -27,6 +28,8 @@ export class DropdownComponent implements OnInit {
   constructor(private eRef: ElementRef) { }
 
   ngOnInit(): void {
+    if(this.select)
+      this.heading = this.options[this.select] as string;
   }
 
   toggleOptions() {
@@ -35,6 +38,6 @@ export class DropdownComponent implements OnInit {
 
   updateHeading(heading: string) {
     this.heading = heading;
-    this.selected.emit(this.heading);
+    this.selectChanged.emit(this.heading);
   }
 }
