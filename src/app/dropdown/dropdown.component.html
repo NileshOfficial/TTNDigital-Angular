@@ -4,6 +4,6 @@
         <fa-icon [icon]="optionsVisible ? upArrowHead : downArrowHead"></fa-icon>
     </a>
     <ul *ngIf="optionsVisible" class="options">
-        <li *ngFor="let option of options" (click)="updateHeading(option)">{{ option }}</li>
+        <li *ngFor="let option of options; let i = index" (click)="updateHeading(option, i)">{{ option }}</li>
     </ul>
 </div>

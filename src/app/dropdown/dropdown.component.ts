@@ -12,7 +12,7 @@ export class DropdownComponent implements OnInit {
   @Input() options: Array<string | number> = [];
   @Input() bordered: boolean = false;
   @Input() select: number = null;
-  @Output() selectChanged: EventEmitter<string | number> = new EventEmitter();
+  @Output() selectChanged: EventEmitter<{ heading: string, idx: number }> = new EventEmitter();
 
   upArrowHead: IconDefinition = faChevronUp;
   downArrowHead: IconDefinition = faChevronDown;
@@ -20,7 +20,7 @@ export class DropdownComponent implements OnInit {
 
   @HostListener('document:click', ['$event'])
   clickout(event) {
-    if(!this.eRef.nativeElement.contains(event.target)) {
+    if (!this.eRef.nativeElement.contains(event.target)) {
       this.optionsVisible = false;
     }
   }
@@ -28,7 +28,7 @@ export class DropdownComponent implements OnInit {
   constructor(private eRef: ElementRef) { }
 
   ngOnInit(): void {
-    if(this.select)
+    if (this.select)
       this.heading = this.options[this.select] as string;
   }
 
@@ -36,8 +36,8 @@ export class DropdownComponent implements OnInit {
     this.optionsVisible = !this.optionsVisible;
   }
 
-  updateHeading(heading: string) {
+  updateHeading(heading: string, idx: number) {
     this.heading = heading;
-    this.selectChanged.emit(this.heading);
+    this.selectChanged.emit({ heading, idx });
   }
 }
