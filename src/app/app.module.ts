@@ -16,6 +16,7 @@ import { AddZeroPipe } from './pipes/addzero.pipe';
 import { MsToDurationPipe } from './pipes/ms-to-duration.pipe';
 import { ComplaintsComponent } from './complaints/complaints.component';
 import { ResolveBoardComponent } from './resolve-board/resolve-board.component';
+import { AboutComponent } from './about/about.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { ResolveBoardComponent } from './resolve-board/resolve-board.component';
     AddZeroPipe,
     MsToDurationPipe,
     ComplaintsComponent,
-    ResolveBoardComponent
+    ResolveBoardComponent,
+    AboutComponent
   ],
   imports: [
     BrowserModule,
