@@ -38,6 +38,7 @@ export class DropdownComponent implements OnInit {
 
   updateHeading(heading: string, idx: number) {
     this.heading = heading;
+    this.optionsVisible = false;
     this.selectChanged.emit({ heading, idx });
   }
 }
