@@ -17,6 +17,7 @@ import { MsToDurationPipe } from './pipes/ms-to-duration.pipe';
 import { ComplaintsComponent } from './complaints/complaints.component';
 import { ResolveBoardComponent } from './resolve-board/resolve-board.component';
 import { AboutComponent } from './about/about.component';
+import { HelpComponent } from './help/help.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import { AboutComponent } from './about/about.component';
     MsToDurationPipe,
     ComplaintsComponent,
     ResolveBoardComponent,
-    AboutComponent
+    AboutComponent,
+    HelpComponent
   ],
   imports: [
     BrowserModule,
