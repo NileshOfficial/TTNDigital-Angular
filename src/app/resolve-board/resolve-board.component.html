@@ -1,15 +1,23 @@
 <div class="card">
-    <h5 class="header">
-        your complaints
-        <a class="filterSelect titleText">
-            filter by
+    <div class="header">
+        <div class="filterSelect titleText" tabindex="0">
+            <span>filter by</span>
             <fa-icon [icon]="filterIcon"></fa-icon>
-        </a>
-    </h5>
+            <div class="fieldGroup">
+                <input type="text" placeholder="Search">
+                <ttnd-dropdown heading="Search Field" class="dropdown" [options]="searchOptions"></ttnd-dropdown>
+            </div>
+            <ttnd-dropdown class="dropdown" heading="Department" [options]="departmentOptions"></ttnd-dropdown>
+            <ttnd-dropdown class="dropdown" heading="Status" [options]="statusOptions"></ttnd-dropdown>
+        </div>
+        <h5>
+            your complaints
+        </h5>
+    </div>
     <table class="table">
         <tr>
             <th>
-                department 
+                department
                 <fa-icon [icon]="sortIcon"></fa-icon>
             </th>
             <th>issue id</th>
@@ -23,7 +31,8 @@
             <td>gdg</td>
             <td>rgef</td>
             <td>
-                <ttnd-dropdown [options]="statusOptions" [select]="1" (selectChanged)="getDropdownValue($event)"></ttnd-dropdown>
+                <ttnd-dropdown [options]="statusOptions" [select]="1" (selectChanged)="getDropdownValue($event)">
+                </ttnd-dropdown>
             </td>
         </tr>
     </table>

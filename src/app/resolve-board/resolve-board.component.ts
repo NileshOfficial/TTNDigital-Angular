@@ -11,7 +11,8 @@ export class ResolveBoardComponent implements OnInit {
   sortIcon: IconDefinition = faSort;
   filterIcon: IconDefinition = faFilter;
   statusOptions: Array<string> = ['Open', 'Resolved', 'In Progress'];
-
+  departmentOptions: Array<string> = ['Admin', 'IT', 'Infra', 'HR'];
+  searchOptions: Array<string> = ['Issue Id', 'Locked By']
 
   constructor() { }
 
