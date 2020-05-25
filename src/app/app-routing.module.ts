@@ -8,7 +8,7 @@ import { ComplaintsComponent } from './complaints/complaints.component';
 import { ResolveBoardComponent } from './resolve-board/resolve-board.component';
 import { AboutComponent } from './about/about.component';
 import { HelpComponent } from './help/help.component';
-
+import { LoginCheckPointService } from './services/login-check-point.service';
 
 const routes: Routes = [
   { path: '', redirectTo: '/auth/login', pathMatch: 'full' },
@@ -20,7 +20,7 @@ const routes: Routes = [
   },
   { path: 'home', redirectTo: '/home/buzz', pathMatch: "full" },
   {
-    path: 'home', component: HomeComponent, children: [
+    path: 'home', canActivate: [LoginCheckPointService], component: HomeComponent, children: [
       { path: 'buzz', component: BuzzComponent },
       { path: 'complaints', component: ComplaintsComponent },
       { path: 'resolve', component: ResolveBoardComponent },
