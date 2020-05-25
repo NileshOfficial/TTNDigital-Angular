@@ -1,3 +1,7 @@
+.card {
+    position: relative;
+}
+
 .header {
     display: flex;
     align-items: center;
@@ -92,25 +96,35 @@
     position: relative;
 }
 
-.table td form {
+input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+input[type=number] {
+    -moz-appearance: textfield;
+}
+
+form {
     position: absolute;
-    bottom: -100%;
-    right: 100%;
+    top: 0;
+    left: 0;
     padding: 1rem;
     background-color: #fff;
     box-shadow: 0 0 5px #777;
-    min-width: 200px;
-    min-height: 128px;
+    max-width: 200px;
+    max-height: 128px;
     text-align: right;
+    font-size: 1.4rem;
 }
 
-.table td form h6 {
+form h6 {
     font-size: 1.2rem;
     text-align: left;
     margin-bottom: 1rem;
 }
 
-.table td form h6 a {
+form h6 a {
     color: #777;
     font-size: 1.4rem;
     position: absolute;
@@ -118,12 +132,12 @@
     top: 5px;
 }
 
-.table td form .formElementGroup {
+form .formElementGroup {
     display: flex;
     justify-content: space-between;
 }
 
-.formElementGroup input[type="number"] {
+form .formElementGroup input[type="number"] {
     border: 1px solid #dcdcdc;
     padding-left: 1rem;
     padding-right: 1rem;
@@ -131,12 +145,12 @@
     width: 35%;
 }
 
-.formElementGroup .formDropdown {
+form .formElementGroup .formDropdown {
     text-align: left;
     width: 63%;
 }
 
-.table td form .submit {
+form .submit {
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -151,15 +165,6 @@
     padding-left: 2px
 }
 
-.table td form .submit:hover {
+form .submit:hover {
     background-color: rgba(0, 0, 0, 0.15);
-}
-
-input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
-}
-
-input[type=number] {
-    -moz-appearance: textfield;
 }

@@ -1,4 +1,4 @@
-<div class="card">
+<div class="card" id="card">
     <div class="header">
         <div class="filterSelect titleText" tabindex="0">
             <span>filter by</span>
@@ -31,25 +31,25 @@
             <td>gdg</td>
             <td>rgef</td>
             <td>
-                <ttnd-dropdown [options]="statusOptions" [select]="1" (selectChanged)="getDropdownValue($event)">
+                <ttnd-dropdown (click)="getClickedElementRef($event)" [options]="statusOptions" [select]="1" (selectChanged)="getDropdownValue($event)">
                 </ttnd-dropdown>
-                <form *ngIf="timePopupVisible" class="timeInputs">
-                    <h6>
-                        estimated time to resolution
-                        <a (click)="hideEstimatedTimePopup()">
-                            <fa-icon [icon]="crossIcon"></fa-icon>
-                        </a>
-                    </h6>
-                    <div class="formElementGroup">
-                        <input type="number" placeholder="Count">
-                        <ttnd-dropdown class="formDropdown" heading="Type" [bordered]="true"
-                            [options]="['hours', 'days', 'weeks', 'months']"></ttnd-dropdown>
-                    </div>
-                    <button (click)="estimatedTimeSubmit()" type="button" class="submit">
-                        <fa-icon [icon]="rightArrowIcon"></fa-icon>
-                    </button>
-                </form>
             </td>
         </tr>
     </table>
+    <form *ngIf="timePopupVisible" class="timeInputs" [ngStyle]="timePopupPosition">
+        <h6>
+            estimated time to resolution
+            <a (click)="hideEstimatedTimePopup()">
+                <fa-icon [icon]="crossIcon"></fa-icon>
+            </a>
+        </h6>
+        <div class="formElementGroup">
+            <input type="number" placeholder="Count">
+            <ttnd-dropdown class="formDropdown" heading="Type" [bordered]="true"
+                [options]="['hours', 'days', 'weeks', 'months']"></ttnd-dropdown>
+        </div>
+        <button (click)="estimatedTimeSubmit()" type="button" class="submit">
+            <fa-icon [icon]="rightArrowIcon"></fa-icon>
+        </button>
+    </form>
 </div>

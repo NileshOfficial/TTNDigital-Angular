@@ -16,7 +16,9 @@ export class ResolveBoardComponent implements OnInit {
   statusOptions: Array<string> = ['Open', 'Resolved', 'In Progress'];
   departmentOptions: Array<string> = ['Admin', 'IT', 'Infra', 'HR'];
   searchOptions: Array<string> = ['Issue Id', 'Locked By'];
+  
   timePopupVisible: boolean = false;
+  timePopupPosition: any;
 
   constructor() { }
 
@@ -35,6 +37,21 @@ export class ResolveBoardComponent implements OnInit {
 
   hideEstimatedTimePopup() {
     this.timePopupVisible = false;
+  }
+
+  getClickedElementRef(event) {
+    let card = document.getElementById("card").getBoundingClientRect();
+    const cardX = card.x;
+    const cardY = card.y;
+
+    if (event.target.attributes.class && event.target.attributes.class.nodeValue === 'clickHandle') {
+      const positionMeta = event.target.getBoundingClientRect();
+      this.timePopupPosition = {
+        'top.px': positionMeta['y'] - cardY - 50,
+        'left.px': positionMeta['x'] - cardX - positionMeta['width'] - 50
+      }
+      console.log(positionMeta['x'], positionMeta['y']);
+    }
   }
 
 }
