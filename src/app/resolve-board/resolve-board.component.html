@@ -35,7 +35,38 @@
                 </ttnd-dropdown>
             </td>
         </tr>
+        <tr>
+            <td>afdsa</td>
+            <td>fasdfdsf sd fa f a f f f</td>
+            <td>gdg</td>
+            <td>rgef</td>
+            <td>
+                <ttnd-dropdown (click)="getClickedElementRef($event)" [options]="statusOptions" [select]="1" (selectChanged)="getDropdownValue($event)">
+                </ttnd-dropdown>
+            </td>
+        </tr>
+        <tr>
+            <td>afdsa</td>
+            <td>fasdfdsf sd fa f a f f f</td>
+            <td>gdg</td>
+            <td>rgef</td>
+            <td>
+                <ttnd-dropdown (click)="getClickedElementRef($event)" [options]="statusOptions" [select]="1" (selectChanged)="getDropdownValue($event)">
+                </ttnd-dropdown>
+            </td>
+        </tr>
+        <tr>
+            <td>afdsa</td>
+            <td>fasdfdsf sd fa f a f f f</td>
+            <td>gdg</td>
+            <td>rgef</td>
+            <td>
+                <ttnd-dropdown (click)="getClickedElementRef($event)" [options]="statusOptions" [select]="1" (selectChanged)="getDropdownValue($event)">
+                </ttnd-dropdown>
+            </td>
+        </tr>
     </table>
+    <div class="popupBg" *ngIf="timePopupVisible"></div>
     <form *ngIf="timePopupVisible" class="timeInputs" [ngStyle]="timePopupPosition">
         <h6>
             estimated time to resolution
