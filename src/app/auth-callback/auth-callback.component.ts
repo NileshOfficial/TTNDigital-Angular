@@ -8,11 +8,9 @@ import { Router, ActivatedRoute } from '@angular/router';
 })
 export class AuthCallbackComponent implements OnInit {
 
-  constructor(private router: Router, private activatedRoute: ActivatedRoute) { }
+  constructor() { }
 
   ngOnInit(): void {
-    if(!this.activatedRoute.snapshot.queryParams['code'])
-      this.router.navigate(['/', 'auth', 'login']);
   }
 
 }

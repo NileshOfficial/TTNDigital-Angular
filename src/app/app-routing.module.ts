@@ -9,12 +9,13 @@ import { ResolveBoardComponent } from './resolve-board/resolve-board.component';
 import { AboutComponent } from './about/about.component';
 import { HelpComponent } from './help/help.component';
 import { LoginCheckPointService } from './services/login-check-point.service';
+import { LoginCheckOnTokenRequestService } from './services/login-check-on-token-request.service';
 
 const routes: Routes = [
   { path: '', redirectTo: '/auth/login', pathMatch: 'full' },
   {
     path: 'auth', children: [
-      { path: '', component: AuthCallbackComponent },
+      { path: '', canActivate: [LoginCheckOnTokenRequestService], component: AuthCallbackComponent },
       { path: 'login', component: LoginBoardComponent }
     ]
   },
