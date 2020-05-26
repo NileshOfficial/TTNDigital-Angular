@@ -15,12 +15,15 @@ export class HomeComponent implements OnInit {
   signOutIcon: IconDefinition = faSignOutAlt;
   rightArrowHead: IconDefinition = faAngleRight;
 
+  adminStatus: boolean = false;
+
   constructor(private authApi: AuthApiService,
     private tokenstore: TokenstoreService,
     private localstore: LocalstorageService,
     private router: Router) { }
 
   ngOnInit(): void {
+    this.adminStatus = this.tokenstore.token.admin;
   }
 
   logout() {

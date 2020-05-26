@@ -29,7 +29,7 @@
                     <fa-icon [icon]="rightArrowHead"></fa-icon>
                 </a>
             </li>
-            <li class="navlink">
+            <li class="navlink" *ngIf="adminStatus">
                 <a class="titleText" [routerLink]="['/home/resolve']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
                     <span>resolved</span>
                     <fa-icon [icon]="rightArrowHead"></fa-icon>
