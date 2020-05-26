@@ -1,0 +1,1 @@
+export const loginRequestEndpoint = 'http://localhost:3001/auth/login';
