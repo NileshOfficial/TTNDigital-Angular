@@ -10,6 +10,7 @@ import { AboutComponent } from './about/about.component';
 import { HelpComponent } from './help/help.component';
 import { LoginCheckPointService } from './services/login-check-point.service';
 import { LoginCheckOnTokenRequestService } from './services/login-check-on-token-request.service';
+import { CheckAdminStatusService } from './services/checkAdminStatus.service';
 
 const routes: Routes = [
   { path: '', redirectTo: '/auth/login', pathMatch: 'full' },
@@ -24,7 +25,7 @@ const routes: Routes = [
     path: 'home', canActivate: [LoginCheckPointService], component: HomeComponent, children: [
       { path: 'buzz', component: BuzzComponent },
       { path: 'complaints', component: ComplaintsComponent },
-      { path: 'resolve', component: ResolveBoardComponent },
+      { path: 'resolve', canActivate: [CheckAdminStatusService], component: ResolveBoardComponent },
       { path: 'about', component: AboutComponent },
       { path: 'help', component: HelpComponent }
     ]
