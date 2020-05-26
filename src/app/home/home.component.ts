@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { faSignOutAlt, faAngleRight, IconDefinition } from '@fortawesome/free-solid-svg-icons'
+import { AuthApiService } from '../services/auth-api.service';
+import { TokenstoreService } from '../services/tokenstore.service';
+import { LocalstorageService } from '../services/localstorage.service';
 
 @Component({
   selector: 'ttnd-home',
@@ -11,9 +15,26 @@ export class HomeComponent implements OnInit {
   signOutIcon: IconDefinition = faSignOutAlt;
   rightArrowHead: IconDefinition = faAngleRight;
 
-  constructor() { }
+  constructor(private authApi: AuthApiService,
+    private tokenstore: TokenstoreService,
+    private localstore: LocalstorageService,
+    private router: Router) { }
 
   ngOnInit(): void {
+  }
+
+  logout() {
+    const revokeTokens = () => {
+      this.tokenstore.token = null;
+      this.localstore.deleteToken();
+      this.router.navigate(['/']);
+    }
+
+    this.authApi.logout().subscribe(revokeTokens, err => {
+      if (err.errorCode && err.errorCode === "INVALID_AUTH_TOKEN")
+        revokeTokens;
+      else alert('request failed try again, later');
+    });
   }
 
 }
