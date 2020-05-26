@@ -5,7 +5,7 @@ import { Observable } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
-export class LoginCheckOnTokenRequestService {
+export class LoginCheckOnTokenRequestService implements CanActivate{
 
   constructor(private router: Router) { }
 
