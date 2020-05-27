@@ -5,7 +5,7 @@
         </h5>
         <div class="body">
             <form (ngSubmit)="postBuzz(f)" #f="ngForm">
-                <textarea ngModel name="description" placeholder="Share your thought...."></textarea>
+                <textarea ngModel name="description" placeholder="Share your thought...." required></textarea>
                 <ttnd-dropdown id="dropdown" heading="Category" [options]="options"
                     (selectChanged)="categoryChanged($event)">
                 </ttnd-dropdown>
@@ -15,7 +15,7 @@
                     </label>
                     <input id="fileInput" type="file" multiple (change)="fileChange($event)">
                 </div>
-                <button class="submit" type="submit">
+                <button class="submit" type="submit" [disabled]="!f.valid || !category">
                     <fa-icon [icon]="postIcon"></fa-icon>
                 </button>
             </form>
@@ -27,20 +27,11 @@
             <fa-icon [icon]="atIcon"></fa-icon> recent buzz
         </h5>
         <div class="body">
-            <div class="post">
-                <ttnd-buzz-post [post]="{}"></ttnd-buzz-post>
+            <div *ngIf="posts.length === 0" class="loader">
+                <ttnd-loader animation="cubes"></ttnd-loader>
             </div>
-            <div class="post">
-                <ttnd-buzz-post [post]="{}"></ttnd-buzz-post>
-            </div>
-            <div class="post">
-                <ttnd-buzz-post [post]="{}"></ttnd-buzz-post>
-            </div>
-            <div class="post">
-                <ttnd-buzz-post [post]="{}"></ttnd-buzz-post>
-            </div>
-            <div class="post">
-                <ttnd-buzz-post [post]="{}"></ttnd-buzz-post>
+            <div class="post" *ngFor="let post of posts">
+                <ttnd-buzz-post [post]="post"></ttnd-buzz-post>
             </div>
         </div>
     </div>

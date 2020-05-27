@@ -21,9 +21,12 @@ export class BuzzComponent implements OnInit {
   images: Array<File> = [];
   category: string = '';
 
+  posts = [];
+
   constructor(private buzzApi: BuzzApiService) { }
 
   ngOnInit(): void {
+    this.buzzApi.getBuzzFeed().subscribe(data => { this.posts = data });
   }
 
   fileChange(event) {

@@ -71,10 +71,25 @@
     color: #fff;
 }
 
+.body form .submit:disabled {
+    color: #db6958;
+    background-color: #ddd;
+    pointer-events: none;
+}
+
 .post {
     border-bottom: 1px solid #dcdcdc;
+    width: 100%;
 }
 
 .post:last-child {
     border-bottom: none;
+}
+
+.loader {
+    background-color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 200px;
 }
