@@ -32,4 +32,18 @@ export class BuzzApiService {
       headers: headers
     });
   }
+
+  updateReview(docId: string, reverse: boolean, type: string = 'like', ): Observable<any> {
+    const token = this.tokenstore.token;
+    let headers = new HttpHeaders({
+      'authorization': `bearer ${token.access_token},bearer ${token.id_token}`
+    });
+
+    const uri = (type === 'like')
+      ? `${endpoints.updateLikeEndpoint}/${docId}${reverse ? '?reverse=1' : ''}`
+      : `${endpoints.updateDislikeEndpoint}/${docId}${reverse ? '?reverse=1' : ''}`
+    return this.http.patch(uri, {}, {
+      headers: headers
+    });
+  }
 }

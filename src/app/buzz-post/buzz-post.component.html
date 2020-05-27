@@ -14,11 +14,11 @@
         </div>
         <p class="description">{{ postData['description'] }}</p>
         <div class="review">
-            <a class="like" (click)="toggleReview('like')">
+            <a class="like" (click)="toggleLike()">
                 <span class="count">{{ postData['likes'] }}</span>
                 <fa-icon [icon]="likeIcon" [ngClass]="{'active': liked}"></fa-icon>
             </a>
-            <a class="like" (click)="toggleReview('dislike')">
+            <a class="like" (click)="toggleDislike()">
                 <span class="count">{{ postData['dislikes'] }}</span>
                 <fa-icon [icon]="dislikeIcon" flip="horizontal" [ngClass]="{'active': disliked}"></fa-icon>
             </a>
