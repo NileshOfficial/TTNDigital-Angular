@@ -1,0 +1,52 @@
+.container {
+    width: 100%;
+    position: relative;
+}
+
+.image {
+    width: 100%;
+    height: 250px;
+    display: none;
+}
+
+.image img {
+    width: 100%;
+    height: 100%;
+}
+
+.controls {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 2rem;
+    color: #fff;
+    width: 30px;
+    height: 30px;
+    line-height: 30px;
+    text-align: center;
+    border-radius: 50%;
+    background-color: rgba(0, 0, 0, 0.25);
+    transition: 0.2s ease-in-out;
+}
+
+.controls:hover {
+    background-color: #e04a32;
+}
+
+.controls.prev {
+    left: 2rem;
+    padding-right: 2px;
+}
+
+.controls.next {
+    right: 2rem;
+    padding-left: 2px;
+}
+
+.visible {
+    display: block !important;
+}
+
+.disabled {
+    pointer-events: none;
+}

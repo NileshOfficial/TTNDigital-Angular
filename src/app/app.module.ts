@@ -19,6 +19,7 @@ import { ComplaintsComponent } from './complaints/complaints.component';
 import { ResolveBoardComponent } from './resolve-board/resolve-board.component';
 import { AboutComponent } from './about/about.component';
 import { HelpComponent } from './help/help.component';
+import { CarouselComponent } from './carousel/carousel.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import { HelpComponent } from './help/help.component';
     ComplaintsComponent,
     ResolveBoardComponent,
     AboutComponent,
-    HelpComponent
+    HelpComponent,
+    CarouselComponent
   ],
   imports: [
     BrowserModule,

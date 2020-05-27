@@ -1,0 +1,11 @@
+<div class="container">
+    <div class="image" *ngFor="let image of images; let idx = index" [ngClass]="{visible: current === idx}">
+        <img src={{image}} alt="image">
+    </div>
+    <a class="controls prev" (click)="prev()" [ngClass]="{disabled: current === 0}">
+        <fa-icon [icon]="prevIcon"></fa-icon>
+    </a>
+    <a class="controls next" (click)="next()" [ngClass]="{disabled: current === images.length - 1}">
+        <fa-icon [icon]="nextIcon"></fa-icon>
+    </a>
+</div>
