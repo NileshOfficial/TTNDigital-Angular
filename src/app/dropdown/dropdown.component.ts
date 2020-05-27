@@ -9,10 +9,10 @@ import { faChevronUp, faChevronDown, IconDefinition, faThumbsDown } from '@forta
 export class DropdownComponent implements OnInit {
 
   @Input() heading: string = '';
-  @Input() options: Array<string | number> = [];
+  @Input() options: Array<Array<string>> = [];
   @Input() bordered: boolean = false;
   @Input() select: number = null;
-  @Output() selectChanged: EventEmitter<{ heading: string, idx: number }> = new EventEmitter();
+  @Output() selectChanged: EventEmitter<{ option: string, idx: number }> = new EventEmitter();
 
   upArrowHead: IconDefinition = faChevronUp;
   downArrowHead: IconDefinition = faChevronDown;
@@ -29,16 +29,17 @@ export class DropdownComponent implements OnInit {
 
   ngOnInit(): void {
     if (this.select)
-      this.heading = this.options[this.select] as string;
+      this.heading = this.options[this.select][1] as string;
   }
 
   toggleOptions() {
     this.optionsVisible = !this.optionsVisible;
   }
 
-  updateHeading(heading: string, idx: number) {
-    this.heading = heading;
+  updateHeading(heading: Array<string>, idx: number) {
+    this.heading = heading[1];
     this.optionsVisible = false;
-    this.selectChanged.emit({ heading, idx });
+    const option = this.options[idx];
+    this.selectChanged.emit({ option: option[0], idx });
   }
 }

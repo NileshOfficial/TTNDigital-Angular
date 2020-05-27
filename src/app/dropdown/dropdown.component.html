@@ -5,6 +5,6 @@
         <div class="clickHandle" (click)="toggleOptions()"></div>
     </a>
     <ul *ngIf="optionsVisible" class="options">
-        <li *ngFor="let option of options; let i = index" (click)="updateHeading(option, i)">{{ option }}</li>
+        <li *ngFor="let option of options; let i = index" (click)="updateHeading(option, i)">{{ option[1] }}</li>
     </ul>
 </div>
