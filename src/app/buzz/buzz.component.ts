@@ -17,7 +17,7 @@ export class BuzzComponent implements OnInit {
   imageIcon: IconDefinition = faImage;
   atIcon: IconDefinition = faAt;
 
-  options: Array<string> = ['Activity', 'Lost And Found'];
+  options: Array<Array<string>> = [['activity', 'Activity'], ['lost and found', 'Lost And Found']];
   images: Array<File> = [];
   category: string = '';
 
@@ -30,8 +30,9 @@ export class BuzzComponent implements OnInit {
     this.images = <Array<File>>event.target.files;
   }
 
-  categoryChanged(event: { heading: string, idx: number }) {
-    this.category = this.options[event.idx];
+  categoryChanged(event: { option: string, idx: number }) {
+    this.category = event.option;
+    console.log(event.option);
   }
 
   postBuzz(form: NgForm) {

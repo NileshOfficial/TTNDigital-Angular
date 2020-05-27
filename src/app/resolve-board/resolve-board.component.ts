@@ -13,10 +13,10 @@ export class ResolveBoardComponent implements OnInit {
   rightArrowIcon: IconDefinition = faChevronRight;
   crossIcon: IconDefinition = faTimes;
 
-  statusOptions: Array<string> = ['Open', 'Resolved', 'In Progress'];
-  departmentOptions: Array<string> = ['Admin', 'IT', 'Infra', 'HR'];
-  searchOptions: Array<string> = ['Issue Id', 'Locked By'];
-  
+  statusOptions: Array<Array<string>> = [['Open', 'Open'], ['Resolved', 'Resolved'], ['In Progress', 'In Progress']];
+  departmentOptions: Array<Array<string>> = [['Admin', 'Admin'], ['IT', 'IT'], ['Infra', 'Infra'], ['HR', 'HR']];
+  searchOptions: Array<Array<string>> = [['Issue Id', 'Issue Id'], ['Locked By', 'Locked By']];
+
   timePopupVisible: boolean = false;
   timePopupPosition: any;
 
@@ -26,7 +26,7 @@ export class ResolveBoardComponent implements OnInit {
   }
 
   getDropdownValue(event: { heading: string, idx: number }) {
-    if(event.heading === 'In Progress' || event.heading === 'Open')
+    if (event.heading === 'In Progress' || event.heading === 'Open')
       this.timePopupVisible = true;
     else this.hideEstimatedTimePopup()
   }
