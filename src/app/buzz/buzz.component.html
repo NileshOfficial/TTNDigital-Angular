@@ -4,19 +4,20 @@
             <fa-icon [icon]="penIcon" flip="horizontal"></fa-icon> create buzz
         </h5>
         <div class="body">
-            <form>
-                <textarea placeholder="Share your thought...."></textarea>
-                <ttnd-dropdown id="dropdown" heading="Category" [options]="['Activity', 'Lost And Found']">
+            <form (ngSubmit)="postBuzz(f)" #f="ngForm">
+                <textarea ngModel name="description" placeholder="Share your thought...."></textarea>
+                <ttnd-dropdown id="dropdown" heading="Category" [options]="options"
+                    (selectChanged)="categoryChanged($event)">
                 </ttnd-dropdown>
                 <div class="attachment">
                     <label for="fileInput">
                         <fa-icon [icon]="imageIcon"></fa-icon>
                     </label>
-                    <input id="fileInput" type="file" multiple>
+                    <input id="fileInput" type="file" multiple (change)="fileChange($event)">
                 </div>
-                <a class="submit">
+                <button class="submit" type="submit">
                     <fa-icon [icon]="postIcon"></fa-icon>
-                </a>
+                </button>
             </form>
         </div>
     </div>
@@ -27,19 +28,19 @@
         </h5>
         <div class="body">
             <div class="post">
-                <ttnd-buzz-post [post]="data"></ttnd-buzz-post>
+                <ttnd-buzz-post [post]="{}"></ttnd-buzz-post>
             </div>
             <div class="post">
-                <ttnd-buzz-post [post]="data"></ttnd-buzz-post>
+                <ttnd-buzz-post [post]="{}"></ttnd-buzz-post>
             </div>
             <div class="post">
-                <ttnd-buzz-post [post]="data"></ttnd-buzz-post>
+                <ttnd-buzz-post [post]="{}"></ttnd-buzz-post>
             </div>
             <div class="post">
-                <ttnd-buzz-post [post]="data"></ttnd-buzz-post>
+                <ttnd-buzz-post [post]="{}"></ttnd-buzz-post>
             </div>
             <div class="post">
-                <ttnd-buzz-post [post]="data"></ttnd-buzz-post>
+                <ttnd-buzz-post [post]="{}"></ttnd-buzz-post>
             </div>
         </div>
     </div>

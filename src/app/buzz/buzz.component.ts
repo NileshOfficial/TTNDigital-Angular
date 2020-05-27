@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { faPen, faChevronRight, faAt, IconDefinition } from '@fortawesome/free-solid-svg-icons';
 import { faImage } from '@fortawesome/free-regular-svg-icons';
-import { Icon } from '@fortawesome/fontawesome-svg-core';
-
+import { buzzFormData } from '../interfaces/buzz.model';
+import { NgForm } from '@angular/forms';
+import { BuzzApiService } from '../services/buzz-api.service';
 
 @Component({
   selector: 'ttnd-buzz',
@@ -16,19 +17,33 @@ export class BuzzComponent implements OnInit {
   imageIcon: IconDefinition = faImage;
   atIcon: IconDefinition = faAt;
 
-  data = {
-    description: "fksfkhgsfhsgfhjds skgfkhdsf gjhdshk gdsfhkgdsgfhdsg hjdsfgkdsfuerh flkdshflkdsdhfkjl hfdljkhdfkjlghkdsjfghljkfdshglk jdshgldsfh gldfhgjk hdkghhdsjk g kds kg hhkjghdsjklg hdskljghljkds hhglsdjkf gh lkdffsglkd gkjldsfhgljk dshg",
-    category: 'fsdfsdf',
-    images: ['fsdfdsf'],
-    likes: 234,
-    dislikes: 23,
-    date: Date.now(),
-    email: "nilesh.kumar@tothenew.com"
-  }
+  options: Array<string> = ['Activity', 'Lost And Found'];
+  images: Array<File> = [];
+  category: string = '';
 
-  constructor() { }
+  constructor(private buzzApi: BuzzApiService) { }
 
   ngOnInit(): void {
+  }
+
+  fileChange(event) {
+    this.images = <Array<File>>event.target.files;
+  }
+
+  categoryChanged(event: { heading: string, idx: number }) {
+    this.category = this.options[event.idx];
+  }
+
+  postBuzz(form: NgForm) {
+    const images = this.images;
+    const formData: any = new FormData();
+    for (const file of images) {
+      formData.append("files", file, file.name);
+    }
+    formData.append('description', form.value['description']);
+    formData.append('category', this.category);
+
+    this.buzzApi.postBuzz(formData).subscribe(data => console.log(data), err => console.log(err));
   }
 
 }
