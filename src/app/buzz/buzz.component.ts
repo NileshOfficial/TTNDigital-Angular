@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { faPen, faChevronRight, faAt, IconDefinition } from '@fortawesome/free-solid-svg-icons';
+import { faPen, faChevronRight, faAt, faCheck, IconDefinition } from '@fortawesome/free-solid-svg-icons';
 import { faImage } from '@fortawesome/free-regular-svg-icons';
 import { buzz } from '../interfaces/buzz.model';
 import { NgForm } from '@angular/forms';
@@ -17,11 +17,19 @@ export class BuzzComponent implements OnInit {
   postIcon: IconDefinition = faChevronRight;
   imageIcon: IconDefinition = faImage;
   atIcon: IconDefinition = faAt;
+  tickIcon: IconDefinition = faCheck;
 
   options: Array<Array<string>> = [['activity', 'Activity'], ['lost and found', 'Lost And Found']];
   images: Array<File> = [];
   category: string = '';
   posts: Array<buzz> = [];
+  heading = 'Category';
+
+  freezePosting: boolean = false;
+  posting: boolean = false;
+  done: boolean = false;
+  error: boolean = false;
+  errMessage: string = '';
 
   showLoader: boolean = false;
   skip = 0;
@@ -49,6 +57,8 @@ export class BuzzComponent implements OnInit {
   }
 
   postBuzz(form: NgForm) {
+    this.freezePosting = true;
+    this.posting = true;
     const images = this.images;
     const formData: any = new FormData();
     for (const file of images) {
@@ -56,8 +66,23 @@ export class BuzzComponent implements OnInit {
     }
     formData.append('description', form.value['description']);
     formData.append('category', this.category);
+    form.reset();
+    this.heading = '';
 
-    this.buzzApi.postBuzz(formData).subscribe(data => console.log(data), err => console.log(err));
+    this.buzzApi.postBuzz(formData).subscribe(data => {
+      this.posting = false;
+      this.done = true;
+      setTimeout(() => {
+        this.done = false;
+        this.freezePosting = false;
+      }, 500);
+    }, err => {
+      this.posting = false;
+      setTimeout(() => {
+        this.done = false;
+        this.freezePosting = false;
+      }, 500);
+    });
   }
 
   onScroll() {

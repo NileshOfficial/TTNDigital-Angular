@@ -4,9 +4,16 @@
             <fa-icon [icon]="penIcon" flip="horizontal"></fa-icon> create buzz
         </h5>
         <div class="body">
+            <div class="overlay" *ngIf="freezePosting">
+                <div class="processing">
+                    <ttnd-loader *ngIf="posting" [outerDimension]="50" [innerDimension]="30"></ttnd-loader>
+                    <fa-icon *ngIf="done" [icon]="tickIcon"></fa-icon>
+                    <span *ngIf="error">{{errMessage}}</span>
+                </div>
+            </div>
             <form (ngSubmit)="postBuzz(f)" #f="ngForm">
                 <textarea ngModel name="description" placeholder="Share your thought...." required></textarea>
-                <ttnd-dropdown id="dropdown" heading="Category" [options]="options"
+                <ttnd-dropdown id="dropdown" [heading]="heading" [options]="options"
                     (selectChanged)="categoryChanged($event)">
                 </ttnd-dropdown>
                 <div class="attachment">
@@ -26,7 +33,7 @@
         <h5 class="header">
             <fa-icon [icon]="atIcon"></fa-icon> recent buzz
         </h5>
-        <div class="body" infiniteScroll [infiniteScrollDistance]="1" [infiniteScrollThrottle]="0"
+        <div class="body fixHeight" infiniteScroll [infiniteScrollDistance]="1" [infiniteScrollThrottle]="0"
             (scrolled)="onScroll()" [scrollWindow]="false">
             <div *ngIf="posts.length === 0" class="loader">
                 <ttnd-loader animation="cubes"></ttnd-loader>
