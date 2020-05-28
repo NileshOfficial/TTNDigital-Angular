@@ -16,6 +16,8 @@
 .body {
     border-bottom: none !important;
     background-color: #fff;
+    max-height: 500px;
+    overflow-y: auto;
 }
 
 .body form {
@@ -92,4 +94,12 @@
     align-items: center;
     justify-content: center;
     min-height: 200px;
+}
+
+.lazyLoader {
+    background-color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100px;
 }

@@ -26,12 +26,16 @@
         <h5 class="header">
             <fa-icon [icon]="atIcon"></fa-icon> recent buzz
         </h5>
-        <div class="body">
+        <div class="body" infiniteScroll [infiniteScrollDistance]="1" [infiniteScrollThrottle]="0"
+            (scrolled)="onScroll()" [scrollWindow]="false">
             <div *ngIf="posts.length === 0" class="loader">
                 <ttnd-loader animation="cubes"></ttnd-loader>
             </div>
             <div class="post" *ngFor="let post of posts">
                 <ttnd-buzz-post [post]="post"></ttnd-buzz-post>
+            </div>
+            <div class="lazyLoader" *ngIf="showLoader">
+                <ttnd-loader [outerDimension]="50" [innerDimension]="30"></ttnd-loader>
             </div>
         </div>
     </div>

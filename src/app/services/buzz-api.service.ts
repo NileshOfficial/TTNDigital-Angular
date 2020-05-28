@@ -23,12 +23,12 @@ export class BuzzApiService {
     });
   }
 
-  getBuzzFeed(): Observable<Array<buzz>> {
+  getBuzzFeed(skip: number, limit: number): Observable<Array<buzz>> {
     const token = this.tokenstore.token
     let headers = new HttpHeaders({
       'authorization': `bearer ${token.access_token},bearer ${token.id_token}`
     });
-    return this.http.get<Array<buzz>>(endpoints.buzzPostEndpoint, {
+    return this.http.get<Array<buzz>>(endpoints.buzzPostEndpoint + `?skip=${skip}&limit=${limit}`, {
       headers: headers
     });
   }
