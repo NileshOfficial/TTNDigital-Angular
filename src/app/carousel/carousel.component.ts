@@ -9,6 +9,8 @@ import { faChevronLeft, faChevronRight, IconDefinition } from '@fortawesome/free
 export class CarouselComponent implements OnInit {
 
   @Input() images: Array<string> = [];
+  @Input() prefix: string = '';
+
   prevIcon: IconDefinition = faChevronLeft;
   nextIcon: IconDefinition = faChevronRight;
   current: number = 0;
@@ -25,6 +27,10 @@ export class CarouselComponent implements OnInit {
   next() {
     if ((this.current + 1) < this.images.length)
       this.current++;
+  }
+
+  imagePath(filename) {
+    return this.prefix ? (this.prefix + '/' + filename) : filename;
   }
 
 }

@@ -1,6 +1,6 @@
 <div class="container">
     <div class="image" *ngFor="let image of images; let idx = index" [ngClass]="{visible: current === idx}">
-        <img src={{image}} alt="image">
+        <img src={{imagePath(image)}} alt="imge">
     </div>
     <a class="controls prev" (click)="prev()" [ngClass]="{disabled: current === 0}">
         <fa-icon [icon]="prevIcon"></fa-icon>
