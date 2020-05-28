@@ -2,6 +2,7 @@ import { Component, OnInit, Input, OnChanges, SimpleChanges } from '@angular/cor
 import { faCircle, faThumbsUp, faThumbsDown, IconDefinition } from '@fortawesome/free-solid-svg-icons';
 import { buzz } from '../interfaces/buzz.model';
 import { BuzzApiService } from '../services/buzz-api.service';
+import { imagesEndpoint } from '../services/uris.conf';
 
 @Component({
   selector: 'ttnd-buzz-post',
@@ -12,7 +13,7 @@ export class BuzzPostComponent implements OnInit, OnChanges {
 
   @Input('post') postInputObject: buzz;
 
-  postData: object;
+  postData = {};
 
   dotIcon: IconDefinition = faCircle;
   likeIcon: IconDefinition = faThumbsUp;
@@ -20,6 +21,8 @@ export class BuzzPostComponent implements OnInit, OnChanges {
 
   liked: boolean = false;
   disliked: boolean = false;
+
+  prefix = imagesEndpoint;
 
   constructor(private buzzApi: BuzzApiService) { }
 

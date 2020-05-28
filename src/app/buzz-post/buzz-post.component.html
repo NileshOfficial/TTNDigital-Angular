@@ -4,9 +4,7 @@
         <span class="month">{{ postData['month'] | addzero }}</span>
     </div>
     <div class="content">
-        <div class="images">
-            <img src="../../assets/images/home-banner.jpg">
-        </div>
+        <ttnd-carousel *ngIf="postData['images'].length > 0" id="carousel" [images]="postData['images']" [prefix]="prefix"></ttnd-carousel>
         <div class="meta">
             {{ postData['email'] }}
             <fa-icon [icon]="dotIcon"></fa-icon>

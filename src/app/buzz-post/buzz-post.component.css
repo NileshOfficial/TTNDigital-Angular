@@ -28,15 +28,9 @@
     color: #777
 }
 
-.images {
-    height: 250px;
+#carousel {
     margin-bottom: 2rem;
-    border: 1px solid #dcdcdc;
-}
-
-.images img {
-    width: 100%;
-    height: 100%;
+    display: block;
 }
 
 .meta {
