@@ -11,4 +11,5 @@ export interface Complaint {
     estimatedTime: EstimatedTime;
     issueId: string;
     status: string;
+    timestamp: number;
 }
