@@ -6,6 +6,7 @@ import { SelectData } from '../dropdown/selectData.model';
 import { AuthApiService } from '../services/auth-api.service';
 import { ComplaintsService } from '../services/complaints.service';
 import { Complaint } from '../services/complaints.model';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'ttnd-complaints',
@@ -28,6 +29,13 @@ export class ComplaintsComponent implements OnInit {
   name: string = '';
   email: string = '';
 
+  loadingComplaints: boolean = true;
+  skip: number = 0;
+  limit: number = 10;
+  subscription: Subscription;
+  stopScrolling: boolean = false;
+  showLoader: boolean = false;
+
   constructor(private authApi: AuthApiService, private complaintsApi: ComplaintsService) { }
 
   ngOnInit(): void {
@@ -36,14 +44,16 @@ export class ComplaintsComponent implements OnInit {
       this.email = data['email'];
     });
 
-    this.complaintsApi.getUserComplaints().subscribe(data => {
-      console.log(data);
+    this.complaintsApi.getUserComplaints(this.skip, this.limit).subscribe(data => {
+      this.loadingComplaints = false;
       this.complaints = data;
+      this.skip += 10;
+      if (data.length < this.limit)
+        this.stopScrolling = true;
     })
   }
 
   onSubmit(form: NgForm): void {
-    console.log("herer");
     const formData: any = new FormData();
     for (const file of this.attachments) {
       formData.append('files', file, file.name);
@@ -73,5 +83,22 @@ export class ComplaintsComponent implements OnInit {
 
   fileChange(event): void {
     this.attachments = <Array<File>>event.target.files;
+  }
+
+  onScroll(): void {
+    if (!this.subscription && !this.stopScrolling) {
+      this.showLoader = true;
+      this.subscription = this.complaintsApi.getUserComplaints(this.skip, this.limit).subscribe(data => {
+        if(data.length < this.limit)
+          this.stopScrolling = true;
+        this.complaints.push(...data);
+        this.subscription = null;
+        this.showLoader = false;
+        this.skip += 10;
+      }, err => {
+        this.subscription = null;
+        this.showLoader = false;
+      })
+    }
   }
 }

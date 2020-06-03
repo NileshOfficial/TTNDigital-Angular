@@ -45,25 +45,38 @@
         your complaints
     </h5>
     <div class="body p-0">
-        <table class="table">
-            <tr>
-                <th>department</th>
-                <th>issue id</th>
-                <th>assigned to</th>
-                <th>status</th>
-            </tr>
-            <tr *ngFor="let complaint of complaints">
-                <td>{{complaint.department}}</td>
-                <td>
-                    <a class="issueId">{{complaint.issueId}}</a>
-                </td>
-                <td>{{complaint.assignedTo}}</td>
-                <td [ngClass]="{open: complaint.status === 'Open', 
+        <div *ngIf="loadingComplaints" class="loader">
+            <ttnd-loader animation="cubes"></ttnd-loader>
+        </div>
+        <table *ngIf="!loadingComplaints" class="table">
+            <thead>
+                <tr>
+                    <th>department</th>
+                    <th>issue id</th>
+                    <th>assigned to</th>
+                    <th>status</th>
+                </tr>
+            </thead>
+            <tbody class="fixHeight" infiniteScroll [infiniteScrollDistance]="1" [infiniteScrollThrottle]="0"
+                (scrolled)="onScroll()" [scrollWindow]="false">
+                <tr *ngFor="let complaint of complaints">
+                    <td>{{complaint.department}}</td>
+                    <td>
+                        <a class="issueId">{{complaint.issueId}}</a>
+                    </td>
+                    <td>{{complaint.assignedTo}}</td>
+                    <td [ngClass]="{open: complaint.status === 'Open', 
                                 inProgress: complaint.status === 'In Progress', 
                                 resolved: complaint.status === 'Resolved'}">
-                    {{complaint.status}}
-                </td>
-            </tr>
+                        {{complaint.status}}
+                    </td>
+                </tr>
+                <tr colspan="4" class="lazyLoader" *ngIf="showLoader">
+                    <ttnd-loader [outerDimension]="50" [innerDimension]="30"></ttnd-loader>
+                </tr>
+            </tbody>
         </table>
+        <div>
+        </div>
     </div>
 </div>
