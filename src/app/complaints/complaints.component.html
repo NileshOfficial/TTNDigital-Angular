@@ -52,29 +52,17 @@
                 <th>assigned to</th>
                 <th>status</th>
             </tr>
-            <tr>
-                <td>sdfsdf</td>
-                <td>sfsdf</td>
-                <td>sfsdff</td>
-                <td>sdfsdf</td>
-            </tr>
-            <tr>
-                <td>sdfsdf</td>
-                <td>sdfsf</td>
-                <td>brgbfb</td>
-                <td>sfsd</td>
-            </tr>
-            <tr>
-                <td>fgdfg</td>
-                <td>fgdfg</td>
-                <td>fgdfg</td>
-                <td>fgdfg</td>
-            </tr>
-            <tr>
-                <td>xgdgdffv</td>
-                <td>xgdgdffv</td>
-                <td>xgdgdffv</td>
-                <td>xgdgdffv</td>
+            <tr *ngFor="let complaint of complaints">
+                <td>{{complaint.department}}</td>
+                <td>
+                    <a class="issueId">{{complaint.issueId}}</a>
+                </td>
+                <td>{{complaint.assignedTo}}</td>
+                <td [ngClass]="{open: complaint.status === 'Open', 
+                                inProgress: complaint.status === 'In Progress', 
+                                resolved: complaint.status === 'Resolved'}">
+                    {{complaint.status}}
+                </td>
             </tr>
         </table>
     </div>

@@ -93,3 +93,9 @@
     margin-right: 2rem;
     font-size: 2rem !important;
 }
+
+.issueId {
+    color: #1a73e8;
+    text-decoration: underline;
+    font-weight: 500;
+}

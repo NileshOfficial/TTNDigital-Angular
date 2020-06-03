@@ -5,6 +5,7 @@ import { NgForm } from '@angular/forms';
 import { SelectData } from '../dropdown/selectData.model';
 import { AuthApiService } from '../services/auth-api.service';
 import { ComplaintsService } from '../services/complaints.service';
+import { Complaint } from '../services/complaints.model';
 
 @Component({
   selector: 'ttnd-complaints',
@@ -19,6 +20,7 @@ export class ComplaintsComponent implements OnInit {
 
   departments = [['Admin', 'Admin'], ['IT', 'IT'], ['Infra', 'Infra'], ['HR', 'HR']];
   issues = [['Hardware', 'Hardware'], ['Infrastructure', 'Infrastructure'], ['Others', 'Others']];
+  complaints: Array<Complaint> = [];
 
   attachments: Array<File> = [];
   selectedDept: string = '';
@@ -33,6 +35,11 @@ export class ComplaintsComponent implements OnInit {
       this.name = data['name'];
       this.email = data['email'];
     });
+
+    this.complaintsApi.getUserComplaints().subscribe(data => {
+      console.log(data);
+      this.complaints = data;
+    })
   }
 
   onSubmit(form: NgForm): void {
