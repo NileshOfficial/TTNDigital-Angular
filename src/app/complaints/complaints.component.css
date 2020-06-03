@@ -12,6 +12,7 @@
     padding: 1rem;
     border-bottom: none !important;
     background-color: #fff;
+    position: relative;
 }
 
 .body form {
@@ -109,17 +110,17 @@
 }
 
 tbody {
-    display:block;
+    display: block;
 }
 
 thead, tbody tr {
-    display:table;
-    width:100%;
-    table-layout:fixed;
+    display: table;
+    width: 100%;
+    table-layout: fixed;
 }
 
 thead {
-    width: calc( 100% - 1em );
+    width: calc( 100% - 1em);
     border-bottom: 1px solid #dcdcdc;
 }
 
@@ -134,4 +135,76 @@ thead {
     align-items: center;
     justify-content: center;
     min-height: 100px;
+}
+
+.moreInfo {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background-color: rgba(0, 0, 0, 0.2);
+}
+
+.moreInfo .content {
+    max-width: 500px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #fff;
+    box-shadow: 0 2px 2px #777;
+    border-radius: 4px;
+    padding: 2rem 3rem;
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+.moreInfo .content .close {
+    font-size: 2rem;
+    height: 25px;
+    width: 25px;
+    text-align: center;
+    border-radius: 50%;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    transition: 0.2s ease-in-out;
+}
+
+.moreInfo .content .close:hover {
+    background-color: rgba(0, 0, 0, 0.09);
+}
+
+.moreInfo .content h1 {
+    margin-bottom: 2rem;
+}
+
+.moreInfo .content h1 .issueId {
+    cursor: pointer;
+}
+
+.moreInfo .content h1 .status {
+    font-size: 1.4rem;
+    margin-left: 1rem;
+}
+
+.moreInfo .content h1 .date {
+    font-size: 1.4rem;
+    width: 100%;
+}
+
+.moreInfo .content .details {
+    font-size: 1.4rem;
+    margin-bottom: 3rem;
+}
+
+.moreInfo .content .details .dept {
+    font-size: 1.8rem;
+    width: 100%;
+    margin-bottom: 5px;
+}
+
+.moreInfo .content .description {
+    font-size: 1.2rem;
 }

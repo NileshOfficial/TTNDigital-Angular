@@ -36,6 +36,9 @@ export class ComplaintsComponent implements OnInit {
   stopScrolling: boolean = false;
   showLoader: boolean = false;
 
+  complaintDetailsVisible: boolean = false;
+  complaintDetailsObject: Complaint;
+
   constructor(private authApi: AuthApiService, private complaintsApi: ComplaintsService) { }
 
   ngOnInit(): void {
@@ -50,6 +53,7 @@ export class ComplaintsComponent implements OnInit {
       this.skip += 10;
       if (data.length < this.limit)
         this.stopScrolling = true;
+      this.complaintDetailsObject = data[0];
     })
   }
 
@@ -101,4 +105,15 @@ export class ComplaintsComponent implements OnInit {
       })
     }
   }
+
+  openMoreInfo(complaint: Complaint): void {
+    this.complaintDetailsObject = complaint;
+    this.complaintDetailsVisible = true;
+  }
+
+  closeMoreInfo(): void {
+    this.complaintDetailsVisible = false;
+    this.complaintDetailsObject = null;
+  }
+
 }

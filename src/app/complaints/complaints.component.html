@@ -62,7 +62,7 @@
                 <tr *ngFor="let complaint of complaints">
                     <td>{{complaint.department}}</td>
                     <td>
-                        <a class="issueId">{{complaint.issueId}}</a>
+                        <a class="issueId" (click)="openMoreInfo(complaint)">{{complaint.issueId}}</a>
                     </td>
                     <td>{{complaint.assignedTo}}</td>
                     <td [ngClass]="{open: complaint.status === 'Open', 
@@ -76,7 +76,22 @@
                 </tr>
             </tbody>
         </table>
-        <div>
+        <div class="moreInfo" *ngIf="complaintDetailsVisible">
+            <div class="content">
+                <a class="close" (click)="closeMoreInfo()">&times;</a>
+                <h1>
+                    <span class="issueId">{{complaintDetailsObject.issueId}}</span>
+                    <span class="status titleText">({{complaintDetailsObject.status}})</span>
+                    <span class="date titleText">{{complaintDetailsObject.timestamp | date}}</span>
+                </h1>
+                <div class="details titleText">
+                    <span class="dept">Department:&nbsp;{{complaintDetailsObject.department}}</span>
+                    <span class="assignedTo">Assigned&nbsp;to:&nbsp;{{complaintDetailsObject.assignedTo}}</span>
+                </div>
+                <p class="description">
+                    {{complaintDetailsObject.description}}
+                </p>
+            </div>
         </div>
     </div>
 </div>
