@@ -9,6 +9,7 @@ import { faChevronUp, faChevronDown, IconDefinition, faThumbsDown } from '@forta
 export class DropdownComponent implements OnInit {
 
   @Input() heading: string = '';
+  @Input() placeholder: string = '';
   @Input() options: Array<Array<string>> = [];
   @Input() bordered: boolean = false;
   @Input() select: number = null;
@@ -41,5 +42,9 @@ export class DropdownComponent implements OnInit {
     this.optionsVisible = false;
     const option = this.options[idx];
     this.selectChanged.emit({ option: option[0], idx });
+  }
+
+  reset() {
+    this.heading = '';
   }
 }
