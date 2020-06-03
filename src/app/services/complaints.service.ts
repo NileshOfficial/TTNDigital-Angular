@@ -1,4 +1,4 @@
-import { HttpHeaders, HttpClient } from '@angular/common/http';
+import { HttpHeaders, HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { TokenstoreService } from './tokenstore.service';
@@ -30,14 +30,18 @@ export class ComplaintsService {
     });
   }
 
-  getUserComplaints(): Observable<Array<Complaint>> {
+  getUserComplaints(skip: number, limit: number): Observable<Array<Complaint>> {
     const token = this.tokenstore.token
     let headers = new HttpHeaders({
       'authorization': `bearer ${token.access_token},bearer ${token.id_token}`
     });
+    
+    let params = new HttpParams().append('skip', '' + skip);
+    params = params.append('limit', '' + limit);
 
     return this.http.get<Array<Complaint>>(addComplaintEndpoint, {
-      headers: headers
+      headers: headers,
+      params: params
     });
   }
 }
