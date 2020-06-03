@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { faPen, faChevronRight, faAt, faCheck, IconDefinition } from '@fortawesome/free-solid-svg-icons';
 import { faImage } from '@fortawesome/free-regular-svg-icons';
 import { buzz } from '../interfaces/buzz.model';
 import { NgForm } from '@angular/forms';
 import { BuzzApiService } from '../services/buzz-api.service';
 import { Subscription } from 'rxjs';
+import { DropdownComponent } from '../dropdown/dropdown.component';
 
 @Component({
   selector: 'ttnd-buzz',
@@ -12,7 +13,7 @@ import { Subscription } from 'rxjs';
   styleUrls: ['../styles/generic.styles.css', './buzz.component.css']
 })
 export class BuzzComponent implements OnInit {
-
+  @ViewChild('category') categoryDropdown: DropdownComponent;
   penIcon: IconDefinition = faPen;
   postIcon: IconDefinition = faChevronRight;
   imageIcon: IconDefinition = faImage;
@@ -25,7 +26,6 @@ export class BuzzComponent implements OnInit {
   images: Array<File> = [];
   category: string = '';
   posts: Array<buzz> = [];
-  heading = 'Category';
 
   freezePosting: boolean = false;
   posting: boolean = false;
@@ -74,7 +74,7 @@ export class BuzzComponent implements OnInit {
     formData.append('category', this.category);
     form.reset();
     this.category = '';
-    this.heading = '';
+    this.categoryDropdown.reset();
 
     this.buzzApi.postBuzz(formData).subscribe(data => {
       this.posting = false;

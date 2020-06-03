@@ -13,8 +13,8 @@
             </div>
             <form (ngSubmit)="postBuzz(f)" #f="ngForm">
                 <textarea ngModel name="description" placeholder="Share your thought...." required></textarea>
-                <ttnd-dropdown id="dropdown" [heading]="heading" [options]="options"
-                    (selectChanged)="categoryChanged($event)">
+                <ttnd-dropdown id="dropdown" placeholder="Category" [options]="options"
+                    (selectChanged)="categoryChanged($event)" #category>
                 </ttnd-dropdown>
                 <div class="attachment">
                     <label for="fileInput">
