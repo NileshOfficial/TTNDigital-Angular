@@ -19,6 +19,8 @@ export class BuzzComponent implements OnInit {
   atIcon: IconDefinition = faAt;
   tickIcon: IconDefinition = faCheck;
 
+  loadingPosts: boolean = false;
+
   options: Array<Array<string>> = [['activity', 'Activity'], ['lost and found', 'Lost And Found']];
   images: Array<File> = [];
   category: string = '';
@@ -40,9 +42,14 @@ export class BuzzComponent implements OnInit {
   constructor(private buzzApi: BuzzApiService) { }
 
   ngOnInit(): void {
+    this.loadPostsOnInit();
+  }
+
+  loadPostsOnInit() {
+    this.loadingPosts = true;
     this.buzzApi.getBuzzFeed(this.skip, this.limit).subscribe(data => {
-      console.log(this.skip);
-      this.posts.push(...data);
+      this.loadingPosts = false;
+      this.posts = data;
       this.skip += 5;
     });
   }
@@ -53,7 +60,6 @@ export class BuzzComponent implements OnInit {
 
   categoryChanged(event: { option: string, idx: number }) {
     this.category = event.option;
-    console.log(event.option);
   }
 
   postBuzz(form: NgForm) {
@@ -67,21 +73,28 @@ export class BuzzComponent implements OnInit {
     formData.append('description', form.value['description']);
     formData.append('category', this.category);
     form.reset();
+    this.category = '';
     this.heading = '';
 
     this.buzzApi.postBuzz(formData).subscribe(data => {
       this.posting = false;
       this.done = true;
+      this.skip = 0;
+      this.loadPostsOnInit();
       setTimeout(() => {
         this.done = false;
         this.freezePosting = false;
       }, 500);
     }, err => {
       this.posting = false;
-      setTimeout(() => {
-        this.done = false;
-        this.freezePosting = false;
-      }, 500);
+      if (err.error.errorCode === 'LIMIT_FILE_SIZE') {
+        this.error = true;
+        this.errMessage = err.error.message;
+        setTimeout(() => {
+          this.error = false;
+          this.freezePosting = false;
+        }, 1000);
+      }
     });
   }
 

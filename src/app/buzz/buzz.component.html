@@ -35,7 +35,7 @@
         </h5>
         <div class="body fixHeight" infiniteScroll [infiniteScrollDistance]="1" [infiniteScrollThrottle]="0"
             (scrolled)="onScroll()" [scrollWindow]="false">
-            <div *ngIf="posts.length === 0" class="loader">
+            <div *ngIf="loadingPosts" class="loader">
                 <ttnd-loader animation="cubes"></ttnd-loader>
             </div>
             <div class="post" *ngFor="let post of posts">
