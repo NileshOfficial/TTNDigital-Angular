@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import * as endpoints from './uris.conf';
 import { LoginToken } from './auth.model';
@@ -32,6 +32,12 @@ export class AuthApiService {
 
     return this.http.get<{ admin: boolean }>(endpoints.adminCheckEndpoint, {
       headers: headers
+    });
+  }
+
+  fetchUserDetails(): Observable<any> {
+    return this.http.get(endpoints.userDataOAuthEndpoint, {
+      params: new HttpParams().set('id_token', this.tokenstore.token.id_token)
     });
   }
 }
