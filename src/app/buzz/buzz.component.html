@@ -20,7 +20,7 @@
                     <label for="fileInput">
                         <fa-icon [icon]="imageIcon"></fa-icon>
                     </label>
-                    <input id="fileInput" type="file" multiple (change)="fileChange($event)">
+                    <input id="fileInput" type="file" multiple (change)="fileChange($event)" accept="image/png,image/jpeg">
                 </div>
                 <button class="submit" type="submit" [disabled]="!f.valid || !category">
                     <fa-icon [icon]="postIcon"></fa-icon>
