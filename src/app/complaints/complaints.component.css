@@ -25,7 +25,7 @@
     font-size: 1.4rem;
 }
 
-.formElement label{
+.formElement label {
     display: inline-block;
     font-size: 1.2rem;
     margin-bottom: 1rem;
@@ -76,8 +76,20 @@
     background-color: #e0e0e0;
 }
 
+.formElement .submit:disabled {
+    pointer-events: none;
+    background-color: rgba(0, 0, 0, 0.3);
+}
+
 .alignRight {
     display: flex;
+    align-items: center;
     justify-content: flex-end;
     padding-top: 0;
+}
+
+.attachmentIcon {
+    color: #aaa;
+    margin-right: 2rem;
+    font-size: 2rem !important;
 }
