@@ -47,6 +47,10 @@ export class ComplaintsComponent implements OnInit {
       this.email = data['email'];
     });
 
+    this.loadComplaintsOnInit();
+  }
+
+  loadComplaintsOnInit(): void {
     this.complaintsApi.getUserComplaints(this.skip, this.limit).subscribe(data => {
       this.loadingComplaints = false;
       this.complaints = data;
@@ -70,8 +74,12 @@ export class ComplaintsComponent implements OnInit {
     this.dept.reset();
     this.issueTitle.reset();
 
+    this.complaints = null;
+    this.loadingComplaints = true;
+    this.stopScrolling = false;
     this.complaintsApi.addComplaint(formData).subscribe(data => {
-      console.log(data);
+      this.skip = 0;
+      this.loadComplaintsOnInit();
     }, err => {
       console.log(err.error);
     })
@@ -93,7 +101,7 @@ export class ComplaintsComponent implements OnInit {
     if (!this.subscription && !this.stopScrolling) {
       this.showLoader = true;
       this.subscription = this.complaintsApi.getUserComplaints(this.skip, this.limit).subscribe(data => {
-        if(data.length < this.limit)
+        if (data.length < this.limit)
           this.stopScrolling = true;
         this.complaints.push(...data);
         this.subscription = null;
