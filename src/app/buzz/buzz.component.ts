@@ -51,6 +51,8 @@ export class BuzzComponent implements OnInit {
       this.loadingPosts = false;
       this.posts = data;
       this.skip += 5;
+      if (data.length < this.limit)
+        this.stopScrolling = true;
     });
   }
 
@@ -104,7 +106,7 @@ export class BuzzComponent implements OnInit {
 
       this.subscription = this.buzzApi.getBuzzFeed(this.skip, this.limit).subscribe(data => {
         this.posts.push(...data);
-        if (data.length === 0)
+        if (data.length < this.limit)
           this.stopScrolling = true;
         this.skip += 5;
         this.showLoader = false;
