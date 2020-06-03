@@ -59,3 +59,19 @@
 .table tr td:last-child, .table tr th:last-child {
     border-right: 0;
 }
+
+tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+.open {
+    color: #e04a32;
+}
+
+.inProgress {
+    color: #1a73e8;
+}
+
+.resolved {
+    color: #2ec020;
+}
