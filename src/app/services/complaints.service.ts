@@ -30,13 +30,14 @@ export class ComplaintsService {
     });
   }
 
-  getUserComplaints(skip: number, limit: number): Observable<Array<Complaint>> {
+  getUserComplaints(skip: number, limit: number, query?): Observable<Array<Complaint>> {
     const token = this.tokenstore.token
     let headers = new HttpHeaders({
       'authorization': `bearer ${token.access_token},bearer ${token.id_token}`
     });
 
-    let params = new HttpParams().append('skip', '' + skip);
+    let params = query ? new HttpParams({ fromObject: query }) : new HttpParams();
+    params = params.append('skip', '' + skip);
     params = params.append('limit', '' + limit);
 
     return this.http.get<Array<Complaint>>(addComplaintEndpoint, {
