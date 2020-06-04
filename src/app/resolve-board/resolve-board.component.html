@@ -24,29 +24,37 @@
         </div>
     </div>
     <table class="table">
-        <tr>
-            <th>
-                department
-            </th>
-            <th>issue id</th>
-            <th>locked by</th>
-            <th>assigned to</th>
-            <th>status</th>
-        </tr>
-        <tr *ngFor="let complaint of complaints">
-            <td>{{complaint.department}}</td>
-            <td>
-                <a class="issueId" (click)="openMoreInfo(complaint)">{{complaint.issueId}}</a>
-            </td>
-            <td>{{complaint.lockedBy}}</td>
-            <td>{{complaint.assignedTo}}</td>
-            <td>
-                <ttnd-dropdown (click)="getClickedElementRef($event)" [options]="statusOptions"
-                    [select]="currentComplaintStatus(complaint.status)"
-                    (selectChanged)="getDropdownValue($event, complaint._id)">
-                </ttnd-dropdown>
-            </td>
-        </tr>
+        <thead>
+            <tr>
+                <th>
+                    department
+                </th>
+                <th>issue id</th>
+                <th>locked by</th>
+                <th>assigned to</th>
+                <th>status</th>
+            </tr>
+        </thead>
+        <tbody class="fixHeight" infiniteScroll [infiniteScrollDistance]="1" [infiniteScrollThrottle]="0"
+            (scrolled)="onScroll()" [scrollWindow]="false">
+            <tr *ngFor="let complaint of complaints">
+                <td>{{complaint.department}}</td>
+                <td>
+                    <a class="issueId" (click)="openMoreInfo(complaint)">{{complaint.issueId}}</a>
+                </td>
+                <td>{{complaint.lockedBy}}</td>
+                <td>{{complaint.assignedTo}}</td>
+                <td>
+                    <ttnd-dropdown (click)="getClickedElementRef($event)" [options]="statusOptions"
+                        [select]="currentComplaintStatus(complaint.status)"
+                        (selectChanged)="getDropdownValue($event, complaint._id)">
+                    </ttnd-dropdown>
+                </td>
+            </tr>
+            <tr colspan="4" class="lazyLoader" *ngIf="showLoader">
+                <ttnd-loader [outerDimension]="50" [innerDimension]="30"></ttnd-loader>
+            </tr>
+        </tbody>
     </table>
     <div class="popupBg" *ngIf="timePopupVisible"></div>
     <form (ngSubmit)="updateEstimatedTime(form)" *ngIf="timePopupVisible" class="timeInputs"
@@ -57,7 +65,8 @@
         <div class="formElementGroup">
             <input ngModel name="duration" type="number" placeholder="Count" required>
             <ttnd-dropdown class="formDropdown" placeholder="Type" [bordered]="true" (selectChanged)="timeType($event)"
-                [options]="[['hours', 'hours'], ['days', 'days'], ['weeks', 'weeks'], ['months', 'months']]" #timeTypeSelect>
+                [options]="[['hours', 'hours'], ['days', 'days'], ['weeks', 'weeks'], ['months', 'months']]"
+                #timeTypeSelect>
             </ttnd-dropdown>
         </div>
         <button type="submit" class="submit" [disabled]="!estimatedTimeType || !form.valid">

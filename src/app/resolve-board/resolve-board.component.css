@@ -298,3 +298,31 @@ form .submit:disabled {
     text-decoration: underline;
     font-weight: 500;
 }
+
+.lazyLoader {
+    background-color: #fff !important;
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    min-height: 100px;
+}
+
+tbody {
+    display: block;
+}
+
+thead, tbody tr {
+    display: table;
+    width: 100%;
+    table-layout: fixed;
+}
+
+thead {
+    width: calc( 100% - 1em);
+    border-bottom: 1px solid #dcdcdc;
+}
+
+.fixHeight {
+    max-height: 300px;
+    overflow-y: scroll;
+}

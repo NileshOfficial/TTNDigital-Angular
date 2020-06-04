@@ -5,6 +5,7 @@ import { SelectData } from '../dropdown/selectData.model';
 import { Complaint } from '../services/complaints.model';
 import { NgForm } from '@angular/forms';
 import { DropdownComponent } from '../dropdown/dropdown.component';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'ttnd-resolve-board',
@@ -17,7 +18,7 @@ export class ResolveBoardComponent implements OnInit {
   @ViewChild('deptOptionsFilter') deptFilterRef: DropdownComponent;
   @ViewChild('statusOptionsFilter') statusFilterRef: DropdownComponent;
 
-  @ViewChild('timeTypeSelect')timeTypeSelect: DropdownComponent;
+  @ViewChild('timeTypeSelect') timeTypeSelect: DropdownComponent;
 
   rightArrowIcon: IconDefinition = faChevronRight;
   crossIcon: IconDefinition = faTimes;
@@ -44,16 +45,25 @@ export class ResolveBoardComponent implements OnInit {
   statusFilter: string = '';
   searchFilter: string = '';
   searchField: string = '';
-  filter: any = null;
+  filter: any = {};
 
   complaintDetailsVisible: boolean = false;
   complaintDetailsObject: Complaint = null;
 
+  showLoader: boolean = true;
+  skip: number = 0;
+  limit: number = 10;
+  subscription: Subscription = null;
+  stopScrolling: boolean = false;
+
   constructor(private complaintApi: ComplaintsService) { }
 
   ngOnInit(): void {
-    this.complaintApi.getAllComplaints(0, 0).subscribe(data => {
+    this.complaintApi.getAllComplaints(0, 10).subscribe(data => {
       this.complaints = data;
+      this.skip += 5;
+      if (data.length < this.limit)
+        this.stopScrolling = true;
     });
   }
 
@@ -111,7 +121,7 @@ export class ResolveBoardComponent implements OnInit {
     this.estimatedTimeType = '';
     this.timeTypeSelect.reset();
     form.reset();
-    
+
     this.complaintApi.updateStatus(this._id, patch).subscribe(data => {
       console.log(data);
       this._id = '';
@@ -136,9 +146,6 @@ export class ResolveBoardComponent implements OnInit {
   }
 
   applyFilters(): void {
-    console.log("here");
-    this.filter = {};
-
     if (this.departmentFilter) this.filter['department'] = this.departmentFilter;
     if (this.statusFilter) this.filter['status'] = this.statusFilter;
     if (this.searchFilter) {
@@ -148,9 +155,14 @@ export class ResolveBoardComponent implements OnInit {
         this.filter['lockedBy'] = this.searchField;
     }
 
-    console.log(this.filter);
-    this.complaintApi.getAllComplaints(0, 0, this.filter).subscribe(data => {
+    this.skip = 0;
+    this.stopScrolling = false;
+    
+    this.complaintApi.getAllComplaints(this.skip, this.limit, this.filter).subscribe(data => {
       this.complaints = data;
+      this.skip += 10;
+      if(data.length < this.limit)
+        this.stopScrolling = true;
     })
   }
 
@@ -159,13 +171,19 @@ export class ResolveBoardComponent implements OnInit {
     this.searchFilterRef.reset('#000');
     this.statusFilterRef.reset('#000');
     this.searchField = '';
-    this.filter = null;
+    this.filter = {};
     this.departmentFilter = '';
     this.statusFilter = '';
     this.searchFilter = '';
 
-    this.complaintApi.getAllComplaints(0, 0).subscribe(data => {
+    this.skip = 0;
+    this.stopScrolling = false;
+
+    this.complaintApi.getAllComplaints(this.skip, this.limit).subscribe(data => {
       this.complaints = data;
+      this.skip += 10;
+      if(data.length < this.limit)
+        this.stopScrolling = true;
     })
   }
 
@@ -176,5 +194,23 @@ export class ResolveBoardComponent implements OnInit {
 
   closeMoreInfo(): void {
     this.complaintDetailsVisible = false;
+  }
+
+  onScroll(): void {
+    console.log("jer");
+    if (!this.subscription && !this.stopScrolling) {
+      this.showLoader = true;
+      this.complaintApi.getAllComplaints(this.skip, this.limit, this.filter).subscribe(data => {
+        this.complaints.push(...data);
+        this.showLoader = false;
+        this.subscription = null;
+        this.skip += 10;
+        if (data.length < this.limit)
+          this.stopScrolling = true;
+      }, err => {
+        this.showLoader = false;
+        this.subscription = null;
+      });
+    }
   }
 }
