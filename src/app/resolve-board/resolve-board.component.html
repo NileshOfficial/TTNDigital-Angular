@@ -63,6 +63,13 @@
     <div class="popupBg" *ngIf="timePopupVisible"></div>
     <form (ngSubmit)="updateEstimatedTime(form)" *ngIf="timePopupVisible" class="timeInputs"
         [ngStyle]="timePopupPosition" #form="ngForm">
+        <div class="overlay" *ngIf="freezePosting">
+            <div class="processing">
+                <ttnd-loader *ngIf="posting" [outerDimension]="50" [innerDimension]="30"></ttnd-loader>
+                <fa-icon *ngIf="done" [icon]="tickIcon"></fa-icon>
+                <span *ngIf="error">{{errMessage}}</span>
+            </div>
+        </div>
         <h6>
             estimated time to resolution
         </h6>

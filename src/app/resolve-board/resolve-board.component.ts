@@ -57,6 +57,12 @@ export class ResolveBoardComponent implements OnInit {
   stopScrolling: boolean = false;
   loadingComplaints: boolean = true;
 
+  freezePosting: boolean = false;
+  posting: boolean = false;
+  done: boolean = false;
+  error: boolean = false;
+  errMessage: string = '';
+
   constructor(private complaintApi: ComplaintsService) { }
 
   ngOnInit(): void {
@@ -111,6 +117,8 @@ export class ResolveBoardComponent implements OnInit {
   }
 
   updateEstimatedTime(form: NgForm): void {
+    this.freezePosting = true;
+    this.posting = true;
     const patch = {
       status: this.dropDownValue,
       estimatedTime: {
@@ -125,10 +133,26 @@ export class ResolveBoardComponent implements OnInit {
     form.reset();
 
     this.complaintApi.updateStatus(this._id, patch).subscribe(data => {
-      console.log(data);
       this._id = '';
-      this.hideEstimatedTimePopup();
-    }, err => console.log(err));
+      this.done = true;
+      this.posting = false;
+      setTimeout(() => {
+        this.done = false;
+        this.freezePosting = false;
+        this.hideEstimatedTimePopup();
+      }, 500);
+    }, err => {
+      this.posting = false;
+      //if (err.error.errorCode === 'LIMIT_FILE_SIZE') {
+      this.error = true;
+      this.errMessage = err.error.message;
+      setTimeout(() => {
+        this.error = false;
+        this.freezePosting = false;
+        this.hideEstimatedTimePopup();
+      }, 1000);
+      //}
+    });
   }
 
   timeType(event: SelectData): void {
