@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { faSort, faFilter, faChevronRight, faTimes, IconDefinition } from '@fortawesome/free-solid-svg-icons';
+import { ComplaintsService } from '../services/complaints.service';
+import { SelectData } from '../dropdown/selectData.model';
+import { Complaint } from '../services/complaints.model';
 
 @Component({
   selector: 'ttnd-resolve-board',
@@ -13,22 +16,30 @@ export class ResolveBoardComponent implements OnInit {
   rightArrowIcon: IconDefinition = faChevronRight;
   crossIcon: IconDefinition = faTimes;
 
-  statusOptions: Array<Array<string>> = [['Open', 'Open'], ['Resolved', 'Resolved'], ['In Progress', 'In Progress']];
+  statusOptions: Array<Array<string>> = [['Open', 'Open', '#e04a32'], ['Resolved', 'Resolved', '#2ec020'], ['In Progress', 'In Progress', '#1a73e8']];
   departmentOptions: Array<Array<string>> = [['Admin', 'Admin'], ['IT', 'IT'], ['Infra', 'Infra'], ['HR', 'HR']];
   searchOptions: Array<Array<string>> = [['Issue Id', 'Issue Id'], ['Locked By', 'Locked By']];
 
   timePopupVisible: boolean = false;
   timePopupPosition: any;
 
-  constructor() { }
+  complaints: Array<Complaint> = [];
+  currentStatus: number = null;
+
+  constructor(private complaintApi: ComplaintsService) { }
 
   ngOnInit(): void {
+    this.complaintApi.getAllComplaints(0, 0).subscribe(data => {
+      this.complaints = data;
+    });
   }
 
-  getDropdownValue(event: { heading: string, idx: number }) {
-    if (event.heading === 'In Progress' || event.heading === 'Open')
+  getDropdownValue(event: SelectData) {
+    if (event.option === 'In Progress') {
       this.timePopupVisible = true;
+    }
     else this.hideEstimatedTimePopup()
+    console.log(this.timePopupVisible);
   }
 
   estimatedTimeSubmit() {
@@ -51,6 +62,14 @@ export class ResolveBoardComponent implements OnInit {
         'left.px': positionMeta['x'] - cardX - positionMeta['width'] - 50
       }
       console.log(positionMeta['x'], positionMeta['y']);
+    }
+  }
+
+  currentComplaintStatus(option: string): number {
+    switch (option) {
+      case 'Open': return 0;
+      case 'Resolved': return 1;
+      case 'In Progress': return 2;
     }
   }
 

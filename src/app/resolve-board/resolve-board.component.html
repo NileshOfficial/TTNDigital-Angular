@@ -25,43 +25,19 @@
             <th>assigned to</th>
             <th>status</th>
         </tr>
-        <tr>
-            <td>afdsa</td>
-            <td>fasdfdsf sd fa f a f f f</td>
-            <td>gdg</td>
-            <td>rgef</td>
+        <tr *ngFor="let complaint of complaints">
+            <td>{{complaint.department}}</td>
             <td>
-                <ttnd-dropdown (click)="getClickedElementRef($event)" [options]="statusOptions" [select]="1" (selectChanged)="getDropdownValue($event)">
-                </ttnd-dropdown>
+                <a>{{complaint.issueId}}</a>
             </td>
-        </tr>
-        <tr>
-            <td>afdsa</td>
-            <td>fasdfdsf sd fa f a f f f</td>
-            <td>gdg</td>
-            <td>rgef</td>
+            <td>{{complaint.lockedBy}}</td>
+            <td>{{complaint.assignedTo}}</td>
+            <!-- <td [ngClass]="{open: complaint.status === 'Open', 
+                        inProgress: complaint.status === 'In Progress', 
+                        resolved: complaint.status === 'Resolved'}"> -->
             <td>
-                <ttnd-dropdown (click)="getClickedElementRef($event)" [options]="statusOptions" [select]="1" (selectChanged)="getDropdownValue($event)">
-                </ttnd-dropdown>
-            </td>
-        </tr>
-        <tr>
-            <td>afdsa</td>
-            <td>fasdfdsf sd fa f a f f f</td>
-            <td>gdg</td>
-            <td>rgef</td>
-            <td>
-                <ttnd-dropdown (click)="getClickedElementRef($event)" [options]="statusOptions" [select]="1" (selectChanged)="getDropdownValue($event)">
-                </ttnd-dropdown>
-            </td>
-        </tr>
-        <tr>
-            <td>afdsa</td>
-            <td>fasdfdsf sd fa f a f f f</td>
-            <td>gdg</td>
-            <td>rgef</td>
-            <td>
-                <ttnd-dropdown (click)="getClickedElementRef($event)" [options]="statusOptions" [select]="1" (selectChanged)="getDropdownValue($event)">
+                <ttnd-dropdown (click)="getClickedElementRef($event)" [options]="statusOptions"
+                    [select]="currentComplaintStatus(complaint.status)" (selectChanged)="getDropdownValue($event)">
                 </ttnd-dropdown>
             </td>
         </tr>
@@ -70,9 +46,6 @@
     <form *ngIf="timePopupVisible" class="timeInputs" [ngStyle]="timePopupPosition">
         <h6>
             estimated time to resolution
-            <a (click)="hideEstimatedTimePopup()">
-                <fa-icon [icon]="crossIcon"></fa-icon>
-            </a>
         </h6>
         <div class="formElementGroup">
             <input type="number" placeholder="Count">
