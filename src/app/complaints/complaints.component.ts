@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { faImage, IconDefinition } from '@fortawesome/free-regular-svg-icons';
+import { faCheck } from '@fortawesome/free-solid-svg-icons';
 import { DropdownComponent } from '../dropdown/dropdown.component';
 import { NgForm } from '@angular/forms';
 import { SelectData } from '../dropdown/selectData.model';
@@ -18,6 +19,7 @@ export class ComplaintsComponent implements OnInit {
   @ViewChild('issueTitle') issueTitle: DropdownComponent;
 
   imageIcon: IconDefinition = faImage;
+  tickIcon: IconDefinition = faCheck;
 
   departments = [['Admin', 'Admin'], ['IT', 'IT'], ['Infra', 'Infra'], ['HR', 'HR']];
   issues = [['Hardware', 'Hardware'], ['Infrastructure', 'Infrastructure'], ['Others', 'Others']];
@@ -28,6 +30,11 @@ export class ComplaintsComponent implements OnInit {
   selectedIssue: string = '';
   name: string = '';
   email: string = '';
+  freezePosting: boolean = false;
+  posting: boolean = false;
+  done: boolean = false;
+  error: boolean = false;
+  errMessage: string = '';
 
   loadingComplaints: boolean = true;
   skip: number = 0;
@@ -62,6 +69,9 @@ export class ComplaintsComponent implements OnInit {
   }
 
   onSubmit(form: NgForm): void {
+    this.freezePosting = true;
+    this.posting = true;
+
     const formData: any = new FormData();
     for (const file of this.attachments) {
       formData.append('files', file, file.name);
@@ -77,11 +87,26 @@ export class ComplaintsComponent implements OnInit {
     this.complaints = null;
     this.loadingComplaints = true;
     this.stopScrolling = false;
+
     this.complaintsApi.addComplaint(formData).subscribe(data => {
+      this.posting = false;
+      this.done = true;
       this.skip = 0;
       this.loadComplaintsOnInit();
+      setTimeout(() => {
+        this.done = false;
+        this.freezePosting = false;
+      }, 500);
     }, err => {
-      console.log(err.error);
+      this.posting = false;
+      //if (err.error.errorCode === 'LIMIT_FILE_SIZE') {
+      this.error = true;
+      this.errMessage = err.error.message;
+      setTimeout(() => {
+        this.error = false;
+        this.freezePosting = false;
+      }, 1000);
+      //}
     })
   }
 
