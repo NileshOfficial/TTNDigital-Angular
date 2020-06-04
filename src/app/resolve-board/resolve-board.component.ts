@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { faSort, faFilter, faChevronRight, faTimes, IconDefinition } from '@fortawesome/free-solid-svg-icons';
+import { faSort, faCheck, faUndoAlt, faChevronRight, faTimes, IconDefinition } from '@fortawesome/free-solid-svg-icons';
 import { ComplaintsService } from '../services/complaints.service';
 import { SelectData } from '../dropdown/selectData.model';
 import { Complaint } from '../services/complaints.model';
@@ -13,9 +13,10 @@ import { NgForm } from '@angular/forms';
 export class ResolveBoardComponent implements OnInit {
 
   sortIcon: IconDefinition = faSort;
-  filterIcon: IconDefinition = faFilter;
   rightArrowIcon: IconDefinition = faChevronRight;
   crossIcon: IconDefinition = faTimes;
+  resetIcon: IconDefinition = faUndoAlt;
+  tickIcon: IconDefinition = faCheck;
 
   statusOptions: Array<Array<string>> = [['Open', 'Open', '#e04a32'], ['Resolved', 'Resolved', '#2ec020'], ['In Progress', 'In Progress', '#1a73e8']];
   departmentOptions: Array<Array<string>> = [['Admin', 'Admin'], ['IT', 'IT'], ['Infra', 'Infra'], ['HR', 'HR']];

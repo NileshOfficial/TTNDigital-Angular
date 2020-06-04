@@ -1,18 +1,24 @@
 <div class="card" id="card">
     <div class="header">
-        <div class="filterSelect titleText" tabindex="0">
-            <span>filter by</span>
-            <fa-icon [icon]="filterIcon"></fa-icon>
+        <h5>
+            your complaints
+        </h5>
+        <div class="filterSelect titleText">
             <div class="fieldGroup">
                 <input type="text" placeholder="Search">
                 <ttnd-dropdown heading="Search Field" class="dropdown" [options]="searchOptions"></ttnd-dropdown>
             </div>
-            <ttnd-dropdown class="dropdown" heading="Department" [options]="departmentOptions"></ttnd-dropdown>
-            <ttnd-dropdown class="dropdown" heading="Status" [options]="statusOptions"></ttnd-dropdown>
+            <ttnd-dropdown [bordered]=true class="dropdown ml-1" placeholder="Department" [options]="departmentOptions">
+            </ttnd-dropdown>
+            <ttnd-dropdown [bordered]=true class="dropdown ml-1" placeholder="Status" [options]="statusOptions">
+            </ttnd-dropdown>
+            <a class="filterControl green" title="Apply filters">
+                <fa-icon [icon]="tickIcon"></fa-icon>
+            </a>
+            <a class="filterControl red" title="Reset filters">
+                <fa-icon [icon]="resetIcon"></fa-icon>
+            </a>
         </div>
-        <h5>
-            your complaints
-        </h5>
     </div>
     <table class="table">
         <tr>
@@ -32,25 +38,25 @@
             </td>
             <td>{{complaint.lockedBy}}</td>
             <td>{{complaint.assignedTo}}</td>
-            <!-- <td [ngClass]="{open: complaint.status === 'Open', 
-                        inProgress: complaint.status === 'In Progress', 
-                        resolved: complaint.status === 'Resolved'}"> -->
             <td>
                 <ttnd-dropdown (click)="getClickedElementRef($event)" [options]="statusOptions"
-                    [select]="currentComplaintStatus(complaint.status)" (selectChanged)="getDropdownValue($event, complaint._id)">
+                    [select]="currentComplaintStatus(complaint.status)"
+                    (selectChanged)="getDropdownValue($event, complaint._id)">
                 </ttnd-dropdown>
             </td>
         </tr>
     </table>
     <div class="popupBg" *ngIf="timePopupVisible"></div>
-    <form (ngSubmit)="updateEstimatedTime(form)" *ngIf="timePopupVisible" class="timeInputs" [ngStyle]="timePopupPosition" #form="ngForm">
+    <form (ngSubmit)="updateEstimatedTime(form)" *ngIf="timePopupVisible" class="timeInputs"
+        [ngStyle]="timePopupPosition" #form="ngForm">
         <h6>
             estimated time to resolution
         </h6>
         <div class="formElementGroup">
             <input ngModel name="duration" type="number" placeholder="Count" required>
             <ttnd-dropdown class="formDropdown" placeholder="Type" [bordered]="true" (selectChanged)="timeType($event)"
-                [options]="[['hours', 'hours'], ['days', 'days'], ['weeks', 'weeks'], ['months', 'months']]"></ttnd-dropdown>
+                [options]="[['hours', 'hours'], ['days', 'days'], ['weeks', 'weeks'], ['months', 'months']]">
+            </ttnd-dropdown>
         </div>
         <button type="submit" class="submit" [disabled]="!estimatedTimeType || !form.valid">
             <fa-icon [icon]="rightArrowIcon"></fa-icon>
