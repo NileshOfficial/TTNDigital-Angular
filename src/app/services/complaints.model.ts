@@ -12,4 +12,6 @@ export interface Complaint {
     issueId: string;
     status: string;
     timestamp: number;
+    email: string;
+    lockedBy: string;
 }
