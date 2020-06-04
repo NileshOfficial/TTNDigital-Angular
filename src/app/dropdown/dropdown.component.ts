@@ -18,6 +18,7 @@ export class DropdownComponent implements OnInit {
   upArrowHead: IconDefinition = faChevronUp;
   downArrowHead: IconDefinition = faChevronDown;
   optionsVisible: boolean = false;
+  currentColor: string = 'initial';
 
   @HostListener('document:click', ['$event'])
   clickout(event) {
@@ -29,8 +30,11 @@ export class DropdownComponent implements OnInit {
   constructor(private eRef: ElementRef) { }
 
   ngOnInit(): void {
-    if (this.select)
+    if (this.select !== null) {
       this.heading = this.options[this.select][1] as string;
+      const color = this.options[this.select][2];
+      this.currentColor = color || 'initial';
+    }
   }
 
   toggleOptions() {
@@ -41,6 +45,8 @@ export class DropdownComponent implements OnInit {
     this.heading = heading[1];
     this.optionsVisible = false;
     const option = this.options[idx];
+    const color = this.options[idx][2];
+    this.currentColor = color || 'initial';
     this.selectChanged.emit({ option: option[0], idx });
   }
 

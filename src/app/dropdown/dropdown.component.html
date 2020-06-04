@@ -1,6 +1,6 @@
 <div class="select">
     <a class="title titleText" [ngClass]="{optionsVisible: optionsVisible, bordered: bordered}">
-        <span>{{ heading ? heading : placeholder }}</span>
+        <span [ngStyle]="{color: currentColor}">{{ heading ? heading : placeholder }}</span>
         <fa-icon [icon]="optionsVisible ? upArrowHead : downArrowHead"></fa-icon>
         <div class="clickHandle" (click)="toggleOptions()"></div>
     </a>
