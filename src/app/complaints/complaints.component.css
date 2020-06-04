@@ -4,8 +4,11 @@
 
 .header {
     padding: 1rem 2rem;
-    margin-bottom: 0;
     background-color: #f2f2f2;
+}
+
+.header h5 {
+    margin-bottom: 1rem;
 }
 
 .body {
@@ -126,7 +129,7 @@ thead {
 
 .fixHeight {
     max-height: 300px;
-    overflow-y: auto;
+    overflow-y: scroll;
 }
 
 .lazyLoader {
@@ -235,4 +238,78 @@ thead {
     font-size: 2.4rem;
     color: #ff0000;
     text-align: center;
+}
+
+.filterSelect {
+    display: flex;
+    align-items: stretch;
+    justify-content: space-between;
+    font-size: 1.2rem;
+    height: 45px;
+    margin-top: 1rem;
+    outline: none;
+    transition: 0.2s ease-in-out;
+    cursor: pointer;
+}
+
+.filterSelect>span {
+    text-transform: capitalize;
+}
+
+.filterSelect fa-icon {
+    margin-left: 5px;
+}
+
+.filterSelect .fieldGroup {
+    display: flex;
+    border: 1px solid #dcdcdc;
+    border-radius: 4px;
+    flex-basis: 25%;
+    max-height: 40px;
+}
+
+.filterSelect .fieldGroup input {
+    border: none;
+    flex-basis: 70%;
+    padding-left: 1rem;
+    border-radius: inherit;
+}
+
+.filterSelect .fieldGroup .dropdown {
+    flex-basis: 30%;
+    min-width: 150px;
+}
+
+.filterSelect .dropdown {
+    flex-basis: 25%;
+}
+
+.filterSelect .filterControl {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.6rem;
+    margin-left: 2rem;
+    transition: 0.2s ease-in-out;
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+    padding-right: 5px;
+    margin-top: 2px;
+}
+
+.filterSelect .filterControl:hover {
+    background-color: rgba(0, 0, 0, 0.09);
+}
+
+.ml-1 {
+    margin-left: 1rem;
+}
+
+.green {
+    color: #10be1f;
+}
+
+.red {
+    color: #f00;
 }

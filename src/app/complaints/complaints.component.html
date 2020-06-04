@@ -48,9 +48,28 @@
 </div>
 
 <div class="card">
-    <h5 class="header">
-        your complaints
-    </h5>
+    <div class="header">
+        <h5>
+            your complaints
+        </h5>
+        <div class="filterSelect titleText">
+            <div class="fieldGroup">
+                <input type="text" [(ngModel)]="searchField" placeholder="Search Issue ID">
+            </div>
+            <ttnd-dropdown [bordered]=true class="dropdown ml-1" placeholder="Department" [noSelect]="true"
+                [options]="departmentFilterOptions" (selectChanged)="getDeptFilter($event)" #deptOptionsFilter>
+            </ttnd-dropdown>
+            <ttnd-dropdown [bordered]=true class="dropdown ml-1" placeholder="Status" [noSelect]="true"
+                [options]="statusFilterOptions" (selectChanged)="getStatusFilter($event)" #statusOptionsFilter>
+            </ttnd-dropdown>
+            <a (click)="applyFilters()" class="filterControl green" title="Apply filters">
+                <fa-icon [icon]="tickIcon"></fa-icon>
+            </a>
+            <a (click)="resetFilters()" class="filterControl red" title="Reset filters">
+                <fa-icon [icon]="resetIcon"></fa-icon>
+            </a>
+        </div>
+    </div>
     <div class="body p-0">
         <div *ngIf="loadingComplaints" class="loader">
             <ttnd-loader animation="cubes"></ttnd-loader>

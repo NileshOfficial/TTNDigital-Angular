@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { faImage, IconDefinition } from '@fortawesome/free-regular-svg-icons';
-import { faCheck } from '@fortawesome/free-solid-svg-icons';
+import { faCheck, faUndoAlt } from '@fortawesome/free-solid-svg-icons';
 import { DropdownComponent } from '../dropdown/dropdown.component';
 import { NgForm } from '@angular/forms';
 import { SelectData } from '../dropdown/selectData.model';
@@ -18,8 +18,12 @@ export class ComplaintsComponent implements OnInit {
   @ViewChild('department') dept: DropdownComponent;
   @ViewChild('issueTitle') issueTitle: DropdownComponent;
 
+  @ViewChild('deptOptionsFilter') deptOptionsFilter: DropdownComponent;
+  @ViewChild('statusOptionsFilter') statusOptionsFilter: DropdownComponent;
+
   imageIcon: IconDefinition = faImage;
   tickIcon: IconDefinition = faCheck;
+  resetIcon: IconDefinition = faUndoAlt;
 
   departments = [['Admin', 'Admin'], ['IT', 'IT'], ['Infra', 'Infra'], ['HR', 'HR']];
   issues = [['Hardware', 'Hardware'], ['Infrastructure', 'Infrastructure'], ['Others', 'Others']];
@@ -45,6 +49,13 @@ export class ComplaintsComponent implements OnInit {
 
   complaintDetailsVisible: boolean = false;
   complaintDetailsObject: Complaint;
+
+  searchField: string = '';
+  departmentFilterOptions: Array<Array<string>> = [['', 'None'], ['Admin', 'Admin'], ['IT', 'IT'], ['Infra', 'Infra'], ['HR', 'HR']];
+  statusFilterOptions: Array<Array<string>> = [['', 'None', '#000'], ['Open', 'Open'], ['Resolved', 'Resolved'], ['In Progress', 'In Progress']];
+  deptFilterValue: string = '';
+  statusFilterValue: string = '';
+  filters: any = {};
 
   constructor(private authApi: AuthApiService, private complaintsApi: ComplaintsService) { }
 
@@ -125,7 +136,7 @@ export class ComplaintsComponent implements OnInit {
   onScroll(): void {
     if (!this.subscription && !this.stopScrolling) {
       this.showLoader = true;
-      this.subscription = this.complaintsApi.getUserComplaints(this.skip, this.limit).subscribe(data => {
+      this.subscription = this.complaintsApi.getUserComplaints(this.skip, this.limit, this.filters).subscribe(data => {
         if (data.length < this.limit)
           this.stopScrolling = true;
         this.complaints.push(...data);
@@ -149,4 +160,52 @@ export class ComplaintsComponent implements OnInit {
     this.complaintDetailsObject = null;
   }
 
+  getDeptFilter(event: SelectData): void {
+    this.deptFilterValue = event.option;
+  }
+
+  getStatusFilter(event: SelectData): void {
+    this.statusFilterValue = event.option;
+  }
+
+  applyFilters(): void {
+    this.filters = {};
+    
+    if (this.searchField) this.filters['issueId'] = this.searchField;
+    if (this.deptFilterValue) this.filters['department'] = this.deptFilterValue;
+    if (this.statusFilterValue) this.filters['status'] = this.statusFilterValue;
+
+    this.skip = 0;
+    this.stopScrolling = false;
+    this.complaints = [];
+    this.loadingComplaints = true;
+
+    this.complaintsApi.getUserComplaints(this.skip, this.limit, this.filters).subscribe(data => {
+      this.loadingComplaints = false;
+      this.complaints = data;
+      this.skip += 10;
+      if (data.length < this.limit)
+        this.stopScrolling = true;
+    });
+  }
+
+  resetFilters(): void {
+    this.searchField = '';
+    this.deptOptionsFilter.reset();
+    this.statusOptionsFilter.reset();
+    this.filters = {};
+
+    this.skip = 0;
+    this.stopScrolling = false;
+    this.complaints = [];
+    this.loadingComplaints = true;
+
+    this.complaintsApi.getUserComplaints(this.skip, this.limit).subscribe(data => {
+      this.complaints = data;
+      this.loadingComplaints = false;
+      this.skip += 10;
+      if (data.length < this.limit)
+        this.stopScrolling = true;
+    })
+  }
 }
