@@ -5,17 +5,20 @@
         </h5>
         <div class="filterSelect titleText">
             <div class="fieldGroup">
-                <input type="text" placeholder="Search">
-                <ttnd-dropdown heading="Search Field" class="dropdown" [options]="searchOptions"></ttnd-dropdown>
+                <input type="text" [(ngModel)]="searchField" placeholder="Search">
+                <ttnd-dropdown placeholder="Search Field" class="dropdown" [noSelect]="true" [options]="searchOptions"
+                    #searchOptionsFilter (selectChanged)="getSearchFilter($event)"></ttnd-dropdown>
             </div>
-            <ttnd-dropdown [bordered]=true class="dropdown ml-1" placeholder="Department" [options]="departmentOptions">
+            <ttnd-dropdown [bordered]=true class="dropdown ml-1" placeholder="Department" [noSelect]="true" [options]="departmentFilterOptions"
+                (selectChanged)="getDeptFilter($event)" #deptOptionsFilter>
             </ttnd-dropdown>
-            <ttnd-dropdown [bordered]=true class="dropdown ml-1" placeholder="Status" [options]="statusOptions">
+            <ttnd-dropdown [bordered]=true class="dropdown ml-1" placeholder="Status" [noSelect]="true" [options]="statusFilterOptions"
+                (selectChanged)="getStatusFilter($event)" #statusOptionsFilter>
             </ttnd-dropdown>
-            <a class="filterControl green" title="Apply filters">
+            <a (click)="applyFilters()" class="filterControl green" title="Apply filters">
                 <fa-icon [icon]="tickIcon"></fa-icon>
             </a>
-            <a class="filterControl red" title="Reset filters">
+            <a (click)="resetFilters()" class="filterControl red" title="Reset filters">
                 <fa-icon [icon]="resetIcon"></fa-icon>
             </a>
         </div>

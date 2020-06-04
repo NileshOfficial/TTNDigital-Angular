@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { faSort, faCheck, faUndoAlt, faChevronRight, faTimes, IconDefinition } from '@fortawesome/free-solid-svg-icons';
 import { ComplaintsService } from '../services/complaints.service';
 import { SelectData } from '../dropdown/selectData.model';
 import { Complaint } from '../services/complaints.model';
 import { NgForm } from '@angular/forms';
+import { DropdownComponent } from '../dropdown/dropdown.component';
 
 @Component({
   selector: 'ttnd-resolve-board',
@@ -11,6 +12,10 @@ import { NgForm } from '@angular/forms';
   styleUrls: ['../styles/generic.styles.css', './resolve-board.component.css']
 })
 export class ResolveBoardComponent implements OnInit {
+
+  @ViewChild('searchOptionsFilter') searchFilterRef: DropdownComponent;
+  @ViewChild('deptOptionsFilter') deptFilterRef: DropdownComponent;
+  @ViewChild('statusOptionsFilter') statusFilterRef: DropdownComponent;
 
   sortIcon: IconDefinition = faSort;
   rightArrowIcon: IconDefinition = faChevronRight;
@@ -20,7 +25,10 @@ export class ResolveBoardComponent implements OnInit {
 
   statusOptions: Array<Array<string>> = [['Open', 'Open', '#e04a32'], ['Resolved', 'Resolved', '#2ec020'], ['In Progress', 'In Progress', '#1a73e8']];
   departmentOptions: Array<Array<string>> = [['Admin', 'Admin'], ['IT', 'IT'], ['Infra', 'Infra'], ['HR', 'HR']];
-  searchOptions: Array<Array<string>> = [['Issue Id', 'Issue Id'], ['Locked By', 'Locked By']];
+
+  statusFilterOptions: Array<Array<string>> = [['', 'None', '#000'], ['Open', 'Open'], ['Resolved', 'Resolved'], ['In Progress', 'In Progress']];
+  departmentFilterOptions: Array<Array<string>> = [['', 'None'], ...this.departmentOptions];
+  searchOptions: Array<Array<string>> = [['', 'None'], ['Issue Id', 'Issue Id'], ['Locked By', 'Locked By']];
 
   timePopupVisible: boolean = false;
   timePopupPosition: any;
@@ -30,6 +38,12 @@ export class ResolveBoardComponent implements OnInit {
   complaints: Array<Complaint> = [];
   currentStatus: number = null;
   estimatedTimeType: string = null;
+
+  departmentFilter: string = '';
+  statusFilter: string = '';
+  searchFilter: string = '';
+  searchField: string = '';
+  filter: any = null;
 
   constructor(private complaintApi: ComplaintsService) { }
 
@@ -88,7 +102,7 @@ export class ResolveBoardComponent implements OnInit {
         spanType: this.estimatedTimeType,
       }
     }
-    
+
     this.dropDownValue = '';
     this.estimatedTimeType = '';
     this._id = '';
@@ -100,7 +114,53 @@ export class ResolveBoardComponent implements OnInit {
     }, err => console.log(err));
   }
 
-  timeType(event: SelectData) {
+  timeType(event: SelectData): void {
     this.estimatedTimeType = event.option;
+  }
+
+  getDeptFilter(event: SelectData): void {
+    this.departmentFilter = event.option;
+  }
+
+  getStatusFilter(event: SelectData): void {
+    this.statusFilter = event.option;
+  }
+
+  getSearchFilter(event: SelectData): void {
+    this.searchFilter = event.option;
+  }
+
+  applyFilters(): void {
+    console.log("here");
+    this.filter = {};
+
+    if (this.departmentFilter) this.filter['department'] = this.departmentFilter;
+    if (this.statusFilter) this.filter['status'] = this.statusFilter;
+    if (this.searchFilter) {
+      if (this.searchFilter === 'Issue Id')
+        this.filter['issueId'] = this.searchField;
+      if (this.searchFilter === 'Locked By')
+        this.filter['lockedBy'] = this.searchField;
+    }
+
+    console.log(this.filter);
+    this.complaintApi.getAllComplaints(0, 0, this.filter).subscribe(data => {
+      this.complaints = data;
+    })
+  }
+
+  resetFilters(): void {
+    this.deptFilterRef.reset('#000');
+    this.searchFilterRef.reset('#000');
+    this.statusFilterRef.reset('#000');
+    this.searchField = '';
+    this.filter = null;
+    this.departmentFilter = '';
+    this.statusFilter = '';
+    this.searchFilter = '';
+
+    this.complaintApi.getAllComplaints(0, 0).subscribe(data => {
+      this.complaints = data;
+    })
   }
 }
