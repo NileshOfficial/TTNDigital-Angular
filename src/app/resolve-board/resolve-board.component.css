@@ -18,6 +18,11 @@
     margin-bottom: 0;
 }
 
+.header > span {
+    margin-left: 1rem;
+    margin-top: 5px;
+}
+
 .filterSelect {
     display: flex;
     align-items: center;
