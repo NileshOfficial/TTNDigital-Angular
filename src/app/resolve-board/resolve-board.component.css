@@ -169,6 +169,12 @@ form .submit:hover {
     background-color: rgba(0, 0, 0, 0.15);
 }
 
+form .submit:disabled {
+    color: #db6958;
+    background-color: #ddd;
+    pointer-events: none;
+}
+
 .popupBg {
     position: fixed;
     top: 0;

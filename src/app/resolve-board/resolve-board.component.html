@@ -37,22 +37,22 @@
                         resolved: complaint.status === 'Resolved'}"> -->
             <td>
                 <ttnd-dropdown (click)="getClickedElementRef($event)" [options]="statusOptions"
-                    [select]="currentComplaintStatus(complaint.status)" (selectChanged)="getDropdownValue($event)">
+                    [select]="currentComplaintStatus(complaint.status)" (selectChanged)="getDropdownValue($event, complaint._id)">
                 </ttnd-dropdown>
             </td>
         </tr>
     </table>
     <div class="popupBg" *ngIf="timePopupVisible"></div>
-    <form *ngIf="timePopupVisible" class="timeInputs" [ngStyle]="timePopupPosition">
+    <form (ngSubmit)="updateEstimatedTime(form)" *ngIf="timePopupVisible" class="timeInputs" [ngStyle]="timePopupPosition" #form="ngForm">
         <h6>
             estimated time to resolution
         </h6>
         <div class="formElementGroup">
-            <input type="number" placeholder="Count">
-            <ttnd-dropdown class="formDropdown" heading="Type" [bordered]="true"
-                [options]="['hours', 'days', 'weeks', 'months']"></ttnd-dropdown>
+            <input ngModel name="duration" type="number" placeholder="Count" required>
+            <ttnd-dropdown class="formDropdown" placeholder="Type" [bordered]="true" (selectChanged)="timeType($event)"
+                [options]="[['hours', 'hours'], ['days', 'days'], ['weeks', 'weeks'], ['months', 'months']]"></ttnd-dropdown>
         </div>
-        <button (click)="estimatedTimeSubmit()" type="button" class="submit">
+        <button type="submit" class="submit" [disabled]="!estimatedTimeType || !form.valid">
             <fa-icon [icon]="rightArrowIcon"></fa-icon>
         </button>
     </form>

@@ -3,6 +3,7 @@ import { faSort, faFilter, faChevronRight, faTimes, IconDefinition } from '@fort
 import { ComplaintsService } from '../services/complaints.service';
 import { SelectData } from '../dropdown/selectData.model';
 import { Complaint } from '../services/complaints.model';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'ttnd-resolve-board',
@@ -22,9 +23,12 @@ export class ResolveBoardComponent implements OnInit {
 
   timePopupVisible: boolean = false;
   timePopupPosition: any;
+  dropDownValue: string = '';
+  _id: string = '';
 
   complaints: Array<Complaint> = [];
   currentStatus: number = null;
+  estimatedTimeType: string = null;
 
   constructor(private complaintApi: ComplaintsService) { }
 
@@ -34,16 +38,19 @@ export class ResolveBoardComponent implements OnInit {
     });
   }
 
-  getDropdownValue(event: SelectData) {
+  getDropdownValue(event: SelectData, _id: string): void {
     if (event.option === 'In Progress') {
+      this._id = _id;
+      this.dropDownValue = event.option;
       this.timePopupVisible = true;
     }
-    else this.hideEstimatedTimePopup()
-    console.log(this.timePopupVisible);
-  }
-
-  estimatedTimeSubmit() {
-    this.hideEstimatedTimePopup();
+    else {
+      this.complaintApi.updateStatus(_id, { status: event.option }).subscribe(data => {
+        console.log(data);
+        this.hideEstimatedTimePopup();
+      }, err => console.log(err));
+      this.hideEstimatedTimePopup();
+    }
   }
 
   hideEstimatedTimePopup() {
@@ -61,7 +68,6 @@ export class ResolveBoardComponent implements OnInit {
         'top.px': positionMeta['y'] - cardY - 50,
         'left.px': positionMeta['x'] - cardX - positionMeta['width'] - 50
       }
-      console.log(positionMeta['x'], positionMeta['y']);
     }
   }
 
@@ -73,4 +79,27 @@ export class ResolveBoardComponent implements OnInit {
     }
   }
 
+  updateEstimatedTime(form: NgForm): void {
+    const patch = {
+      status: this.dropDownValue,
+      estimatedTime: {
+        value: form.value.duration,
+        spanType: this.estimatedTimeType,
+      }
+    }
+    
+    this.dropDownValue = '';
+    this.estimatedTimeType = '';
+    this._id = '';
+    form.reset();
+
+    this.complaintApi.updateStatus(this._id, patch).subscribe(data => {
+      console.log(data);
+      this.hideEstimatedTimePopup();
+    }, err => console.log(err));
+  }
+
+  timeType(event: SelectData) {
+    this.estimatedTimeType = event.option;
+  }
 }
