@@ -59,4 +59,15 @@ export class ComplaintsService {
       params: params
     });
   }
+
+  updateStatus(id, patchObject): Observable<any> {
+    const token = this.tokenstore.token
+    let headers = new HttpHeaders({
+      'authorization': `bearer ${token.access_token},bearer ${token.id_token}`
+    });
+
+    return this.http.patch(addComplaintEndpoint + `/${id}`, patchObject, {
+      headers: headers
+    });
+  }
 }
