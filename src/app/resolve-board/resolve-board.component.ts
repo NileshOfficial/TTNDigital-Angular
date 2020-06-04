@@ -55,12 +55,14 @@ export class ResolveBoardComponent implements OnInit {
   limit: number = 10;
   subscription: Subscription = null;
   stopScrolling: boolean = false;
+  loadingComplaints: boolean = true;
 
   constructor(private complaintApi: ComplaintsService) { }
 
   ngOnInit(): void {
     this.complaintApi.getAllComplaints(0, 10).subscribe(data => {
       this.complaints = data;
+      this.loadingComplaints = false;
       this.skip += 5;
       if (data.length < this.limit)
         this.stopScrolling = true;
@@ -157,11 +159,14 @@ export class ResolveBoardComponent implements OnInit {
 
     this.skip = 0;
     this.stopScrolling = false;
-    
+    this.complaints = [];
+    this.loadingComplaints = true;
+
     this.complaintApi.getAllComplaints(this.skip, this.limit, this.filter).subscribe(data => {
+      this.loadingComplaints = false;
       this.complaints = data;
       this.skip += 10;
-      if(data.length < this.limit)
+      if (data.length < this.limit)
         this.stopScrolling = true;
     })
   }
@@ -178,11 +183,14 @@ export class ResolveBoardComponent implements OnInit {
 
     this.skip = 0;
     this.stopScrolling = false;
+    this.complaints = [];
+    this.loadingComplaints = true;
 
     this.complaintApi.getAllComplaints(this.skip, this.limit).subscribe(data => {
       this.complaints = data;
+      this.loadingComplaints = false;
       this.skip += 10;
-      if(data.length < this.limit)
+      if (data.length < this.limit)
         this.stopScrolling = true;
     })
   }

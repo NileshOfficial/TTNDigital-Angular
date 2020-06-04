@@ -23,7 +23,10 @@
             </a>
         </div>
     </div>
-    <table class="table">
+    <div *ngIf="loadingComplaints" class="loader">
+        <ttnd-loader animation="cubes"></ttnd-loader>
+    </div>
+    <table class="table" *ngIf="!loadingComplaints">
         <thead>
             <tr>
                 <th>

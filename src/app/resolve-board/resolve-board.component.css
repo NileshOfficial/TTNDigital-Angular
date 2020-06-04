@@ -326,3 +326,11 @@ thead {
     max-height: 300px;
     overflow-y: scroll;
 }
+
+.loader {
+    background-color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100px;
+}
