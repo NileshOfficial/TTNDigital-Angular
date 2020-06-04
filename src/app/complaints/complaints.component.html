@@ -94,6 +94,8 @@
                 <div class="details titleText">
                     <span class="dept">Department:&nbsp;{{complaintDetailsObject.department}}</span>
                     <span class="assignedTo">Assigned&nbsp;to:&nbsp;{{complaintDetailsObject.assignedTo}}</span>
+                    <span *ngIf="complaintDetailsObject.status === 'In Progress'" class="assignedTo">
+                        Estimated&nbsp;Time:&nbsp;{{complaintDetailsObject.estimatedTime.value}}&nbsp;{{complaintDetailsObject.estimatedTime.spanType}}</span>
                 </div>
                 <p class="description">
                     {{complaintDetailsObject.description}}

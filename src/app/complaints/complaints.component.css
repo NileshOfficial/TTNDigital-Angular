@@ -205,6 +205,10 @@ thead {
     margin-bottom: 5px;
 }
 
+.moreInfo .content .assignedTo {
+    width: 100%;
+}
+
 .moreInfo .content .description {
     font-size: 1.2rem;
 }
