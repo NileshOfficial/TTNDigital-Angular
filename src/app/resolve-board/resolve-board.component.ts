@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { faSort, faCheck, faUndoAlt, faChevronRight, faTimes, IconDefinition } from '@fortawesome/free-solid-svg-icons';
+import { faCheck, faUndoAlt, faChevronRight, faTimes, IconDefinition } from '@fortawesome/free-solid-svg-icons';
 import { ComplaintsService } from '../services/complaints.service';
 import { SelectData } from '../dropdown/selectData.model';
 import { Complaint } from '../services/complaints.model';
@@ -17,7 +17,8 @@ export class ResolveBoardComponent implements OnInit {
   @ViewChild('deptOptionsFilter') deptFilterRef: DropdownComponent;
   @ViewChild('statusOptionsFilter') statusFilterRef: DropdownComponent;
 
-  sortIcon: IconDefinition = faSort;
+  @ViewChild('timeTypeSelect')timeTypeSelect: DropdownComponent;
+
   rightArrowIcon: IconDefinition = faChevronRight;
   crossIcon: IconDefinition = faTimes;
   resetIcon: IconDefinition = faUndoAlt;
@@ -44,6 +45,9 @@ export class ResolveBoardComponent implements OnInit {
   searchFilter: string = '';
   searchField: string = '';
   filter: any = null;
+
+  complaintDetailsVisible: boolean = false;
+  complaintDetailsObject: Complaint = null;
 
   constructor(private complaintApi: ComplaintsService) { }
 
@@ -105,11 +109,12 @@ export class ResolveBoardComponent implements OnInit {
 
     this.dropDownValue = '';
     this.estimatedTimeType = '';
-    this._id = '';
+    this.timeTypeSelect.reset();
     form.reset();
-
+    
     this.complaintApi.updateStatus(this._id, patch).subscribe(data => {
       console.log(data);
+      this._id = '';
       this.hideEstimatedTimePopup();
     }, err => console.log(err));
   }
@@ -162,5 +167,14 @@ export class ResolveBoardComponent implements OnInit {
     this.complaintApi.getAllComplaints(0, 0).subscribe(data => {
       this.complaints = data;
     })
+  }
+
+  openMoreInfo(complaint: Complaint): void {
+    this.complaintDetailsObject = complaint;
+    this.complaintDetailsVisible = true;
+  }
+
+  closeMoreInfo(): void {
+    this.complaintDetailsVisible = false;
   }
 }
