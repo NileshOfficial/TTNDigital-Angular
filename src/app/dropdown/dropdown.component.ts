@@ -13,6 +13,7 @@ export class DropdownComponent implements OnInit {
   @Input() options: Array<Array<string>> = [];
   @Input() bordered: boolean = false;
   @Input() select: number = null;
+  @Input() noSelect: boolean = false;
   @Output() selectChanged: EventEmitter<{ option: string, idx: number }> = new EventEmitter();
 
   upArrowHead: IconDefinition = faChevronUp;
@@ -42,15 +43,22 @@ export class DropdownComponent implements OnInit {
   }
 
   updateHeading(heading: Array<string>, idx: number) {
-    this.heading = heading[1];
+    if (idx === 0 && this.noSelect) {
+      this.heading = '';
+      this.selectChanged.emit({ option: this.options[idx][0], idx });
+    } else {
+      this.heading = heading[1];
+      const option = this.options[idx];
+      this.selectChanged.emit({ option: option[0], idx });
+    }
     this.optionsVisible = false;
-    const option = this.options[idx];
     const color = this.options[idx][2];
     this.currentColor = color || 'initial';
-    this.selectChanged.emit({ option: option[0], idx });
+
   }
 
-  reset() {
+  reset(color?: string) {
     this.heading = '';
+    this.currentColor = color || 'inherit';
   }
 }
