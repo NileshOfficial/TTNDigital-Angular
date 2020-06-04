@@ -172,6 +172,8 @@ export class ResolveBoardComponent implements OnInit {
   }
 
   applyFilters(): void {
+    this.filter = {};
+    
     if (this.departmentFilter) this.filter['department'] = this.departmentFilter;
     if (this.statusFilter) this.filter['status'] = this.statusFilter;
     if (this.searchFilter) {
@@ -180,7 +182,7 @@ export class ResolveBoardComponent implements OnInit {
       if (this.searchFilter === 'Locked By')
         this.filter['lockedBy'] = this.searchField;
     }
-
+    
     this.skip = 0;
     this.stopScrolling = false;
     this.complaints = [];
@@ -192,6 +194,8 @@ export class ResolveBoardComponent implements OnInit {
       this.skip += 10;
       if (data.length < this.limit)
         this.stopScrolling = true;
+      this.showLoader = false;
+
     })
   }
 
@@ -216,6 +220,7 @@ export class ResolveBoardComponent implements OnInit {
       this.skip += 10;
       if (data.length < this.limit)
         this.stopScrolling = true;
+      this.showLoader = false;
     })
   }
 
@@ -229,7 +234,6 @@ export class ResolveBoardComponent implements OnInit {
   }
 
   onScroll(): void {
-    console.log("jer");
     if (!this.subscription && !this.stopScrolling) {
       this.showLoader = true;
       this.complaintApi.getAllComplaints(this.skip, this.limit, this.filter).subscribe(data => {
