@@ -6,6 +6,8 @@ import { NgForm } from '@angular/forms';
 import { BuzzApiService } from '../services/buzz-api.service';
 import { Subscription } from 'rxjs';
 import { DropdownComponent } from '../dropdown/dropdown.component';
+import { UtilService } from '../services/util.service';
+import { invalidTokenErr, fileSizeErr } from '../errCodes.conf';
 
 @Component({
   selector: 'ttnd-buzz',
@@ -14,6 +16,8 @@ import { DropdownComponent } from '../dropdown/dropdown.component';
 })
 export class BuzzComponent implements OnInit {
   @ViewChild('category') categoryDropdown: DropdownComponent;
+  @ViewChild('f') form: NgForm;
+
   penIcon: IconDefinition = faPen;
   postIcon: IconDefinition = faChevronRight;
   imageIcon: IconDefinition = faImage;
@@ -39,7 +43,10 @@ export class BuzzComponent implements OnInit {
   subscription: Subscription = null;
   stopScrolling: boolean = false;
 
-  constructor(private buzzApi: BuzzApiService) { }
+  postsFetchErr: boolean = false;
+  postsFetchErrMsg: string = '';
+
+  constructor(private buzzApi: BuzzApiService, private util: UtilService) { }
 
   ngOnInit(): void {
     this.loadPostsOnInit();
@@ -53,6 +60,14 @@ export class BuzzComponent implements OnInit {
       this.skip += 5;
       if (data.length < this.limit)
         this.stopScrolling = true;
+    }, err => {
+      if (err.error.errorCode === invalidTokenErr) {
+        this.util.refreshAuthToken(this.loadPostsOnInit.bind(this));
+      } else {
+        this.loadingPosts = false;
+        this.postsFetchErr = true;
+        this.postsFetchErrMsg = 'Something went wrong, try refreshing. If error persists contact the administrator.';
+      }
     });
   }
 
@@ -74,11 +89,12 @@ export class BuzzComponent implements OnInit {
     }
     formData.append('description', form.value['description']);
     formData.append('category', this.category);
-    form.reset();
-    this.category = '';
-    this.categoryDropdown.reset();
 
     this.buzzApi.postBuzz(formData).subscribe(data => {
+      form.reset();
+      this.category = '';
+      this.categoryDropdown.reset();
+      this.images = [];
       this.posting = false;
       this.done = true;
       this.skip = 0;
@@ -88,14 +104,21 @@ export class BuzzComponent implements OnInit {
         this.freezePosting = false;
       }, 500);
     }, err => {
-      this.posting = false;
-      if (err.error.errorCode === 'LIMIT_FILE_SIZE') {
+      console.log(err);
+      if (err.error.errorCode === fileSizeErr) {
+        this.posting = false;
         this.error = true;
         this.errMessage = err.error.message;
         setTimeout(() => {
           this.error = false;
           this.freezePosting = false;
         }, 1000);
+      } else if (err.error.errorCode === invalidTokenErr) {
+        this.util.refreshAuthToken(this.postBuzz.bind(this), [this.form]);
+      } else {
+        this.loadingPosts = false;
+        this.error = true;
+        this.errMessage = 'Something went wrong, try refreshing. If error persists contact the administrator.';
       }
     });
   }
@@ -112,9 +135,14 @@ export class BuzzComponent implements OnInit {
         this.showLoader = false;
         this.subscription = null;
       }, err => {
-        console.log(err);
-        this.subscription = null;
-        this.showLoader = false;
+        console.log('scroll', err);
+        if (err.error.errorCode === invalidTokenErr) {
+          this.util.refreshAuthToken(this.onScroll.bind(this));
+        } else {
+          this.showLoader = false;
+          this.postsFetchErr = true;
+          this.postsFetchErrMsg = 'Something went wrong, try refreshing. If error persists contact the administrator.';
+        }
       });
     }
   }
