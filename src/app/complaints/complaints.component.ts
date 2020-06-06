@@ -126,7 +126,6 @@ export class ComplaintsComponent implements OnInit {
         this.freezePosting = false;
       }, 500);
     }, err => {
-      console.log(err);
       if (err.error.errorCode === fileSizeErr) {
         this.posting = false;
         this.error = true;
@@ -142,7 +141,7 @@ export class ComplaintsComponent implements OnInit {
         this.error = true;
         this.errMessage = 'Something went wrong, try refreshing. If error persists contact the administrator.';
       }
-    })
+    });
   }
 
   departmentSelected(event: SelectData): void {
@@ -168,7 +167,6 @@ export class ComplaintsComponent implements OnInit {
         this.showLoader = false;
         this.skip += 10;
       }, err => {
-        console.log('scroll', err);
         if (err.error.errorCode === invalidTokenErr) {
           this.util.refreshAuthToken(this.onScroll.bind(this));
         } else {
@@ -176,7 +174,7 @@ export class ComplaintsComponent implements OnInit {
           this.lazyFetchErr = true;
           this.lazyFetchErrMsg = 'Something went wrong, try refreshing. If error persists contact the administrator.';
         }
-      })
+      });
     }
   }
 
@@ -216,11 +214,13 @@ export class ComplaintsComponent implements OnInit {
       this.skip += 10;
       if (data.length < this.limit)
         this.stopScrolling = true;
+      this.showLoader = false;
     }, err => {
       if (err.error.errorCode === invalidTokenErr) {
         this.util.refreshAuthToken(this.applyFilters.bind(this));
       } else {
         this.loadingComplaints = false;
+        this.showLoader = false;
         this.complaintFetchErr = true;
         this.complaintFetchErrMsg = 'Something went wrong, try refreshing. If error persists contact the administrator.';
       }
@@ -246,14 +246,16 @@ export class ComplaintsComponent implements OnInit {
       this.skip += 10;
       if (data.length < this.limit)
         this.stopScrolling = true;
+      this.showLoader = false;
     }, err => {
       if (err.error.errorCode === invalidTokenErr) {
         this.util.refreshAuthToken(this.resetFilters.bind(this));
       } else {
         this.loadingComplaints = false;
+        this.showLoader = false;
         this.complaintFetchErr = true;
         this.complaintFetchErrMsg = 'Something went wrong, try refreshing. If error persists contact the administrator.';
       }
-    })
+    });
   }
 }
