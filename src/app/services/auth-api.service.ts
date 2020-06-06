@@ -35,9 +35,14 @@ export class AuthApiService {
     });
   }
 
-  fetchUserDetails(): Observable<any> {
-    return this.http.get(endpoints.userDataOAuthEndpoint, {
-      params: new HttpParams().set('id_token', this.tokenstore.token.id_token)
+  validateAuthToken(): Observable<any> {
+    const token = this.tokenstore.token
+    let headers = new HttpHeaders({
+      'authorization': `bearer ${token.access_token},bearer ${token.id_token}`
+    });
+
+    return this.http.get(endpoints.validateTokenEndpoint, {
+      headers: headers
     });
   }
 }
