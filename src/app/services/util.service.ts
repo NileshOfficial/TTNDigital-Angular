@@ -16,7 +16,7 @@ export class UtilService {
     private tokenstore: TokenstoreService,
     private router: Router) { }
 
-  async refreshAuthToken(callback?: Function, args: any[] = []) {
+  async refreshAuthToken(callback?: Function, args: any[] = []): Promise<boolean> {
     const token = this.localstorage.retrieveToken();
     if (token && token.refresh_token) {
 
@@ -36,10 +36,15 @@ export class UtilService {
 
         if (callback)
           callback(...args);
-
+        
+          return Promise.resolve(true);
       } catch (err) {
         this.router.navigate(['/']);
+        Promise.resolve(false);
       }
-    } else this.router.navigate(['/']);
+    } else {
+      this.router.navigate(['/']);
+      Promise.resolve(false);
+    }
   }
 }
