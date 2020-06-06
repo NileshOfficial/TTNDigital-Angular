@@ -26,8 +26,11 @@ export class UtilService {
         };
 
         const newToken = await this.http.post<LoginToken>(refreshTokenEndpoint, body).toPromise();
+        console.log(newToken);
         newToken['refresh_token'] = token.refresh_token;
+        newToken['id_token'] = token.id_token;
         newToken['admin'] = token.admin;
+        
         this.localstorage.storeToken(newToken);
         this.tokenstore.token = newToken;
 
