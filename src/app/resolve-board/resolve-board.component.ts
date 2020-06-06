@@ -6,6 +6,9 @@ import { Complaint } from '../services/complaints.model';
 import { NgForm } from '@angular/forms';
 import { DropdownComponent } from '../dropdown/dropdown.component';
 import { Subscription } from 'rxjs';
+import { UtilService } from '../services/util.service';
+import { invalidTokenErr } from '../errCodes.conf';
+
 
 @Component({
   selector: 'ttnd-resolve-board',
@@ -19,6 +22,7 @@ export class ResolveBoardComponent implements OnInit {
   @ViewChild('statusOptionsFilter') statusFilterRef: DropdownComponent;
 
   @ViewChild('timeTypeSelect') timeTypeSelect: DropdownComponent;
+  @ViewChild('form') estimatedTimeForm: NgForm;
 
   rightArrowIcon: IconDefinition = faChevronRight;
   crossIcon: IconDefinition = faTimes;
@@ -63,15 +67,34 @@ export class ResolveBoardComponent implements OnInit {
   error: boolean = false;
   errMessage: string = '';
 
-  constructor(private complaintApi: ComplaintsService) { }
+  complaintFetchErr: boolean = false;
+  complaintFetchErrMsg: string = '';
+  lazyFetchErr: boolean = false;
+  lazyFetchErrMsg: string = '';
+
+  constructor(private complaintApi: ComplaintsService, private util: UtilService) { }
 
   ngOnInit(): void {
+    this.loadComplaintsOnInit();
+  }
+
+  loadComplaintsOnInit(): void {
     this.complaintApi.getAllComplaints(0, 10).subscribe(data => {
       this.complaints = data;
       this.loadingComplaints = false;
-      this.skip += 5;
+      this.skip += 10;
       if (data.length < this.limit)
         this.stopScrolling = true;
+      this.complaintDetailsObject = data[0];
+    }, err => {
+      console.log(err);
+      if (err.error.errorCode === invalidTokenErr) {
+        this.util.refreshAuthToken(this.loadComplaintsOnInit.bind(this));
+      } else {
+        this.loadingComplaints = false;
+        this.complaintFetchErr = true;
+        this.complaintFetchErrMsg = 'Something went wrong, try refreshing. If error persists contact the administrator.';
+      }
     });
   }
 
@@ -142,16 +165,15 @@ export class ResolveBoardComponent implements OnInit {
         this.hideEstimatedTimePopup();
       }, 500);
     }, err => {
-      this.posting = false;
-      //if (err.error.errorCode === 'LIMIT_FILE_SIZE') {
-      this.error = true;
-      this.errMessage = err.error.message;
-      setTimeout(() => {
-        this.error = false;
-        this.freezePosting = false;
-        this.hideEstimatedTimePopup();
-      }, 1000);
-      //}
+      console.log(err);
+
+      if (err.error.errorCode === invalidTokenErr) {
+        this.util.refreshAuthToken(this.updateEstimatedTime.bind(this), [this.estimatedTimeForm]);
+      } else {
+        this.posting = false;
+        this.error = true;
+        this.errMessage = 'Something went wrong, try refreshing. If error persists contact the administrator.';
+      }
     });
   }
 
@@ -173,7 +195,7 @@ export class ResolveBoardComponent implements OnInit {
 
   applyFilters(): void {
     this.filter = {};
-    
+
     if (this.departmentFilter) this.filter['department'] = this.departmentFilter;
     if (this.statusFilter) this.filter['status'] = this.statusFilter;
     if (this.searchFilter) {
@@ -182,7 +204,7 @@ export class ResolveBoardComponent implements OnInit {
       if (this.searchFilter === 'Locked By')
         this.filter['lockedBy'] = this.searchField;
     }
-    
+
     this.skip = 0;
     this.stopScrolling = false;
     this.complaints = [];
@@ -195,8 +217,18 @@ export class ResolveBoardComponent implements OnInit {
       if (data.length < this.limit)
         this.stopScrolling = true;
       this.showLoader = false;
+    }, err => {
+      console.log(err);
 
-    })
+      if (err.error.errorCode === invalidTokenErr) {
+        this.util.refreshAuthToken(this.applyFilters.bind(this));
+      } else {
+        this.loadingComplaints = false;
+        this.showLoader = false;
+        this.complaintFetchErr = true;
+        this.complaintFetchErrMsg = 'Something went wrong, try refreshing. If error persists contact the administrator.';
+      }
+    });
   }
 
   resetFilters(): void {
@@ -221,7 +253,18 @@ export class ResolveBoardComponent implements OnInit {
       if (data.length < this.limit)
         this.stopScrolling = true;
       this.showLoader = false;
-    })
+    }, err => {
+      console.log(err);
+
+      if (err.error.errorCode === invalidTokenErr) {
+        this.util.refreshAuthToken(this.resetFilters.bind(this));
+      } else {
+        this.loadingComplaints = false;
+        this.showLoader = false;
+        this.complaintFetchErr = true;
+        this.complaintFetchErrMsg = 'Something went wrong, try refreshing. If error persists contact the administrator.';
+      }
+    });
   }
 
   openMoreInfo(complaint: Complaint): void {
@@ -244,8 +287,15 @@ export class ResolveBoardComponent implements OnInit {
         if (data.length < this.limit)
           this.stopScrolling = true;
       }, err => {
-        this.showLoader = false;
-        this.subscription = null;
+        console.log(err);
+
+        if (err.error.errorCode === invalidTokenErr) {
+          this.util.refreshAuthToken(this.onScroll.bind(this));
+        } else {
+          this.showLoader = false;
+          this.lazyFetchErr = true;
+          this.lazyFetchErrMsg = 'Something went wrong, try refreshing. If error persists contact the administrator.';
+        }
       });
     }
   }
