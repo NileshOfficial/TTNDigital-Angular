@@ -8,4 +8,4 @@ export const updateDislikeEndpoint = 'http://localhost:3001/buzz/dislike';
 export const imagesEndpoint = 'http://localhost:3001/images';
 export const addComplaintEndpoint = 'http://localhost:3001/complaints';
 export const getAllComplaintsEndpoint = 'http://localhost:3001/complaints/all';
-export const userDataOAuthEndpoint = 'https://oauth2.googleapis.com/tokeninfo';
+export const validateTokenEndpoint = 'http://localhost:3001/auth/validate';
