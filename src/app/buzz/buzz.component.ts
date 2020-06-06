@@ -116,7 +116,7 @@ export class BuzzComponent implements OnInit {
       } else if (err.error.errorCode === invalidTokenErr) {
         this.util.refreshAuthToken(this.postBuzz.bind(this), [this.form]);
       } else {
-        this.loadingPosts = false;
+        this.posting = false;
         this.error = true;
         this.errMessage = 'Something went wrong, try refreshing. If error persists contact the administrator.';
       }
