@@ -2,6 +2,10 @@
     margin-bottom: 2rem;
 }
 
+.card:first-child .header {
+    margin-bottom: 0;
+}
+
 .header {
     padding: 1rem 2rem;
     background-color: #f2f2f2;
@@ -112,6 +116,11 @@
     min-height: 100px;
 }
 
+.loader span {
+    color: #f00;
+    font-size: 1.8rem;
+}
+
 tbody {
     display: block;
 }
@@ -138,6 +147,11 @@ thead {
     align-items: center;
     justify-content: center;
     min-height: 100px;
+}
+
+.lazyLoader span {
+    color: #f00;
+    font-size: 1.8rem;
 }
 
 .moreInfo {

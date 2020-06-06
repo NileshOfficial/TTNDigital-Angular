@@ -8,6 +8,9 @@ import { AuthApiService } from '../services/auth-api.service';
 import { ComplaintsService } from '../services/complaints.service';
 import { Complaint } from '../services/complaints.model';
 import { Subscription } from 'rxjs';
+import { invalidTokenErr, fileSizeErr } from '../errCodes.conf';
+import { UtilService } from '../services/util.service';
+import { TokenstoreService } from '../services/tokenstore.service';
 
 @Component({
   selector: 'ttnd-complaints',
@@ -20,6 +23,8 @@ export class ComplaintsComponent implements OnInit {
 
   @ViewChild('deptOptionsFilter') deptOptionsFilter: DropdownComponent;
   @ViewChild('statusOptionsFilter') statusOptionsFilter: DropdownComponent;
+
+  @ViewChild('form') form: NgForm;
 
   imageIcon: IconDefinition = faImage;
   tickIcon: IconDefinition = faCheck;
@@ -57,13 +62,18 @@ export class ComplaintsComponent implements OnInit {
   statusFilterValue: string = '';
   filters: any = {};
 
-  constructor(private authApi: AuthApiService, private complaintsApi: ComplaintsService) { }
+  complaintFetchErr: boolean = false;
+  complaintFetchErrMsg: string = '';
+  lazyFetchErr: boolean = false;
+  lazyFetchErrMsg: string = '';
+
+  constructor(private tokenStore: TokenstoreService, private complaintsApi: ComplaintsService, private util: UtilService) { }
 
   ngOnInit(): void {
-    this.authApi.fetchUserDetails().subscribe(data => {
-      this.name = data['name'];
-      this.email = data['email'];
-    });
+    const tokenSplit = this.tokenStore.token.id_token.split('.');
+    const { name, email } = JSON.parse(atob(tokenSplit[1]));
+    this.name = name;
+    this.email = email;
 
     this.loadComplaintsOnInit();
   }
@@ -76,7 +86,15 @@ export class ComplaintsComponent implements OnInit {
       if (data.length < this.limit)
         this.stopScrolling = true;
       this.complaintDetailsObject = data[0];
-    })
+    }, err => {
+      if (err.error.errorCode === invalidTokenErr) {
+        this.util.refreshAuthToken(this.loadComplaintsOnInit.bind(this));
+      } else {
+        this.loadingComplaints = false;
+        this.complaintFetchErr = true;
+        this.complaintFetchErrMsg = 'Something went wrong, try refreshing. If error persists contact the administrator.';
+      }
+    });
   }
 
   onSubmit(form: NgForm): void {
@@ -91,15 +109,14 @@ export class ComplaintsComponent implements OnInit {
     formData.append('title', this.selectedIssue);
     formData.append('description', form.value['description']);
 
-    form.reset();
-    this.dept.reset();
-    this.issueTitle.reset();
-
     this.complaints = null;
     this.loadingComplaints = true;
     this.stopScrolling = false;
 
     this.complaintsApi.addComplaint(formData).subscribe(data => {
+      form.reset();
+      this.dept.reset();
+      this.issueTitle.reset();
       this.posting = false;
       this.done = true;
       this.skip = 0;
@@ -109,15 +126,22 @@ export class ComplaintsComponent implements OnInit {
         this.freezePosting = false;
       }, 500);
     }, err => {
-      this.posting = false;
-      //if (err.error.errorCode === 'LIMIT_FILE_SIZE') {
-      this.error = true;
-      this.errMessage = err.error.message;
-      setTimeout(() => {
-        this.error = false;
-        this.freezePosting = false;
-      }, 1000);
-      //}
+      console.log(err);
+      if (err.error.errorCode === fileSizeErr) {
+        this.posting = false;
+        this.error = true;
+        this.errMessage = err.error.message;
+        setTimeout(() => {
+          this.error = false;
+          this.freezePosting = false;
+        }, 1000);
+      } else if (err.error.errorCode === invalidTokenErr) {
+        this.util.refreshAuthToken(this.onSubmit.bind(this), [this.form]);
+      } else {
+        this.posting = false;
+        this.error = true;
+        this.errMessage = 'Something went wrong, try refreshing. If error persists contact the administrator.';
+      }
     })
   }
 
@@ -144,8 +168,14 @@ export class ComplaintsComponent implements OnInit {
         this.showLoader = false;
         this.skip += 10;
       }, err => {
-        this.subscription = null;
-        this.showLoader = false;
+        console.log('scroll', err);
+        if (err.error.errorCode === invalidTokenErr) {
+          this.util.refreshAuthToken(this.onScroll.bind(this));
+        } else {
+          this.showLoader = false;
+          this.lazyFetchErr = true;
+          this.lazyFetchErrMsg = 'Something went wrong, try refreshing. If error persists contact the administrator.';
+        }
       })
     }
   }
@@ -170,7 +200,7 @@ export class ComplaintsComponent implements OnInit {
 
   applyFilters(): void {
     this.filters = {};
-    
+
     if (this.searchField) this.filters['issueId'] = this.searchField;
     if (this.deptFilterValue) this.filters['department'] = this.deptFilterValue;
     if (this.statusFilterValue) this.filters['status'] = this.statusFilterValue;
@@ -186,6 +216,14 @@ export class ComplaintsComponent implements OnInit {
       this.skip += 10;
       if (data.length < this.limit)
         this.stopScrolling = true;
+    }, err => {
+      if (err.error.errorCode === invalidTokenErr) {
+        this.util.refreshAuthToken(this.applyFilters.bind(this));
+      } else {
+        this.loadingComplaints = false;
+        this.complaintFetchErr = true;
+        this.complaintFetchErrMsg = 'Something went wrong, try refreshing. If error persists contact the administrator.';
+      }
     });
   }
 
@@ -194,6 +232,8 @@ export class ComplaintsComponent implements OnInit {
     this.deptOptionsFilter.reset();
     this.statusOptionsFilter.reset();
     this.filters = {};
+    this.deptFilterValue = '';
+    this.statusFilterValue = '';
 
     this.skip = 0;
     this.stopScrolling = false;
@@ -206,6 +246,14 @@ export class ComplaintsComponent implements OnInit {
       this.skip += 10;
       if (data.length < this.limit)
         this.stopScrolling = true;
+    }, err => {
+      if (err.error.errorCode === invalidTokenErr) {
+        this.util.refreshAuthToken(this.resetFilters.bind(this));
+      } else {
+        this.loadingComplaints = false;
+        this.complaintFetchErr = true;
+        this.complaintFetchErrMsg = 'Something went wrong, try refreshing. If error persists contact the administrator.';
+      }
     })
   }
 }

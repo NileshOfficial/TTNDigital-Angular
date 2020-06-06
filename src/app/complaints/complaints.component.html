@@ -74,7 +74,10 @@
         <div *ngIf="loadingComplaints" class="loader">
             <ttnd-loader animation="cubes"></ttnd-loader>
         </div>
-        <table *ngIf="!loadingComplaints" class="table">
+        <div class="loader" *ngIf="complaintFetchErr">
+            <span>{{complaintFetchErrMsg}}</span>
+        </div>
+        <table *ngIf="!loadingComplaints && !complaintFetchErr" class="table">
             <thead>
                 <tr>
                     <th>department</th>
@@ -99,6 +102,9 @@
                 </tr>
                 <tr colspan="4" class="lazyLoader" *ngIf="showLoader">
                     <ttnd-loader [outerDimension]="50" [innerDimension]="30"></ttnd-loader>
+                </tr>
+                <tr colspan="4" class="lazyLoader" *ngIf="lazyFetchErr">
+                    <span>{{lazyFetchErrMsg}}</span>
                 </tr>
             </tbody>
         </table>
