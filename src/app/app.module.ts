@@ -22,6 +22,7 @@ import { AboutComponent } from './about/about.component';
 import { HelpComponent } from './help/help.component';
 import { CarouselComponent } from './carousel/carousel.component';
 import { RequestHeaderService } from './services/interceptor.service';
+import { NotfoundComponent } from './notfound/notfound.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,8 @@ import { RequestHeaderService } from './services/interceptor.service';
     ResolveBoardComponent,
     AboutComponent,
     HelpComponent,
-    CarouselComponent
+    CarouselComponent,
+    NotfoundComponent
   ],
   imports: [
     BrowserModule,
