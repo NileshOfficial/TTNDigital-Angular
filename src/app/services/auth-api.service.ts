@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import * as endpoints from './uris.conf';
 import { LoginToken } from './auth.model';
@@ -36,13 +36,6 @@ export class AuthApiService {
   }
 
   validateAuthToken(): Observable<any> {
-    const token = this.tokenstore.token
-    let headers = new HttpHeaders({
-      'authorization': `bearer ${token.access_token},bearer ${token.id_token}`
-    });
-
-    return this.http.get(endpoints.validateTokenEndpoint, {
-      headers: headers
-    });
+    return this.http.get(endpoints.validateTokenEndpoint);
   }
 }
