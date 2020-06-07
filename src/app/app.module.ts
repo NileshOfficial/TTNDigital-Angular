@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 
@@ -21,6 +21,7 @@ import { ResolveBoardComponent } from './resolve-board/resolve-board.component';
 import { AboutComponent } from './about/about.component';
 import { HelpComponent } from './help/help.component';
 import { CarouselComponent } from './carousel/carousel.component';
+import { RequestHeaderService } from './services/interceptor.service';
 
 @NgModule({
   declarations: [
@@ -48,7 +49,7 @@ import { CarouselComponent } from './carousel/carousel.component';
     FormsModule,
     InfiniteScrollModule
   ],
-  providers: [],
+  providers: [{ provide: HTTP_INTERCEPTORS, useClass: RequestHeaderService, multi: true }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
