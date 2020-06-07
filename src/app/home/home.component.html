@@ -18,28 +18,31 @@
     <nav>
         <ul class="card">
             <li class="navlink">
-                <a class="titleText" [routerLink]="['/home/buzz']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+                <a class="titleText" [routerLink]="['/home/buzz']" routerLinkActive="active"
+                    [routerLinkActiveOptions]="{exact: true}">
                     <span>buzz</span>
                     <fa-icon [icon]="rightArrowHead"></fa-icon>
                 </a>
             </li>
-            <li class="navlink" >
-                <a class="titleText" [routerLink]="['/home/complaints']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+            <li class="navlink">
+                <a class="titleText" [routerLink]="['/home/complaints']" routerLinkActive="active"
+                    [routerLinkActiveOptions]="{exact: true}">
                     <span>complaints</span>
                     <fa-icon [icon]="rightArrowHead"></fa-icon>
                 </a>
             </li>
             <li class="navlink" *ngIf="adminStatus">
-                <a class="titleText" [routerLink]="['/home/resolve']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+                <a class="titleText" [routerLink]="['/home/resolve']" routerLinkActive="active"
+                    [routerLinkActiveOptions]="{exact: true}">
                     <span>resolved</span>
                     <fa-icon [icon]="rightArrowHead"></fa-icon>
                 </a>
             </li>
         </ul>
         <div class="extras">
-            <span class="copyright">&copy; 2016 to the new digital</span>
+            <span class="copyright">&copy; 2016 to the new</span>
             <ul class="helpLinks">
-                <li><a [routerLink]="['/home/about']" >about</a></li>
+                <li><a [routerLink]="['/home/about']">about</a></li>
                 <li><a [routerLink]="['/home/help']">help</a></li>
             </ul>
         </div>

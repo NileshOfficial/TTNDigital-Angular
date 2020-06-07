@@ -11,6 +11,7 @@ import { HelpComponent } from './help/help.component';
 import { LoginCheckPointService } from './services/login-check-point.service';
 import { LoginCheckOnTokenRequestService } from './services/login-check-on-token-request.service';
 import { CheckAdminStatusService } from './services/checkAdminStatus.service';
+import { NotfoundComponent } from './notfound/notfound.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/auth/login', pathMatch: 'full' },
@@ -27,9 +28,13 @@ const routes: Routes = [
       { path: 'complaints', component: ComplaintsComponent },
       { path: 'resolve', canActivate: [CheckAdminStatusService], component: ResolveBoardComponent },
       { path: 'about', component: AboutComponent },
-      { path: 'help', component: HelpComponent }
+      { path: 'help', component: HelpComponent },
+      { path: 'notfound', component: NotfoundComponent },
+      { path: '**', redirectTo: '/home/notfound' }
     ]
-  }
+  },
+  // { path: 'notfound', component: NotfoundComponent },
+  { path: '**', redirectTo: '/home/notfound' }
 ];
 
 @NgModule({
