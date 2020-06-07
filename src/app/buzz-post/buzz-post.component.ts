@@ -24,12 +24,16 @@ export class BuzzPostComponent implements OnInit, OnChanges {
 
   prefix = imagesEndpoint;
 
+  postingReview: boolean = false;
+
   constructor(private buzzApi: BuzzApiService) { }
 
   ngOnInit(): void {
   }
 
   ngOnChanges(change: SimpleChanges) {
+    this.liked = this.postInputObject['liked'];
+    this.disliked = this.postInputObject['disliked'];
     this.postData = { ...this.postInputObject };
     const date = new Date(this.postData['date']);
     this.postData['date'] = date.getDate();
@@ -38,40 +42,42 @@ export class BuzzPostComponent implements OnInit, OnChanges {
   }
 
   toggleLike() {
+    this.postingReview = true;
     this.liked = !this.liked;
     if (this.liked) {
       if (this.disliked) {
         this.disliked = false;
         //update dislike -1
         this._updateReviews('dislikes', false);
-        this.buzzApi.updateReview(this.postData['_id'], true, 'dislike').subscribe(data => console.log(data), err => console.log(err));
+        this.buzzApi.updateReview(this.postData['_id'], true, 'dislike').subscribe();
       }
       //update like +1
       this._updateReviews('likes');
-      this.buzzApi.updateReview(this.postData['_id'], false).subscribe(data => console.log(data), err => console.log(err));
+      this.buzzApi.updateReview(this.postData['_id'], false).subscribe(data => { this.postingReview = false; }, err => { this.postingReview = false; });
     } else {
       //update like -1
       this._updateReviews('likes', false);
-      this.buzzApi.updateReview(this.postData['_id'], true).subscribe(data => console.log(data), err => console.log(err));
+      this.buzzApi.updateReview(this.postData['_id'], true).subscribe(data => { this.postingReview = false; }, err => { this.postingReview = false; });
     }
   }
 
   toggleDislike() {
+    this.postingReview = true;
     this.disliked = !this.disliked;
     if (this.disliked) {
       if (this.liked) {
         this.liked = false;
         //update like -1
         this._updateReviews('likes', false);
-        this.buzzApi.updateReview(this.postData['_id'], true).subscribe(data => console.log(data), err => console.log(err));
+        this.buzzApi.updateReview(this.postData['_id'], true).subscribe();
       }
       //update dislike +1
       this._updateReviews('dislikes');
-      this.buzzApi.updateReview(this.postData['_id'], false, 'dislike').subscribe(data => console.log(data), err => console.log(err));
+      this.buzzApi.updateReview(this.postData['_id'], false, 'dislike').subscribe(data => { this.postingReview = false; }, err => { this.postingReview = false; });
     } else {
       //update dislike -1
       this._updateReviews('dislikes', false);
-      this.buzzApi.updateReview(this.postData['_id'], true, 'dislike').subscribe(data => console.log(data), err => console.log(err));
+      this.buzzApi.updateReview(this.postData['_id'], true, 'dislike').subscribe(data => { this.postingReview = false; }, err => { this.postingReview = false; });
     }
   }
 

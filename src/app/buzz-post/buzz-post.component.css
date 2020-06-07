@@ -55,7 +55,17 @@
 
 .review {
     display: flex;
+    align-items: center;
     justify-content: flex-end;
+    min-height: 30px;
+}
+
+.review ttnd-loader {
+    margin-right: 2rem;
+}
+
+.disableClick {
+    pointer-events: none;
 }
 
 .like {

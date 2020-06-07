@@ -4,14 +4,16 @@
         <span class="month">{{ postData['month'] | addzero }}</span>
     </div>
     <div class="content">
-        <ttnd-carousel *ngIf="postData['images'].length > 0" id="carousel" [images]="postData['images']" [prefix]="prefix"></ttnd-carousel>
+        <ttnd-carousel *ngIf="postData['images'].length > 0" id="carousel" [images]="postData['images']"
+            [prefix]="prefix"></ttnd-carousel>
         <div class="meta">
             {{ postData['email'] }}
             <fa-icon [icon]="dotIcon"></fa-icon>
             {{ postData['time'] | duration }}
         </div>
         <p class="description">{{ postData['description'] }}</p>
-        <div class="review">
+        <div class="review" [ngClass]="{disableClick: postingReview}">
+            <ttnd-loader [outerDimension]="25" [innerDimension]="15" *ngIf="postingReview"></ttnd-loader>
             <a class="like" (click)="toggleLike()">
                 <span class="count">{{ postData['likes'] }}</span>
                 <fa-icon [icon]="likeIcon" [ngClass]="{'active': liked}"></fa-icon>
