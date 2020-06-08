@@ -15,12 +15,14 @@
             <ttnd-dropdown [bordered]=true class="dropdown ml-1" placeholder="Status" [noSelect]="true"
                 [options]="statusFilterOptions" (selectChanged)="getStatusFilter($event)" #statusOptionsFilter>
             </ttnd-dropdown>
-            <a (click)="applyFilters()" class="filterControl green" title="Apply filters">
-                <fa-icon [icon]="tickIcon"></fa-icon>
-            </a>
-            <a (click)="resetFilters()" class="filterControl red" title="Reset filters">
-                <fa-icon [icon]="resetIcon"></fa-icon>
-            </a>
+            <div class="filterControlContainer">
+                <a (click)="applyFilters()" class="filterControl green" title="Apply filters">
+                    <fa-icon [icon]="tickIcon"></fa-icon>
+                </a>
+                <a (click)="resetFilters()" class="filterControl red" title="Reset filters">
+                    <fa-icon [icon]="resetIcon"></fa-icon>
+                </a>
+            </div>
         </div>
         <span class="titleText">*To search, please select a field from 'Search Field' menu.</span>
     </div>
