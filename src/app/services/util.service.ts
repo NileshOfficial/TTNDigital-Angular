@@ -1,10 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
-import { LocalstorageService } from './localstorage.service';
 import { refreshTokenEndpoint } from './uris.conf';
 import { LoginToken } from './auth.model';
-import { TokenstoreService } from './tokenstore.service';
 
 @Injectable({
   providedIn: 'root'
@@ -30,14 +28,14 @@ export class UtilService {
         newToken['refresh_token'] = token.refresh_token;
         newToken['id_token'] = token.id_token;
         newToken['admin'] = token.admin;
-        
+
         this.localstorage.storeToken(newToken);
         this.tokenstore.token = newToken;
 
         if (callback)
           callback(...args);
-        
-          return Promise.resolve(true);
+
+        return Promise.resolve(true);
       } catch (err) {
         this.router.navigate(['/']);
         Promise.resolve(false);
@@ -46,5 +44,46 @@ export class UtilService {
       this.router.navigate(['/']);
       Promise.resolve(false);
     }
+  }
+}
+
+@Injectable({
+  providedIn: 'root'
+})
+export class TokenstoreService {
+
+  private tokenData: LoginToken;
+  constructor() { }
+
+
+  public get token(): LoginToken {
+    return this.tokenData;
+  }
+
+
+  public set token(token: LoginToken) {
+    this.tokenData = token
+  }
+
+}
+
+@Injectable({
+  providedIn: 'root'
+})
+export class LocalstorageService {
+
+  constructor() { }
+
+  storeToken(token: LoginToken): void {
+    localStorage.setItem('token', JSON.stringify(token));
+  }
+
+  retrieveToken(): LoginToken | null {
+    const token = localStorage.getItem('token');
+    return token ? JSON.parse(token) : null;
+  }
+
+  deleteToken() {
+    localStorage.removeItem('token');
   }
 }
