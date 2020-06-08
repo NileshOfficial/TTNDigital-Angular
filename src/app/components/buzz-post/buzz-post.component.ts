@@ -1,8 +1,8 @@
 import { Component, OnInit, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { faCircle, faThumbsUp, faThumbsDown, IconDefinition } from '@fortawesome/free-solid-svg-icons';
-import { buzz } from '../interfaces/buzz.model';
-import { BuzzApiService } from '../services/buzz-api.service';
-import { imagesEndpoint } from '../services/uris.conf';
+import { buzz } from '../../interfaces/buzz.model';
+import { BuzzApiService } from '../../services/buzz-api.service';
+import { imagesEndpoint } from '../../services/uris.conf';
 
 @Component({
   selector: 'ttnd-buzz-post',

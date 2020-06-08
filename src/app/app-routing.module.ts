@@ -1,17 +1,17 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { LoginBoardComponent } from './login-board/login-board.component';
-import { AuthCallbackComponent } from './auth-callback/auth-callback.component';
-import { BuzzComponent } from './buzz/buzz.component';
-import { HomeComponent } from './home/home.component';
-import { ComplaintsComponent } from './complaints/complaints.component';
-import { ResolveBoardComponent } from './resolve-board/resolve-board.component';
-import { AboutComponent } from './about/about.component';
-import { HelpComponent } from './help/help.component';
+import { LoginBoardComponent } from './components/login-board/login-board.component';
+import { AuthCallbackComponent } from './components/auth-callback/auth-callback.component';
+import { BuzzComponent } from './components/buzz/buzz.component';
+import { HomeComponent } from './components/home/home.component';
+import { ComplaintsComponent } from './components/complaints/complaints.component';
+import { ResolveBoardComponent } from './components/resolve-board/resolve-board.component';
+import { AboutComponent } from './components/about/about.component';
+import { HelpComponent } from './components/help/help.component';
 import { LoginCheckPointService } from './services/login-check-point.service';
 import { LoginCheckOnTokenRequestService } from './services/login-check-on-token-request.service';
 import { CheckAdminStatusService } from './services/checkAdminStatus.service';
-import { NotfoundComponent } from './notfound/notfound.component';
+import { NotfoundComponent } from './components/notfound/notfound.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/auth/login', pathMatch: 'full' },

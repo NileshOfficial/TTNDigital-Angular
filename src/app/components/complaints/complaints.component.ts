@@ -4,13 +4,12 @@ import { faCheck, faUndoAlt } from '@fortawesome/free-solid-svg-icons';
 import { DropdownComponent } from '../dropdown/dropdown.component';
 import { NgForm } from '@angular/forms';
 import { SelectData } from '../dropdown/selectData.model';
-import { AuthApiService } from '../services/auth-api.service';
-import { ComplaintsService } from '../services/complaints.service';
-import { Complaint } from '../services/complaints.model';
+import { ComplaintsService } from '../../services/complaints.service';
+import { Complaint } from '../../services/complaints.model';
 import { Subscription } from 'rxjs';
-import { invalidTokenErr, fileSizeErr } from '../errCodes.conf';
-import { UtilService } from '../services/util.service';
-import { TokenstoreService } from '../services/tokenstore.service';
+import { invalidTokenErr, fileSizeErr } from '../../errCodes.conf';
+import { UtilService } from '../../services/util.service';
+import { TokenstoreService } from '../../services/tokenstore.service';
 
 @Component({
   selector: 'ttnd-complaints',

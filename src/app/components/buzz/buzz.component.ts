@@ -1,13 +1,13 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { faPen, faChevronRight, faAt, faCheck, IconDefinition } from '@fortawesome/free-solid-svg-icons';
 import { faImage } from '@fortawesome/free-regular-svg-icons';
-import { buzz } from '../interfaces/buzz.model';
+import { buzz } from '../../interfaces/buzz.model';
 import { NgForm } from '@angular/forms';
-import { BuzzApiService } from '../services/buzz-api.service';
+import { BuzzApiService } from '../../services/buzz-api.service';
 import { Subscription } from 'rxjs';
 import { DropdownComponent } from '../dropdown/dropdown.component';
-import { UtilService } from '../services/util.service';
-import { invalidTokenErr, fileSizeErr } from '../errCodes.conf';
+import { UtilService } from '../../services/util.service';
+import { invalidTokenErr, fileSizeErr } from '../../errCodes.conf';
 
 @Component({
   selector: 'ttnd-buzz',

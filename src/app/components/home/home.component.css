@@ -38,7 +38,7 @@ header a fa-icon {
 .banner {
     min-height: 300px;
     width: 100%;
-    background: url('../../assets/images/home-banner.jpg') center center/cover;
+    background: url('../../../assets/images/home-banner.jpg') center center/cover;
     padding-left: 80px;
     display: flex;
     align-items: center;

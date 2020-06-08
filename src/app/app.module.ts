@@ -7,22 +7,22 @@ import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { LoginBoardComponent } from './login-board/login-board.component';
-import { LoaderComponent } from './loader/loader.component';
-import { AuthCallbackComponent } from './auth-callback/auth-callback.component';
-import { HomeComponent } from './home/home.component';
-import { DropdownComponent } from './dropdown/dropdown.component';
-import { BuzzComponent } from './buzz/buzz.component';
-import { BuzzPostComponent } from './buzz-post/buzz-post.component';
+import { LoginBoardComponent } from './components/login-board/login-board.component';
+import { LoaderComponent } from './components/loader/loader.component';
+import { AuthCallbackComponent } from './components/auth-callback/auth-callback.component';
+import { HomeComponent } from './components/home/home.component';
+import { DropdownComponent } from './components/dropdown/dropdown.component';
+import { BuzzComponent } from './components/buzz/buzz.component';
+import { BuzzPostComponent } from './components/buzz-post/buzz-post.component';
 import { AddZeroPipe } from './pipes/addzero.pipe';
 import { MsToDurationPipe } from './pipes/ms-to-duration.pipe';
-import { ComplaintsComponent } from './complaints/complaints.component';
-import { ResolveBoardComponent } from './resolve-board/resolve-board.component';
-import { AboutComponent } from './about/about.component';
-import { HelpComponent } from './help/help.component';
-import { CarouselComponent } from './carousel/carousel.component';
+import { ComplaintsComponent } from './components/complaints/complaints.component';
+import { ResolveBoardComponent } from './components/resolve-board/resolve-board.component';
+import { AboutComponent } from './components/about/about.component';
+import { HelpComponent } from './components/help/help.component';
+import { CarouselComponent } from './components/carousel/carousel.component';
 import { RequestHeaderService } from './services/interceptor.service';
-import { NotfoundComponent } from './notfound/notfound.component';
+import { NotfoundComponent } from './components/notfound/notfound.component';
 
 @NgModule({
   declarations: [

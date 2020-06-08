@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter, HostListener, ElementRef } from '@angular/core';
-import { faChevronUp, faChevronDown, IconDefinition, faThumbsDown } from '@fortawesome/free-solid-svg-icons';
+import { faChevronUp, faChevronDown, IconDefinition } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'ttnd-dropdown',
