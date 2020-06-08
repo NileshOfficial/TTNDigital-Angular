@@ -5,7 +5,7 @@ import { DropdownComponent } from '../dropdown/dropdown.component';
 import { NgForm } from '@angular/forms';
 import { SelectData } from '../dropdown/selectData.model';
 import { ComplaintsService } from '../../services/complaints.service';
-import { Complaint } from '../../services/complaints.model';
+import { Complaint } from '../../interfaces/complaints.model';
 import { Subscription } from 'rxjs';
 import { invalidTokenErr, fileSizeErr } from '../../errCodes.conf';
 import { UtilService } from '../../services/util.service';

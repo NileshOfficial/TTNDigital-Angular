@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { refreshTokenEndpoint } from './uris.conf';
-import { LoginToken } from './auth.model';
+import { LoginToken } from '../interfaces/auth.model';
 
 @Injectable({
   providedIn: 'root'

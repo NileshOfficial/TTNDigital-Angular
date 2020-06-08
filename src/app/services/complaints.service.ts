@@ -2,7 +2,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { addComplaintEndpoint, getAllComplaintsEndpoint } from './uris.conf';
-import { Complaint } from './complaints.model';
+import { Complaint } from '../interfaces/complaints.model';
 
 interface ComplaintData {
   department: string;
