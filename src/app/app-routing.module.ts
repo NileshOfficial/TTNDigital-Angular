@@ -8,25 +8,26 @@ import { ComplaintsComponent } from './components/complaints/complaints.componen
 import { ResolveBoardComponent } from './components/resolve-board/resolve-board.component';
 import { AboutComponent } from './components/about/about.component';
 import { HelpComponent } from './components/help/help.component';
-import { LoginCheckPointService } from './services/login-check-point.service';
-import { LoginCheckOnTokenRequestService } from './services/login-check-on-token-request.service';
-import { CheckAdminStatusService } from './services/checkAdminStatus.service';
+// import { LoginCheckPointService } from './services/login-check-point.service';
+// import { LoginCheckOnTokenRequestService } from './services/login-check-on-token-request.service';
+// import { CheckAdminStatusService } from './services/checkAdminStatus.service';
+import * as guards from './services/routeGuards';
 import { NotfoundComponent } from './components/notfound/notfound.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/auth/login', pathMatch: 'full' },
   {
     path: 'auth', children: [
-      { path: '', canActivate: [LoginCheckOnTokenRequestService], component: AuthCallbackComponent },
+      { path: '', canActivate: [guards.GrantCodeCheckGuard], component: AuthCallbackComponent },
       { path: 'login', component: LoginBoardComponent }
     ]
   },
   { path: 'home', redirectTo: '/home/buzz', pathMatch: "full" },
   {
-    path: 'home', canActivate: [LoginCheckPointService], component: HomeComponent, children: [
+    path: 'home', canActivate: [guards.DirectRouteAccessGuard], component: HomeComponent, children: [
       { path: 'buzz', component: BuzzComponent },
       { path: 'complaints', component: ComplaintsComponent },
-      { path: 'resolve', canActivate: [CheckAdminStatusService], component: ResolveBoardComponent },
+      { path: 'resolve', canActivate: [guards.CheckAdminStatusGuard], component: ResolveBoardComponent },
       { path: 'about', component: AboutComponent },
       { path: 'help', component: HelpComponent },
       { path: 'notfound', component: NotfoundComponent },
