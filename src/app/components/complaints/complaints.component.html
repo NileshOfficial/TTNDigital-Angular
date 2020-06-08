@@ -56,18 +56,20 @@
             <div class="fieldGroup">
                 <input type="text" [(ngModel)]="searchField" placeholder="Search Issue ID">
             </div>
-            <ttnd-dropdown [bordered]=true class="dropdown ml-1" placeholder="Department" [noSelect]="true"
+            <ttnd-dropdown [bordered]=true class="dropdown ml-1 ml-none" placeholder="Department" [noSelect]="true"
                 [options]="departmentFilterOptions" (selectChanged)="getDeptFilter($event)" #deptOptionsFilter>
             </ttnd-dropdown>
             <ttnd-dropdown [bordered]=true class="dropdown ml-1" placeholder="Status" [noSelect]="true"
                 [options]="statusFilterOptions" (selectChanged)="getStatusFilter($event)" #statusOptionsFilter>
             </ttnd-dropdown>
-            <a (click)="applyFilters()" class="filterControl green" title="Apply filters">
-                <fa-icon [icon]="tickIcon"></fa-icon>
-            </a>
-            <a (click)="resetFilters()" class="filterControl red" title="Reset filters">
-                <fa-icon [icon]="resetIcon"></fa-icon>
-            </a>
+            <div class="filterControlContainer">
+                <a (click)="applyFilters()" class="filterControl green" title="Apply filters">
+                    <fa-icon [icon]="tickIcon"></fa-icon>
+                </a>
+                <a (click)="resetFilters()" class="filterControl red" title="Reset filters">
+                    <fa-icon [icon]="resetIcon"></fa-icon>
+                </a>
+            </div>
         </div>
     </div>
     <div class="body p-0">
