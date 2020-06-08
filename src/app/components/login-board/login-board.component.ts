@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { IconDefinition, faGoogle } from '@fortawesome/free-brands-svg-icons';
 import { HttpParams } from '@angular/common/http';
-import * as config from './login.conf';
+import * as config from '../../config/login.conf';
 
 @Component({
   selector: 'ttnd-login-board',
