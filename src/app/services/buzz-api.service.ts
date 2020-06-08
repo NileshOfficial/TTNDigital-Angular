@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import * as endpoints from './uris.conf';
+import * as endpoints from '../config/uris.conf';
 import { Observable } from 'rxjs';
 import { buzz } from '../interfaces/buzz.model';
 

@@ -7,7 +7,7 @@ import { SelectData } from '../dropdown/selectData.model';
 import { ComplaintsService } from '../../services/complaints.service';
 import { Complaint } from '../../interfaces/complaints.model';
 import { Subscription } from 'rxjs';
-import { invalidTokenErr, fileSizeErr } from '../../errCodes.conf';
+import { invalidTokenErr, fileSizeErr } from '../../config/errCodes.conf';
 import { UtilService } from '../../services/util.service';
 import { TokenstoreService } from '../../services/util.service';
 

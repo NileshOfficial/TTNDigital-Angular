@@ -7,7 +7,7 @@ import { NgForm } from '@angular/forms';
 import { DropdownComponent } from '../dropdown/dropdown.component';
 import { Subscription } from 'rxjs';
 import { UtilService } from '../../services/util.service';
-import { invalidTokenErr } from '../../errCodes.conf';
+import { invalidTokenErr } from '../../config/errCodes.conf';
 
 
 @Component({

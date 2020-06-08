@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
-import { refreshTokenEndpoint } from './uris.conf';
+import { refreshTokenEndpoint } from '../config/uris.conf';
 import { LoginToken } from '../interfaces/auth.model';
 
 @Injectable({

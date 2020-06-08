@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { TokenstoreService, LocalstorageService } from './util.service';
 import { AuthApiService } from './auth-api.service';
 import { UtilService } from './util.service';
-import { invalidTokenErr } from '../errCodes.conf';
+import { invalidTokenErr } from '../config/errCodes.conf';
 
 @Injectable({
     providedIn: 'root'

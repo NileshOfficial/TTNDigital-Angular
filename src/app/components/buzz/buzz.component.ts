@@ -7,7 +7,7 @@ import { BuzzApiService } from '../../services/buzz-api.service';
 import { Subscription } from 'rxjs';
 import { DropdownComponent } from '../dropdown/dropdown.component';
 import { UtilService } from '../../services/util.service';
-import { invalidTokenErr, fileSizeErr } from '../../errCodes.conf';
+import { invalidTokenErr, fileSizeErr } from '../../config/errCodes.conf';
 
 @Component({
   selector: 'ttnd-buzz',

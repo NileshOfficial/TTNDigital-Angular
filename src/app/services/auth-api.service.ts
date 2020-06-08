@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import * as endpoints from './uris.conf';
+import * as endpoints from '../config/uris.conf';
 import { LoginToken } from '../interfaces/auth.model';
 import { TokenstoreService } from './util.service';
 

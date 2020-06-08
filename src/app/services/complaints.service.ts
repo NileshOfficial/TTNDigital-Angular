@@ -1,7 +1,7 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { addComplaintEndpoint, getAllComplaintsEndpoint } from './uris.conf';
+import { addComplaintEndpoint, getAllComplaintsEndpoint } from '../config/uris.conf';
 import { Complaint } from '../interfaces/complaints.model';
 
 interface ComplaintData {
