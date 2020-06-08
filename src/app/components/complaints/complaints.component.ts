@@ -3,7 +3,7 @@ import { faImage, IconDefinition } from '@fortawesome/free-regular-svg-icons';
 import { faCheck, faUndoAlt } from '@fortawesome/free-solid-svg-icons';
 import { DropdownComponent } from '../generic/dropdown/dropdown.component';
 import { NgForm } from '@angular/forms';
-import { SelectData } from '../generic/dropdown/selectData.model';
+import { SelectData } from '../../interfaces/selectData.model';
 import { ComplaintsService } from '../../services/complaints.service';
 import { Complaint } from '../../interfaces/complaints.model';
 import { Subscription } from 'rxjs';

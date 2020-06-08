@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { faCheck, faUndoAlt, faChevronRight, faTimes, IconDefinition } from '@fortawesome/free-solid-svg-icons';
 import { ComplaintsService } from '../../services/complaints.service';
-import { SelectData } from '../generic/dropdown/selectData.model';
+import { SelectData } from '../../interfaces/selectData.model';
 import { Complaint } from '../../interfaces/complaints.model';
 import { NgForm } from '@angular/forms';
 import { DropdownComponent } from '../generic/dropdown/dropdown.component';
