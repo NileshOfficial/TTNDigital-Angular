@@ -9,7 +9,7 @@ import { Complaint } from '../../services/complaints.model';
 import { Subscription } from 'rxjs';
 import { invalidTokenErr, fileSizeErr } from '../../errCodes.conf';
 import { UtilService } from '../../services/util.service';
-import { TokenstoreService } from '../../services/tokenstore.service';
+import { TokenstoreService } from '../../services/util.service';
 
 @Component({
   selector: 'ttnd-complaints',

@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
 import { CanActivate, Router, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
 import { Observable } from 'rxjs';
-import { TokenstoreService } from './tokenstore.service';
-import { LocalstorageService } from './localstorage.service';
+import { TokenstoreService, LocalstorageService } from './util.service';
 import { AuthApiService } from './auth-api.service';
 import { UtilService } from './util.service';
 import { invalidTokenErr } from '../errCodes.conf';

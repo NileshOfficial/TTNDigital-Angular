@@ -3,7 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import * as endpoints from './uris.conf';
 import { LoginToken } from './auth.model';
-import { TokenstoreService } from './tokenstore.service';
+import { TokenstoreService } from './util.service';
 
 @Injectable({
   providedIn: 'root'

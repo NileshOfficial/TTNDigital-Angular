@@ -2,8 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { faSignOutAlt, faAngleRight, IconDefinition } from '@fortawesome/free-solid-svg-icons'
 import { AuthApiService } from '../../services/auth-api.service';
-import { TokenstoreService } from '../../services/tokenstore.service';
-import { LocalstorageService } from '../../services/localstorage.service';
+import { TokenstoreService, LocalstorageService } from '../../services/util.service';
 
 @Component({
   selector: 'ttnd-home',

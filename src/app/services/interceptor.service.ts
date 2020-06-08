@@ -1,4 +1,4 @@
-import { TokenstoreService } from './tokenstore.service';
+import { TokenstoreService } from './util.service';
 import { HttpHeaders, HttpInterceptor, HttpRequest, HttpHandler } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
