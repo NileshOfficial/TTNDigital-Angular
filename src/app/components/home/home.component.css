@@ -9,6 +9,7 @@ header {
 
 header .logo {
     height: 100px;
+    width: 130px;
     position: absolute;
     top: 0;
     left: 5rem;
@@ -18,12 +19,29 @@ header .logo {
     box-shadow: 0 0 5px #777;
 }
 
-header .logo img {
-    height: 100%;
+header .logo a {
     width: 100%;
+    height: 100%;
+    background: url('../../../assets/images/logo.png') center center/cover;
 }
 
-header a {
+header .logoSmall {
+    display: none;
+    position: absolute;
+    top: 5px;
+    left: 5rem;
+    height: 50px;
+    width: 50px;
+    padding: 5px;
+}
+
+header .logoSmall a {
+    width: 100%;
+    height: 100%;
+    background: url('../../../assets/images/rock.png') center center/cover;
+}
+
+header .logout {
     font-size: 1.4rem;
     color: #e04a32;
     text-transform: capitalize;
@@ -50,6 +68,7 @@ header a fa-icon {
 }
 
 main {
+    position: relative;
     display: flex;
     padding: 2.5rem 5rem 5rem;
     background-color: #f4f7fa;
@@ -122,4 +141,81 @@ nav .navlink a {
 .content {
     width: 100%;
     position: relative;
+}
+
+.navigation {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 48%;
+    font-size: 3.6rem;
+    color: #e04a32;
+    background-color: #fff;
+    border-top-right-radius: 4px;
+    border-bottom-right-radius: 4px;
+    padding: 1rem;
+    box-shadow: 2px 0 2px #777;
+}
+
+.hide {
+    display: none !important;
+}
+
+@media(min-width: 1920px) {
+    main {
+        max-width: 1920px;
+        margin: 0 auto;
+    }
+}
+
+@media(max-width: 1300px) {
+    main {
+        display: block;
+    }
+    main nav {
+        display: none;
+        position: fixed;
+        top: 48%;
+        left: 0;
+        z-index: 1;
+    }
+    main .navOverlay {
+        display: none;
+        position: absolute;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+        background-color: rgba(0, 0, 0, 0.3);
+        z-index: 1;
+    }
+    main .navigation {
+        display: inline-block;
+    }
+    .navActive {
+        display: block !important;
+    }
+}
+
+@media(max-width: 576px) {
+    header {
+        padding-top: 5px;
+        padding-bottom: 5px;
+        background-color: #fff;
+        box-shadow: 0 2px 2px #ccc;
+        z-index: 2;
+    }
+    header .logo {
+        display: none;
+    }
+    header .logoSmall {
+        display: block;
+    }
+    main nav {
+        min-width: 200px;
+    }
+    .banner {
+        display: none;
+    }
 }

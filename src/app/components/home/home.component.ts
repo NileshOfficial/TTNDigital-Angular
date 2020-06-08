@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { faSignOutAlt, faAngleRight, IconDefinition } from '@fortawesome/free-solid-svg-icons'
 import { AuthApiService } from '../../services/auth-api.service';
 import { TokenstoreService, LocalstorageService } from '../../services/util.service';
+import { faCompass } from '@fortawesome/free-regular-svg-icons';
 
 @Component({
   selector: 'ttnd-home',
@@ -13,8 +14,11 @@ export class HomeComponent implements OnInit {
 
   signOutIcon: IconDefinition = faSignOutAlt;
   rightArrowHead: IconDefinition = faAngleRight;
+  navigateIcon: IconDefinition = faCompass;
 
   adminStatus: boolean = false;
+
+  navActive: boolean = false;
 
   constructor(private authApi: AuthApiService,
     private tokenstore: TokenstoreService,
@@ -37,6 +41,14 @@ export class HomeComponent implements OnInit {
         revokeTokens;
       else alert('request failed try again, later');
     });
+  }
+
+  showNav() {
+    this.navActive = true;
+  }
+
+  hidenav() {
+    this.navActive = false;
   }
 
 }

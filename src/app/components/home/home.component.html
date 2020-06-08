@@ -1,13 +1,16 @@
-<header>
-    <span class="logo">
-        <img src="../../assets/images/logo.png" alt="logo">
-    </span>
-    <a (click)="logout()">
+<header (click)="hidenav()">
+    <div class="logo">
+        <a></a>
+    </div>
+    <div class="logoSmall">
+        <a></a>
+    </div>
+    <a class="logout" (click)="logout()">
         logout
         <fa-icon [icon]="signOutIcon"></fa-icon>
     </a>
 </header>
-<div class="banner">
+<div class="banner" (click)="hidenav()">
     <h1>
         posting your thoughts
         <br />
@@ -15,7 +18,11 @@
     </h1>
 </div>
 <main>
-    <nav>
+    <a class="navigation" (click)="showNav()" [ngClass]="{hide: navActive}">
+        <fa-icon [icon]="navigateIcon"></fa-icon>
+    </a>
+    <div class="navOverlay" [ngClass]="{navActive: navActive}" (click)="hidenav()"></div>
+    <nav [ngClass]="{navActive: navActive}" (click)="hidenav()">
         <ul class="card">
             <li class="navlink">
                 <a class="titleText" [routerLink]="['/home/buzz']" routerLinkActive="active"
