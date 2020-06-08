@@ -8,9 +8,6 @@ import { ComplaintsComponent } from './components/complaints/complaints.componen
 import { ResolveBoardComponent } from './components/resolve-board/resolve-board.component';
 import { AboutComponent } from './components/about/about.component';
 import { HelpComponent } from './components/help/help.component';
-// import { LoginCheckPointService } from './services/login-check-point.service';
-// import { LoginCheckOnTokenRequestService } from './services/login-check-on-token-request.service';
-// import { CheckAdminStatusService } from './services/checkAdminStatus.service';
 import * as guards from './services/routeGuards';
 import { NotfoundComponent } from './components/notfound/notfound.component';
 
@@ -34,7 +31,6 @@ const routes: Routes = [
       { path: '**', redirectTo: '/home/notfound' }
     ]
   },
-  // { path: 'notfound', component: NotfoundComponent },
   { path: '**', redirectTo: '/home/notfound' }
 ];
 
