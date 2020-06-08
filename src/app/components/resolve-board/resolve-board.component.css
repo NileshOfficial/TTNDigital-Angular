@@ -23,19 +23,27 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+    flex-wrap: wrap;
     font-size: 1.2rem;
     height: 45px;
     margin-top: 1rem;
     outline: none;
     transition: 0.2s ease-in-out;
+    max-width: 900px;
 }
 
 .filterSelect>span {
     text-transform: capitalize;
 }
 
+.filterSelect .info {
+    text-transform: none;
+    flex-basis: 100%;
+}
+
 .filterSelect .fieldGroup {
     display: flex;
+    align-items: stretch;
     flex: 3;
     border: 1px solid #dcdcdc;
     border-radius: 4px;
@@ -372,5 +380,33 @@ thead {
     .filterSelect .fieldGroup input {
         max-width: 150px;
     }
-    
+}
+
+@media(max-width: 720px) {
+    .filterSelect {
+        height: auto;
+    }
+    .filterSelect .fieldGroup {
+        flex-basis: 80%;
+    }
+    .filterSelect .fieldGroup input {
+        max-width: unset;
+    }
+    .filterSelect .fieldGroup .dropdown {
+        position: relative;
+        top: -1rem;
+    }
+    .filterSelect .info {
+        order: 0;
+    }
+    .filterSelect .fieldGroup, .filterSelect .filterControlContainer {
+        order: 1;
+    }
+    .filterSelect .dropdown {
+        order: 2;
+        margin-top: 1rem;
+    }
+    .ml-none {
+        margin-left: 0;
+    }
 }

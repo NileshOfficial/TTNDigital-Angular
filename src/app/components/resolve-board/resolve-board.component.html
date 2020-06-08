@@ -9,7 +9,7 @@
                 <ttnd-dropdown placeholder="Search Field" class="dropdown" [noSelect]="true" [options]="searchOptions"
                     #searchOptionsFilter (selectChanged)="getSearchFilter($event)"></ttnd-dropdown>
             </div>
-            <ttnd-dropdown [bordered]=true class="dropdown ml-1" placeholder="Department" [noSelect]="true"
+            <ttnd-dropdown [bordered]=true class="dropdown ml-1 ml-none" placeholder="Department" [noSelect]="true"
                 [options]="departmentFilterOptions" (selectChanged)="getDeptFilter($event)" #deptOptionsFilter>
             </ttnd-dropdown>
             <ttnd-dropdown [bordered]=true class="dropdown ml-1" placeholder="Status" [noSelect]="true"
@@ -23,8 +23,8 @@
                     <fa-icon [icon]="resetIcon"></fa-icon>
                 </a>
             </div>
+            <span class="titleText info">*To search, please select a field from 'Search Field' menu.</span>
         </div>
-        <span class="titleText">*To search, please select a field from 'Search Field' menu.</span>
     </div>
     <div *ngIf="loadingComplaints" class="loader">
         <ttnd-loader animation="cubes"></ttnd-loader>
