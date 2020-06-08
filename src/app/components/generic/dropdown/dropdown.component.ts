@@ -4,7 +4,7 @@ import { faChevronUp, faChevronDown, IconDefinition } from '@fortawesome/free-so
 @Component({
   selector: 'ttnd-dropdown',
   templateUrl: './dropdown.component.html',
-  styleUrls: ['../styles/generic.styles.css', './dropdown.component.css']
+  styleUrls: ['../../styles/generic.styles.css', './dropdown.component.css']
 })
 export class DropdownComponent implements OnInit {
 

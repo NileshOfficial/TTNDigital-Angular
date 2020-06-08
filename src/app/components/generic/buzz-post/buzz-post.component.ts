@@ -1,13 +1,13 @@
 import { Component, OnInit, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { faCircle, faThumbsUp, faThumbsDown, IconDefinition } from '@fortawesome/free-solid-svg-icons';
-import { buzz } from '../../interfaces/buzz.model';
-import { BuzzApiService } from '../../services/buzz-api.service';
-import { imagesEndpoint } from '../../config/uris.conf';
+import { buzz } from '../../../interfaces/buzz.model';
+import { BuzzApiService } from '../../../services/buzz-api.service';
+import { imagesEndpoint } from '../../../config/uris.conf';
 
 @Component({
   selector: 'ttnd-buzz-post',
   templateUrl: './buzz-post.component.html',
-  styleUrls: ['../styles/generic.styles.css', './buzz-post.component.css']
+  styleUrls: ['../../styles/generic.styles.css', './buzz-post.component.css']
 })
 export class BuzzPostComponent implements OnInit, OnChanges {
 

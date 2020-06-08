@@ -9,7 +9,7 @@ import { ResolveBoardComponent } from './components/resolve-board/resolve-board.
 import { AboutComponent } from './components/about/about.component';
 import { HelpComponent } from './components/help/help.component';
 import * as guards from './services/routeGuards';
-import { NotfoundComponent } from './components/notfound/notfound.component';
+import { NotfoundComponent } from './components/generic/notfound/notfound.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/auth/login', pathMatch: 'full' },

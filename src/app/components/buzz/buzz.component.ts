@@ -5,7 +5,7 @@ import { buzz } from '../../interfaces/buzz.model';
 import { NgForm } from '@angular/forms';
 import { BuzzApiService } from '../../services/buzz-api.service';
 import { Subscription } from 'rxjs';
-import { DropdownComponent } from '../dropdown/dropdown.component';
+import { DropdownComponent } from '../generic/dropdown/dropdown.component';
 import { UtilService } from '../../services/util.service';
 import { invalidTokenErr, fileSizeErr } from '../../config/errCodes.conf';
 
