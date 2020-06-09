@@ -133,3 +133,30 @@
 .contactUs .social .info a span {
     font-size: 2rem;
 }
+
+@media(max-width: 576px) {
+    .addresses {
+        flex-direction: column;
+    }
+    #noida, #dubai, #us {
+        width: 100%;
+        margin-top: 3rem;
+    }
+    .address h4 {
+        margin-bottom: 1rem;
+    }
+    .address p {
+        min-height: unset;
+    }
+    .contactUs {
+        flex-direction: column;
+    }
+    .contactUs .image {
+        order: 1;
+    }
+    .contactUs .social {
+        order: 0;
+        margin-bottom: 2rem;
+    }
+
+}
