@@ -300,6 +300,7 @@ thead {
 .filterSelect .filterControlContainer {
     text-align: right;
     width: 80px;
+    flex-shrink: 0;
 }
 
 .filterSelect .filterControl {
@@ -356,5 +357,20 @@ thead {
 @media(max-width: 576px) {
     .formElement {
         flex-basis: 100%;
+    }
+}
+
+@media(max-width: 410px) {
+    .filterSelect .fieldGroup {
+        flex: unset;
+        flex-shrink: 1;
+        flex-grow: 1;
+        flex-basis: 70%;
+    }
+}
+
+@media(max-width: 365px) {
+    .filterSelect .fieldGroup {
+        max-width: 197px;
     }
 }
