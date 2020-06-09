@@ -37,9 +37,7 @@ export class HomeComponent implements OnInit {
     }
 
     this.authApi.logout().subscribe(revokeTokens, err => {
-      if (err.errorCode && err.errorCode === "INVALID_AUTH_TOKEN")
-        revokeTokens;
-      else alert('request failed try again, later');
+      revokeTokens();
     });
   }
 
