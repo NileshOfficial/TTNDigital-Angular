@@ -3,6 +3,11 @@
         <span class="date">{{ postData['date'] | addzero }}</span>/
         <span class="month">{{ postData['month'] | addzero }}</span>
     </div>
+    <div class="postedOnText">
+        <span class="month">{{ postData['monthName'] }}</span>
+        <span class="date">{{ postData['date'] }},</span>
+        <span class="year">{{ postData['year'] }}</span>
+    </div>
     <div class="content">
         <ttnd-carousel *ngIf="postData['images'].length > 0" id="carousel" [images]="postData['images']"
             [prefix]="prefix"></ttnd-carousel>

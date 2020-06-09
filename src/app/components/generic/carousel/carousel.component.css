@@ -50,3 +50,23 @@
 .disabled {
     pointer-events: none;
 }
+
+@media(max-width: 380px) {
+    .image {
+        height: 200px;
+    }
+    .controls {
+        font-size: 1.6rem;
+        height: 20px;
+        width: 20px;
+        line-height: 20px;
+    }
+    .controls.prev {
+        left: 1rem;
+    }
+    
+    .controls.next {
+        right: 1rem;
+    }
+    
+}

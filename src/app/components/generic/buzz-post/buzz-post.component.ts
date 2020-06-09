@@ -39,6 +39,8 @@ export class BuzzPostComponent implements OnInit, OnChanges {
     this.postData['date'] = date.getDate();
     this.postData['month'] = date.getMonth() + 1;
     this.postData['time'] = Date.now() - this.postInputObject.date;
+    this.postData['monthName'] = date.toLocaleString('default', { month: 'long' });
+    this.postData['year'] = date.getFullYear();
   }
 
   toggleLike() {

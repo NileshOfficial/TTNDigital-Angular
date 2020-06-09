@@ -133,3 +133,9 @@
     color: #ff0000;
     text-align: center;
 }
+
+@media(max-width: 450px) {
+    .body form textarea {
+        height: 200px;
+    }
+}
