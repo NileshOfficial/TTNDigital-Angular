@@ -225,4 +225,10 @@ nav .navlink a {
     .banner {
         display: none;
     }
+    .extras .helpLinks li {
+        color: #0a50d2;
+    }
+    .extras .copyright {
+        color: #1a1a1a;
+    }
 }
