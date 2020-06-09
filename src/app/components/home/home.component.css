@@ -198,6 +198,13 @@ nav .navlink a {
     }
 }
 
+@media(max-width: 720px) {
+    main {
+        padding-left: 0;
+        padding-right: 0;
+    }
+}
+
 @media(max-width: 576px) {
     header {
         padding-top: 5px;

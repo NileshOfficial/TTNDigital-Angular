@@ -352,3 +352,9 @@ thead {
         margin-left: 0;
     }
 }
+
+@media(max-width: 576px) {
+    .formElement {
+        flex-basis: 100%;
+    }
+}
