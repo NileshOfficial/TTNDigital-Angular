@@ -118,15 +118,17 @@ export class ResolveBoardComponent implements OnInit {
   }
 
   getClickedElementRef(event) {
-    let card = document.getElementById("card").getBoundingClientRect();
-    const cardX = card.x;
-    const cardY = card.y;
+    if (window.innerWidth > 576) {
+      let card = document.getElementById("card").getBoundingClientRect();
+      const cardX = card.x;
+      const cardY = card.y;
 
-    if (event.target.attributes.class && event.target.attributes.class.nodeValue === 'clickHandle') {
-      const positionMeta = event.target.getBoundingClientRect();
-      this.timePopupPosition = {
-        'top.px': positionMeta['y'] - cardY - 50,
-        'left.px': positionMeta['x'] - cardX - positionMeta['width'] - 50
+      if (event.target.attributes.class && event.target.attributes.class.nodeValue === 'clickHandle') {
+        const positionMeta = event.target.getBoundingClientRect();
+        this.timePopupPosition = {
+          'top.px': positionMeta['y'] - cardY - 50,
+          'left.px': positionMeta['x'] - cardX - positionMeta['width'] - 50
+        }
       }
     }
   }

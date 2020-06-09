@@ -412,6 +412,73 @@ thead {
     }
 }
 
+@media(max-width: 576px) {
+    .header {
+        box-shadow: 0 2px 5px #777;
+    }
+    .table {
+        background-color: #fff;
+    }
+    table, thead, tbody, th, td, tr {
+        display: block;
+    }
+    thead tr {
+        position: absolute;
+        top: -9999px;
+        left: -9999px;
+    }
+    tr {
+        border: 1px solid #ccc;
+        margin-top: 2rem;
+        background-color: #f2f2f2;
+    }
+    tr:last-child {
+        border: none;
+    }
+    td {
+        border: none;
+        border-bottom: 1px solid #eee;
+        position: relative;
+        padding-left: 50%;
+        min-height: 40px;
+        line-height: 40px;
+        max-height: 50px;
+    }
+    td:before {
+        position: absolute;
+        top: 0px;
+        left: 6px;
+        width: 45%;
+        padding-right: 10px;
+        white-space: nowrap;
+    }
+    td:nth-of-type(1):before {
+        content: "Department";
+    }
+    td:nth-of-type(2):before {
+        content: "Issue Id";
+    }
+    td:nth-of-type(3):before {
+        content: "Locked By";
+    }
+    td:nth-of-type(4):before {
+        content: "Assigned to";
+    }
+    td:nth-of-type(5):before {
+        content: "Status";
+    }
+    #rowCardDropdown {
+        position: relative;
+        top: -1rem;
+    }
+    form {
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+}
+
+
 @media(max-width: 480px) {
     .filterSelect .fieldGroup {
         flex-direction: column;
@@ -421,6 +488,5 @@ thead {
     .filterSelect .fieldGroup input {
         width: 100%;
         min-height: 40px;
-        /* max-width: 180px; */
     }
 }

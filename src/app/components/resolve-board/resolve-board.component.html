@@ -54,7 +54,7 @@
                 <td>{{complaint.lockedBy}}</td>
                 <td>{{complaint.assignedTo}}</td>
                 <td>
-                    <ttnd-dropdown (click)="getClickedElementRef($event)" [options]="statusOptions"
+                    <ttnd-dropdown id="rowCardDropdown" (click)="getClickedElementRef($event)" [options]="statusOptions"
                         [select]="currentComplaintStatus(complaint.status)"
                         (selectChanged)="getDropdownValue($event, complaint._id)">
                     </ttnd-dropdown>
