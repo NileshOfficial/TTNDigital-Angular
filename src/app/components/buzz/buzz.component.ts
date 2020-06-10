@@ -46,6 +46,8 @@ export class BuzzComponent implements OnInit {
   postsFetchErr: boolean = false;
   postsFetchErrMsg: string = '';
 
+  noBuzzMsg: boolean = false;
+
   constructor(private buzzApi: BuzzApiService, private util: UtilService) { }
 
   ngOnInit(): void {
@@ -54,10 +56,13 @@ export class BuzzComponent implements OnInit {
 
   loadPostsOnInit() {
     this.loadingPosts = true;
+    this.noBuzzMsg = false;
     this.buzzApi.getBuzzFeed(this.skip, this.limit).subscribe(data => {
       this.loadingPosts = false;
       this.posts = data;
       this.skip += 5;
+      if(data.length === 0)
+        this.noBuzzMsg = true;
       if (data.length < this.limit)
         this.stopScrolling = true;
     }, err => {

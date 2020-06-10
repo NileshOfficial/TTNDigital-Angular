@@ -1,3 +1,17 @@
+::-webkit-scrollbar {
+    height: 12px;
+    width: 12px;
+    background: #ccc;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #777;
+}
+
+::-webkit-scrollbar-corner {
+    background: #000;
+}
+
 .card:first-child {
     margin-bottom: 2rem;
 }
@@ -147,6 +161,7 @@ thead {
     align-items: center;
     justify-content: center;
     min-height: 100px;
+    font-size: 1.4rem;
 }
 
 .lazyLoader span {

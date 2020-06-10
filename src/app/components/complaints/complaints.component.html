@@ -102,6 +102,7 @@
                         {{complaint.status}}
                     </td>
                 </tr>
+                <tr colspan="4" class="lazyLoader" *ngIf="noComplaintsMsg">No complaints to show.</tr> 
                 <tr colspan="4" class="lazyLoader" *ngIf="showLoader">
                     <ttnd-loader [outerDimension]="50" [innerDimension]="30"></ttnd-loader>
                 </tr>

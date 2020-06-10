@@ -66,6 +66,8 @@ export class ComplaintsComponent implements OnInit {
   lazyFetchErr: boolean = false;
   lazyFetchErrMsg: string = '';
 
+  noComplaintsMsg: boolean = false;
+
   constructor(private tokenStore: TokenstoreService, private complaintsApi: ComplaintsService, private util: UtilService) { }
 
   ngOnInit(): void {
@@ -79,9 +81,12 @@ export class ComplaintsComponent implements OnInit {
 
   loadComplaintsOnInit(): void {
     this.complaintsApi.getUserComplaints(this.skip, this.limit).subscribe(data => {
+      this.noComplaintsMsg = false;
       this.loadingComplaints = false;
       this.complaints = data;
       this.skip += 10;
+      if (data.length === 0)
+        this.noComplaintsMsg = true;
       if (data.length < this.limit)
         this.stopScrolling = true;
       this.complaintDetailsObject = data[0];

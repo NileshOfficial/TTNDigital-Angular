@@ -1,3 +1,17 @@
+tbody::-webkit-scrollbar {
+    height: 0.9em;
+    width: 0.9em;
+    background: #ccc;
+}
+
+tbody::-webkit-scrollbar-thumb {
+    background: #777;
+}
+
+tbody::-webkit-scrollbar-corner {
+    background: #000;
+}
+
 .card {
     position: relative;
 }
@@ -313,6 +327,7 @@ form .submit:disabled {
     align-items: center;
     justify-content: center;
     min-height: 100px;
+    font-size: 1.4rem;
 }
 
 .lazyLoader span {

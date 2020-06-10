@@ -44,6 +44,7 @@
             <div class="lazyLoader" *ngIf="showLoader">
                 <ttnd-loader [outerDimension]="50" [innerDimension]="30"></ttnd-loader>
             </div>
+            <div class="lazyLoader" *ngIf="noBuzzMsg">Nothing's buzzing.</div>
             <div class="lazyLoader" *ngIf="postsFetchErr">
                 <span>{{postsFetchErrMsg}}</span>
             </div>

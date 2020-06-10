@@ -54,7 +54,7 @@ export class ResolveBoardComponent implements OnInit {
   complaintDetailsVisible: boolean = false;
   complaintDetailsObject: Complaint = null;
 
-  showLoader: boolean = true;
+  showLoader: boolean = false;
   skip: number = 0;
   limit: number = 10;
   subscription: Subscription = null;
@@ -72,6 +72,8 @@ export class ResolveBoardComponent implements OnInit {
   lazyFetchErr: boolean = false;
   lazyFetchErrMsg: string = '';
 
+  noComplaintsMsg: boolean = false;
+
   constructor(private complaintApi: ComplaintsService, private util: UtilService) { }
 
   ngOnInit(): void {
@@ -83,6 +85,8 @@ export class ResolveBoardComponent implements OnInit {
       this.complaints = data;
       this.loadingComplaints = false;
       this.skip += 10;
+      if (data.length === 0)
+        this.noComplaintsMsg = true;
       if (data.length < this.limit)
         this.stopScrolling = true;
       this.complaintDetailsObject = data[0];
