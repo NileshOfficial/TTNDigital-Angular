@@ -1,11 +1,13 @@
-export const loginRequestEndpoint = 'http://localhost:3001/auth/login';
-export const refreshTokenEndpoint = 'http://localhost:3001/auth/refreshAuthToken';
-export const logoutEndpoint = 'http://localhost:3001/auth/logout';
-export const adminCheckEndpoint = 'http://localhost:3001/admin/isAdmin';
-export const buzzPostEndpoint = 'http://localhost:3001/buzz';
-export const updateLikeEndpoint = 'http://localhost:3001/buzz/like';
-export const updateDislikeEndpoint = 'http://localhost:3001/buzz/dislike';
-export const imagesEndpoint = 'http://localhost:3001/images';
-export const addComplaintEndpoint = 'http://localhost:3001/complaints';
-export const getAllComplaintsEndpoint = 'http://localhost:3001/complaints/all';
-export const validateTokenEndpoint = 'http://localhost:3001/auth/validate';
+const serverRootUri = 'http://localhost:3001/';
+
+export const loginRequestEndpoint = serverRootUri + 'auth/login';
+export const refreshTokenEndpoint = serverRootUri + 'auth/refreshAuthToken';
+export const logoutEndpoint = serverRootUri + 'auth/logout';
+export const adminCheckEndpoint = serverRootUri + 'admin/isAdmin';
+export const buzzPostEndpoint = serverRootUri + 'buzz';
+export const updateLikeEndpoint = serverRootUri + 'buzz/like';
+export const updateDislikeEndpoint = serverRootUri + 'buzz/dislike';
+export const imagesEndpoint = serverRootUri + 'images';
+export const addComplaintEndpoint = serverRootUri + 'complaints';
+export const getAllComplaintsEndpoint = serverRootUri + 'complaints/all';
+export const validateTokenEndpoint = serverRootUri + 'auth/validate';
