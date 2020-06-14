@@ -491,6 +491,13 @@ thead {
         left: 50%;
         transform: translate(-50%, -50%);
     }
+    .moreInfo {
+        z-index: 20;
+    }
+    .moreInfo .content {
+        /* padding: 2rem; */
+        min-width: 300px;
+    }
 }
 
 
