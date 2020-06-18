@@ -38,7 +38,7 @@
                     attachment
                     <fa-icon class="titleText attachmentIcon" [icon]="imageIcon"></fa-icon>
                 </label>
-                <input type="file" id="file" (change)="fileChange($event)" multiple>
+                <input type="file" id="file" (change)="fileChange($event)" multiple accept="image/png,image/jpeg,text/csv,application/pdf,.docx,.doc,.xls,.xlsx,text/plain">
             </div>
             <div class="formElement fullwidth alignRight">
                 <button class="submit" [disabled]="!form.valid || !selectedDept || !selectedIssue">Submit</button>
