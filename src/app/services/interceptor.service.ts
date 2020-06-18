@@ -11,12 +11,10 @@ export class RequestHeaderService implements HttpInterceptor {
         let newRequest = req;
 
         if (urlSegments[0] === 'auth' && urlSegments[1] === 'validate') {
-            console.log(1, req.url)
             newRequest = req.clone({
                 headers: this.newHeader()
             });
         } else if (urlSegments[0] !== 'auth' && urlSegments[0] !== 'admin') {
-            console.log(2, req.url)
             newRequest = req.clone({
                 headers: this.newHeader()
             });
@@ -37,15 +35,4 @@ export class RequestHeaderService implements HttpInterceptor {
         routePaths.push(endpoint[0]);
         return routePaths;
     }
-
-    // get authHeader(): HttpHeaders {
-    //     if (!this.header) {
-    //         const token = this.tokenService.token;
-    //         console.log(token);
-    //         this.header = new HttpHeaders({
-    //             'authorization': `bearer ${token.access_token},bearer ${token.id_token}`
-    //         });
-    //     }
-    //     return this.header;
-    // }
 }
